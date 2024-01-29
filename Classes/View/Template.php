@@ -4,19 +4,10 @@ declare(strict_types=1);
 namespace View;
 final class Template
 {
-    /**
-     * @var string
-     */
     private string $path;
-
-    /**
-     * @var string
-     */
     private string $layout;
-
-    /**
-     * @var string
-     */
+    private string $header;
+    private string $footer;
     private string $content;
 
     public function __construct(string $path)
@@ -53,14 +44,42 @@ final class Template
         return $this;
     }
 
+    public function getHeader(): string
+    {
+        return $this->header;
+    }
+
+    public function setHeader(string $header): self
+    {
+        $this->header = $header;
+
+        return $this;
+    }
+
+    public function getFooter(): string
+    {
+        return $this->footer;
+    }
+
+    public function setFooter(string $footer): self
+    {
+        $this->footer = $footer;
+
+        return $this;
+    }
+
     public function compile(): string
     {
         $content = $this->getContent();
+        $header = $this->getHeader();
+        $footer = $this->getFooter();
         ob_start();
         require sprintf(
             '%s/%s.php',
             $this->getPath(),
-            $this->getLayout()
+            $this->getLayout(),
+            $this->getHeader(),
+            $this->getFooter()
         );
         return ob_get_clean();
     }
