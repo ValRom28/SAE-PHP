@@ -1,0 +1,31 @@
+main{
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+aside{
+    width: 20vw;
+    padding: 2rem;
+    background-color:darkslateblue;
+    color: antiquewhite;
+    padding-bottom: 100vh;
+}
+
+header{
+    background-color: indigo;
+    color: antiquewhite;
+    padding: 1rem;
+    margin: 0;
+}
+
+main{
+    width: 100vw;
+    background-color: black;
+}
