@@ -7,7 +7,7 @@ final class Template
     private string $path;
     private string $layout;
     private string $header;
-    private string $footer;
+    private string $aside;
     private string $content;
 
     public function __construct(string $path)
@@ -56,14 +56,14 @@ final class Template
         return $this;
     }
 
-    public function getFooter(): string
+    public function getAside(): string
     {
-        return $this->footer;
+        return $this->aside;
     }
 
-    public function setFooter(string $footer): self
+    public function setAside(string $aside): self
     {
-        $this->footer = $footer;
+        $this->aside = $aside;
 
         return $this;
     }
@@ -72,14 +72,14 @@ final class Template
     {
         $content = $this->getContent();
         $header = $this->getHeader();
-        $footer = $this->getFooter();
+        $aside = $this->getAside();
         ob_start();
         require sprintf(
             '%s/%s.php',
             $this->getPath(),
             $this->getLayout(),
             $this->getHeader(),
-            $this->getFooter()
+            $this->getAside()
         );
         return ob_get_clean();
     }

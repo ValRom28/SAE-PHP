@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel= stylesheet href="static/css/accueil.css">
     <title>Quiz</title>
 </head>
 <body>
@@ -10,10 +11,10 @@
         <?php echo $header ?? null ?>
     </header>    
     <main>
+        <aside>
+            <?php echo $aside ?? null ?>
+        </aside>
         <?php echo $content ?? null ?>
     </main>
-    <footer>
-        <?php echo $footer ?? null ?>
-    </footer>
 </body>
 </html>
