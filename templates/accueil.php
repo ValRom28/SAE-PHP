@@ -7,14 +7,16 @@
     <title>Sound Iut'o</title>
 </head>
 <body>
-    <header>
-        <?php echo $header ?? null ?>
-    </header>    
+    <aside>
+        <?php echo $aside ?? null ?>
+    </aside>    
     <main>
-        <aside>
-            <?php echo $aside ?? null ?>
-        </aside>
-        <?php echo $content ?? null ?>
+        <header>
+            <?php echo $header ?? null ?>
+        </header>  
+        <section class="main">
+            <?php echo $content ?? null ?>
+        </section>
     </main>
 </body>
 </html>
