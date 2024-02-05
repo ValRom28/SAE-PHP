@@ -3,7 +3,7 @@ $DB_SQLITE = 'Data\\db.sqlite';
 $pdo = new PDO('sqlite:' . $DB_SQLITE);
 
 switch ($argv[1]) {
-    case 'create-table':
+    case 'create-tables':
         echo 'Création des tables ...' . PHP_EOL;
         $query = <<<EOF
             CREATE TABLE IF NOT EXISTS UTILISATEURS (
@@ -66,19 +66,45 @@ switch ($argv[1]) {
         );
         
         foreach ($data as $data) {
-            try {
-                $stmt->execute([
-                    ':idAlbum' => $data['entryId'],
-                    ':nomAlbum' => $data['title'],
-                    ':lienImage' => $data['img'],
-                    ':anneeSortie' => $data['releaseYear']
-                ]);
-            } catch (PDOException $e) {
-                echo $e->getMessage() . PHP_EOL;
+            if ($data['img'] == null) {
+                try {
+                    $stmt->execute([
+                        ':idAlbum' => $data['entryId'],
+                        ':nomAlbum' => $data['title'],
+                        ':lienImage' => 'default.jpg',
+                        ':anneeSortie' => $data['releaseYear']
+                    ]);
+                } catch (PDOException $e) {
+                    echo $e->getMessage() . PHP_EOL;
+                }
+            } else {
+                try {
+                    $stmt->execute([
+                        ':idAlbum' => $data['entryId'],
+                        ':nomAlbum' => $data['title'],
+                        ':lienImage' => $data['img'],
+                        ':anneeSortie' => $data['releaseYear']
+                    ]);
+                } catch (PDOException $e) {
+                    echo $e->getMessage() . PHP_EOL;
+                }
             }
         }
 
         echo 'Données insérées!'. PHP_EOL;
+        break;
+    case 'delete-tables':
+        echo 'Suppression des tables ...' . PHP_EOL;
+        $query = <<<EOF
+            DROP TABLE IF EXISTS UTILISATEURS;
+            DROP TABLE IF EXISTS ALBUM;
+            DROP TABLE IF EXISTS DANS_PLAYLIST;
+            DROP TABLE IF EXISTS GENRE;
+            DROP TABLE IF EXISTS POSSEDE;
+            DROP TABLE IF EXISTS ARTIST;
+        EOF;
+        $pdo->exec($query);
+        echo 'Tables supprimées !' . PHP_EOL;
         break;
 }
 
