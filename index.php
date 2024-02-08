@@ -7,15 +7,7 @@ Autoloader::register();
 $action = $_REQUEST['action'] ?? false;
 
 ob_start();
-switch ($action) {
-    case 'submit':
-        include 'templates/Component/main.php';
-        break;
-
-    default:
-        include 'templates/Component/main.php';
-        break;
-}
+include 'templates/Component/main.php';
 $content = ob_get_clean();
 ob_start();
 include 'templates/Component/header.php';
