@@ -93,6 +93,7 @@ switch ($argv[1]) {
 
         echo 'Données insérées!'. PHP_EOL;
         break;
+        
     case 'delete-tables':
         echo 'Suppression des tables ...' . PHP_EOL;
         $query = <<<EOF
