@@ -7,6 +7,6 @@ require_once 'Classes/Database/request.php';
 
 $playlist = getAlbums(1);
 foreach ($playlist as $album) {
-  echo "<img src=Data/images/".$album['lienImage']." alt=".$album['nomAlbum']." title=".$album['nomAlbum']." />";
+  echo "<img src=templates/static/images/".$album['lienImage']." alt=".$album['nomAlbum']." title=".$album['nomAlbum']." />";
 }?>
 </div>
