@@ -3,9 +3,11 @@
 <?php
 require_once 'Classes/autoloader.php';
 Autoloader::register();
-require_once 'Classes/Database/request.php';
+use Database\Request;
 
-$playlist = getAlbums(1);
+$pdo = new \PDO('sqlite:Data/db.sqlite');
+$request = new Request($pdo);
+$playlist = $request->getAlbums();
 foreach ($playlist as $album) {
   echo "<img src=Data/images/".$album['lienImage']." alt=".$album['nomAlbum']." title=".$album['nomAlbum']." />";
 }?>

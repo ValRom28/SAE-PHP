@@ -1,33 +1,43 @@
 <?php
-$DB_SQLITE = 'Data\\db.sqlite';
-$pdo = new PDO('sqlite:' . $DB_SQLITE);
+namespace Database;
 
-function getAlbums(): array
-{
-    global $pdo;
-    $query = <<<EOF
-        SELECT idAlbum,nomAlbum,lienImage,anneeSortie
-        FROM ALBUM
-        ORDER BY nomAlbum
-    EOF;
-    $stmt = $pdo->query($query);
-    return $stmt->fetchAll();
-}
+class Request {
+    private $pdo;
 
-function getAlbumOfPlaylist(int $idUtilisateur): array
-{
-    global $pdo;
-    $query = <<<EOF
-        SELECT idAlbum,nomAlbum,lienImage,anneeSortie
-        FROM ALBUM
-        WHERE idAlbum IN (
-            SELECT idAlbum
-            FROM DANS_PLAYLIST
-            WHERE idUtilisateur = :idUtilisateur
-        )
-        ORDER BY nomAlbum
-    EOF;
-    $stmt = $pdo->prepare($query);
-    $stmt->execute([':idUtilisateur' => $idUtilisateur]);
-    return $stmt->fetchAll();
+    public function __construct(\PDO $pdo) {
+        $this->pdo = $pdo;
+    }
+
+    public function searchAlbums($query) {
+        $stmt = $this->pdo->prepare("SELECT * FROM ALBUM WHERE nomAlbum LIKE ?");
+        $stmt->execute(["%$query%"]);
+        return $stmt->fetchAll();
+    }
+
+    public function getAlbums(): array {
+        $query = <<<EOF
+            SELECT idAlbum,nomAlbum,lienImage,anneeSortie
+            FROM ALBUM
+            ORDER BY nomAlbum
+        EOF;
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+    
+    public function getAlbumOfPlaylist(int $idUtilisateur): array {
+        $query = <<<EOF
+            SELECT idAlbum,nomAlbum,lienImage,anneeSortie
+            FROM ALBUM
+            WHERE idAlbum IN (
+                SELECT idAlbum
+                FROM DANS_PLAYLIST
+                WHERE idUtilisateur = :idUtilisateur
+            )
+            ORDER BY nomAlbum
+        EOF;
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([':idUtilisateur' => $idUtilisateur]);
+        return $stmt->fetchAll();
+    }
 }
