@@ -1,11 +1,13 @@
 <?php
 use Controller\SearchController;
 use Controller\ConnexionControleur;
+use Controller\DeconnexionControleur;
 use View\Template;
 
 require 'Classes/Autoloader.php'; 
 Autoloader::register();
 
+// Récupérer l'action à effectuer
 $action = $_GET['action'] ?? '';
 $template = new Template('templates');
 
@@ -26,6 +28,9 @@ switch ($action) {
             // Sinon, afficher simplement le formulaire de connexion
             $content = (new ConnexionControleur())->pageConnexion();
             }
+        break;
+    case 'logout':
+        $content= (new DeconnexionControleur())->deconnexion();
         break;
 
     default:

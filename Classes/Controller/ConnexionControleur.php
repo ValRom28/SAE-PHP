@@ -20,7 +20,13 @@ class ConnexionControleur {
         $user = $request->connexion($mailUtilisateur, $mdpUtilisateur);
         
         if ($user) {
-            // Authentification réussie, rediriger vers la page d'accueil
+            // Démarrer la session
+            session_start();
+
+            // Définir une variable de session pour indiquer que l'utilisateur est connecté
+            $_SESSION['loggedin'] = true;
+            
+            // Rediriger vers la page d'accueil
             header("Location: index.php");
             exit(); // Assurez-vous de terminer le script après la redirection
         } else {
@@ -34,4 +40,5 @@ class ConnexionControleur {
         }
     }
 }
+
 ?>
