@@ -40,4 +40,9 @@ class Request {
         $stmt->execute([':idUtilisateur' => $idUtilisateur]);
         return $stmt->fetchAll();
     }
+    public function connexion($mailUtilisateur, $mdpUtilisateur) {
+        $stmt = $this->pdo->prepare("SELECT * FROM UTILISATEURS WHERE mailUtilisateur = ? AND mdpUtilisateur = ?");
+        $stmt->execute([$mailUtilisateur, $mdpUtilisateur]);
+        return $stmt->fetch();
+    }
 }

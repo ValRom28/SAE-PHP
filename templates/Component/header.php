@@ -6,5 +6,11 @@
         <div class="border full-rounded"></div>
     </button>
 </form>
+<form action="connexion.php" method="post">
+    <button type="submit" class="connexion">
+        <span>Connexion</span>
+        <div class="border full-rounded"></div>
+    </button>
+</form>
 
 <a href="/">Home</a>
