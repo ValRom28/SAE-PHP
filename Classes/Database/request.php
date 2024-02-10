@@ -45,4 +45,8 @@ class Request {
         $stmt->execute([$mailUtilisateur, $mdpUtilisateur]);
         return $stmt->fetch();
     }
+    public function inscription($pseudoUtilisateur, $mailUtilisateur, $mdpUtilisateur) {
+        $stmt = $this->pdo->prepare("INSERT INTO UTILISATEURS (pseudoUtilisateur, mailUtilisateur, mdpUtilisateur) VALUES (?, ?, ?)");
+        $stmt->execute([$pseudoUtilisateur, $mailUtilisateur, $mdpUtilisateur]);
+    }
 }

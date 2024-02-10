@@ -1,14 +1,13 @@
-<?php
-
-echo '<form action="/index.php" method="get">
+<form action="/index.php" method="get">
     <input type="hidden" name="action" value="search">
     <input type="text" name="search" placeholder="Rechercher un album..." class="text-field">
     <button type="submit" class="full-rounded">
         <span>Rechercher</span>
         <div class="border full-rounded"></div>
     </button>
-</form>';
+</form>
 
+<?php
 // Démarrez la session (si ce n'est pas déjà fait)
 session_start();
 
@@ -34,5 +33,11 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
         </form>
     ';
 }
-
 ?>
+
+<form action="/index.php?action=register" method="post">
+    <button type="submit" class="inscription">
+        <span>Inscription</span>
+        <div class="border full-rounded"></div>
+    </button>
+</form>
