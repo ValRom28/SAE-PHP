@@ -15,6 +15,16 @@ $template = new Template('templates');
 switch ($action) {
     case 'search':
         $query = $_GET['search'] ?? '';
+        if ($query == "rickroll") {
+            $content = "<iframe width=\"560\" height=
+            \"315\" src=\"https://www.youtube.com/embed/dQw4w9WgXcQ\" 
+            frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; 
+            encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>";
+        } else {
+            $searchController = new SearchController();
+            $content = $searchController->search($query);
+        }
+        break;
         $searchController = new SearchController();
         $content = $searchController->search($query);
         break;
