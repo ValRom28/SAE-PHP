@@ -39,7 +39,7 @@ switch ($action) {
         $content = (new InscriptionController())->pageInscription();
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Si des données POST sont soumises, traiter l'inscription
-            $pseudoUtilisateur = $_POST['speudo'] ?? '';
+            $pseudoUtilisateur = $_POST['pseudoUtilisateur'] ?? '';
             $mailUtilisateur = $_POST['email'] ?? '';
             $mdpUtilisateur = $_POST['password'] ?? '';
             $content = (new InscriptionController())->inscription($pseudoUtilisateur, $mailUtilisateur, $mdpUtilisateur);

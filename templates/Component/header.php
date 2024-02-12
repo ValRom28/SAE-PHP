@@ -26,7 +26,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     // L'utilisateur n'est pas connecté, affichez le bouton de connexion
     echo '
         <form action="/index.php?action=login" method="post">
-            <button type="submit" class="connexion">
+            <button action="/index.php?action=login" type="submit" class="connexion">
                 <span>Connexion</span>
                 <div class="border full-rounded"></div>
             </button>
