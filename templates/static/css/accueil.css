@@ -68,7 +68,7 @@ header > * {
     flex-wrap: wrap;
     overflow-x: auto;
     overflow-y: auto;
-    max-height: 47%;
+    max-height: 45rem;
 }
 
 .albumsPlaylist img {
