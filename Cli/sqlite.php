@@ -23,7 +23,6 @@ switch ($argv[1]) {
                 idUtilisateur   INTEGER NOT NULL,
                 idAlbum         INTEGER NOT NULL,
                 note            INTEGER NOT NULL,
-                playlist        BOOLEAN NOT NULL,
                 PRIMARY KEY (idUtilisateur, idAlbum),
                 FOREIGN KEY (idUtilisateur) REFERENCES UTILISATEURS(idUtilisateur),
                 FOREIGN KEY (idAlbum) REFERENCES ALBUM(idAlbum)
@@ -64,6 +63,11 @@ switch ($argv[1]) {
             INSERT INTO ALBUM (nomAlbum, lienImage, anneeSortie) 
             VALUES (:nomAlbum, :lienImage, :anneeSortie)'
         );
+        $stmArtiste = $pdo->prepare('
+            INSERT INTO ARTIST (nomArtiste, lienImage)
+            VALUES (:nomArtiste, :lienImage)'
+        );
+        
 
         // Préparation de la requête d'insertion pour les utilisateurs
         $command = 'python -c "import sys, yaml, json; json.dump(yaml.safe_load(sys.stdin), sys.stdout)" < Data/Utilisateurs.yml';
@@ -73,12 +77,22 @@ switch ($argv[1]) {
             INSERT INTO UTILISATEURS (pseudoUtilisateur, mailUtilisateur, mdpUtilisateur) 
             VALUES (:pseudoUtilisateur, :mailUtilisateur, :mdpUtilisateur)'
         );
+
+        $command = 'python -c "import sys, yaml, json; json.dump(yaml.safe_load(sys.stdin), sys.stdout)" < Data/genre.yml';
+        $json = shell_exec($command);
+        $data3 = json_decode($json, true);
+        $stmGenre = $pdo->prepare('
+            INSERT INTO GENRE (nomGenre)
+            VALUES (:nomGenre)');
         
         foreach ($data as $item) {
             // Vérification de l'existence des clés
             $nomAlbum = isset($item['title']) ? $item['title'] : null;
             $lienImage = isset($item['img']) ? $item['img'] : 'default.jpg';
             $anneeSortie = isset($item['releaseYear']) ? $item['releaseYear'] : null;
+            $artiste= isset($item['by']) ? $item['by'] : null;
+            $lienImageArtiste =  'default.jpg';
+            
 
             // Insertion des données des albums
             try {
@@ -87,6 +101,14 @@ switch ($argv[1]) {
                     ':lienImage' => $lienImage,
                     ':anneeSortie' => $anneeSortie
                 ]);
+                $exist = new Request($pdo);
+                if (!$exist->artiste_exist($artiste)) {
+                    $stmArtiste->execute([
+                        ':nomArtiste' => $artiste,
+                        ':lienImage' => $lienImageArtiste
+                    ]);
+                }
+            
             } catch (PDOException $e) {
                 echo $e->getMessage() . PHP_EOL;
             }
@@ -104,6 +126,15 @@ switch ($argv[1]) {
                 echo $e->getMessage() . PHP_EOL;
             }
         }
+        foreach ($data3 as $genre) {
+            try {
+                $stmGenre->execute([':nomGenre' => $genre['nomGenre']]);
+            } catch (PDOException $e) {
+                echo $e->getMessage() . PHP_EOL;
+            }
+        }
+      
+        
 
         echo 'Données insérées!' . PHP_EOL;
         break;
