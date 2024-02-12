@@ -1,0 +1,13 @@
+utilisateurs:
+  - idUtilisateur: 1
+    pseudoUtilisateur: bob
+    mailUtilisateur: bob@gmail.com
+    mdpUtilisateur: bob
+  - idUtilisateur: 2
+    pseudoUtilisateur: utilisateur2
+    mailUtilisateur: utilisateur2@example.com
+    mdpUtilisateur: motdepasse2
+  - idUtilisateur: 3
+    pseudoUtilisateur: utilisateur3
+    mailUtilisateur: utilisateur3@example.com
+    mdpUtilisateur: motdepasse3

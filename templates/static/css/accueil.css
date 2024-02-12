@@ -13,10 +13,6 @@ main{
     color: ghostwhite;
 }
 
-/* #0f63e9
-#e9236e
-#2ed0ff */
-
 aside{
     width: 15vw;
     padding: 2.5vw;
@@ -24,7 +20,6 @@ aside{
     color: ghostwhite;
     padding-bottom: 100vh;
     border-right: 1px solid ghostwhite;
-    border-radius: 1rem;
 }
 
 header{
@@ -34,7 +29,24 @@ header{
     padding-left: 2rem;
     padding-bottom: 1rem;
     margin: 0;
-    border-radius: 1rem;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+header > * {
+    flex-basis: 40%;
+}
+
+.text-field {
+    height: 2em;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid ghostwhite;
+    margin-right: 3%;
+    width: 50%;
+      -webkit-transition: width 0.15s ease-in-out;
+      transition: width 0.15s ease-in-out;
 }
 
 .albumAccueil{
@@ -56,3 +68,43 @@ section.main{
     margin: 0 auto;
     padding: 2rem;
 }
+
+button {
+    font-size: 16px;
+    position: relative;
+    margin: auto;
+    padding: 1em 2.5em 1em 2.5em;
+    border: none;
+    background: #fff;
+    transition: all 0.1s linear;
+    box-shadow: 0 0.4em 1em rgba(0, 0, 0, 0.1);
+   }
+   
+   button:active {
+    transform: scale(0.95);
+   }
+   
+   button span {
+    color: #464646;
+   }
+   
+   button .border {
+    position: absolute;
+    border: 0.15em solid #fff;
+    transition: all 0.3s 0.08s linear;
+    top: 50%;
+    left: 50%;
+    width: 9em;
+    height: 3em;
+    transform: translate(-50%, -50%);
+   }
+   
+   button:hover .border {
+    display: block;
+    width: 10.5em;
+    height: 3.7em;
+   }
+   
+   .full-rounded {
+    border-radius: 2em;
+   }
