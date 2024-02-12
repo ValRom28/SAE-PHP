@@ -1,12 +1,14 @@
 <?php
-// templates/detail_album.php
+session_start();
+
 if($album) {
     echo "<h2>Détails de l'album</h2>";
     echo "<h3>".$album[0]['nomAlbum']."</h3>";
     echo "<img src='Data/images/".$album[0]['lienImage']."' alt='".$album[0]['nomAlbum']."' />";
     echo "<p>Année de sortie: ".$album[0]['anneeSortie']."</p>";
-    if ($_SESSION['loggedin']) {
-        echo "<form action='ajouter_playlist.php' method='post'>";
+    
+    if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']) {
+        echo "<form action='/index.php?action=ajouter_playlist' method='post'>";
         echo "<input type='hidden' name='album_id' value='".$album[0]['idAlbum']."'>";
         echo "<button type='submit'>Ajouter à la playlist</button>";
         echo "</form>";

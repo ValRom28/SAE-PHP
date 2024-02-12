@@ -4,9 +4,10 @@ use Controller\ConnexionControleur;
 use Controller\DeconnexionControleur;
 use Controller\InscriptionController;
 use Controller\DetailController;
+use Controller\PlaylistController;
 use View\Template;
 
-require 'Classes/Autoloader.php'; 
+require 'Classes/autoloader.php'; 
 Autoloader::register();
 
 // Récupérer l'action à effectuer
@@ -69,6 +70,11 @@ switch ($action) {
                 $content = "Aucun identifiant d'album spécifié.";
             }
             break;        
+
+        case 'ajouter_playlist':
+            $controller = new PlaylistController();
+            $controller->addToPlaylist();
+            break;
 
     default:
         // Récupérer les vues

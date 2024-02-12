@@ -8,8 +8,9 @@
 </form>
 
 <?php
-// Démarrez la session (si ce n'est pas déjà fait)
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Vérifiez si l'utilisateur est connecté
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
@@ -24,20 +25,23 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     ';
 } else {
     // L'utilisateur n'est pas connecté, affichez le bouton de connexion
-    echo '
+    echo <<<EOF
         <form action="/index.php?action=login" method="post">
             <button action="/index.php?action=login" type="submit" class="connexion">
                 <span>Connexion</span>
                 <div class="border full-rounded"></div>
             </button>
         </form>
-    ';
+    EOF;
+    
+    echo <<<EOF
+        <form action="/index.php?action=register" method="post">
+            <button type="submit" class="inscription">
+                <span>Inscription</span>
+                <div class="border full-rounded"></div>
+            </button>
+        </form>
+    EOF;
 }
 ?>
 
-<form action="/index.php?action=register" method="post">
-    <button type="submit" class="inscription">
-        <span>Inscription</span>
-        <div class="border full-rounded"></div>
-    </button>
-</form>
