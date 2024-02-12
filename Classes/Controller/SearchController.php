@@ -8,7 +8,7 @@ class SearchController {
         $pdo = new \PDO('sqlite:Data/db.sqlite');
         $request = new Request($pdo);
         $results = $request->searchAlbums($query);
-        
+        var_dump($results);
         // Obtenir le contenu de la vue
         ob_start();
         include 'templates/Component/search_results.php';
