@@ -49,4 +49,9 @@ class Request {
         $stmt = $this->pdo->prepare("INSERT INTO UTILISATEURS (pseudoUtilisateur, mailUtilisateur, mdpUtilisateur) VALUES (?, ?, ?)");
         $stmt->execute([$pseudoUtilisateur, $mailUtilisateur, $mdpUtilisateur]);
     }
+    public function artiste_exist($nomArtiste) {
+        $stmt = $this->pdo->prepare("SELECT * FROM ARTISTE WHERE nomArtiste = ?");
+        $stmt->execute([$nomArtiste]);
+        return $stmt->fetch();
+    }
 }
