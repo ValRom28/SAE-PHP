@@ -3,6 +3,7 @@ use Controller\SearchController;
 use Controller\ConnexionControleur;
 use Controller\DeconnexionControleur;
 use Controller\InscriptionController;
+use Controller\DetailController;
 use View\Template;
 
 require 'Classes/Autoloader.php'; 
@@ -58,6 +59,16 @@ switch ($action) {
             $content = (new InscriptionController())->pageInscription();
         }
         break;
+
+        case 'detail':
+            $albumId = $_GET['album_id'] ?? null;
+            if ($albumId) {
+                $content = (new DetailController())->show($albumId);
+            } else {
+                // Gérer le cas où aucun identifiant d'album n'est passé
+                $content = "Aucun identifiant d'album spécifié.";
+            }
+            break;        
 
     default:
         // Récupérer les vues
