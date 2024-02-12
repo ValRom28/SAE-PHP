@@ -57,10 +57,10 @@
 - by: Joan Baez
   entryId: 10679
   genre: [Folk]
-  img: 220px-DarkChords.jpg
+  img: 220px-Darkchords.jpg
   parent: Ryan Adams
   releaseYear: 2003
-  title: Dark Chords on a Big Guitar
+  title: Dark chords on a Big Guitar
 - by: Willie Nelson
   entryId: 10697
   genre: [Alternative country]
@@ -68,9 +68,9 @@
   parent: Ryan Adams
   releaseYear: 2006
   title: Songbird
-- by: Cowboy Junkies
+- by: cowboy Junkies
   entryId: 10707
-  genre: [Country rock, Alternative country]
+  genre: [country rock, Alternative country]
   img: 220px-Trinityrevisited.jpg
   parent: Ryan Adams
   releaseYear: 2007
@@ -92,34 +92,34 @@
 - by: Alabama Shakes
   entryId: 10809
   genre: [Blues rock, roots rock, soul, Southern rock, garage rock, Americana]
-  img: 220px-Alabama_Shakes_Sound_Color_album_cover.jpg
+  img: 220px-Alabama_Shakes_Sound_color_album_cover.jpg
   parent: Alabama Shakes
   releaseYear: 2015
-  title: Sound & Color
+  title: Sound & color
 - by: Terry Allen
   entryId: 10890
-  genre: [Country]
+  genre: [country]
   img: Terry_Allen_Lubbock_on_everything.jpg
   parent: Terry Allen (country singer)
   releaseYear: 1979
   title: Lubbock
 - by: Terry Allen
   entryId: 10893
-  genre: [Country]
+  genre: [country]
   img: TerryAllen_Juarez.jpg
   parent: Terry Allen (country singer)
   releaseYear: 1975
   title: Juarez
 - by: Terry Allen
   entryId: 10895
-  genre: [Country]
+  genre: [country]
   img: Terry_Allen_Pedal_Steal.jpg
   parent: Terry Allen (country singer)
   releaseYear: 1985
   title: Pedal Steal
 - by: Terry Allen
   entryId: 10899
-  genre: [Country]
+  genre: [country]
   img: Terry_Allen_Human_Remains.jpg
   parent: Terry Allen (country singer)
   releaseYear: 1996

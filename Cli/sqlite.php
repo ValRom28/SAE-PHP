@@ -81,10 +81,6 @@ switch ($argv[1]) {
             INSERT INTO UTILISATEURS (pseudoUtilisateur, mailUtilisateur, mdpUtilisateur) 
             VALUES (:pseudoUtilisateur, :mailUtilisateur, :mdpUtilisateur)'
         );
-
-        $command = 'python -c "import sys, yaml, json; json.dump(yaml.safe_load(sys.stdin), sys.stdout)" < Data/genre.yml';
-        $json = shell_exec($command);
-        $data3 = json_decode($json, true);
         $stmGenre = $pdo->prepare('
             INSERT INTO GENRE (nomGenre)
             VALUES (:nomGenre)');
@@ -99,13 +95,6 @@ switch ($argv[1]) {
                     ':mailUtilisateur' => $user['mailUtilisateur'],
                     ':mdpUtilisateur' => $user['mdpUtilisateur']
                 ]);
-            } catch (PDOException $e) {
-                echo $e->getMessage() . PHP_EOL;
-            }
-        }
-        foreach ($data3 as $genre) {
-            try {
-                $stmGenre->execute([':nomGenre' => $genre['nomGenre']]);
             } catch (PDOException $e) {
                 echo $e->getMessage() . PHP_EOL;
             }
@@ -130,6 +119,7 @@ switch ($argv[1]) {
                 ]);
                 $stmtArtisteExists = $pdo->prepare('SELECT idArtiste FROM ARTIST WHERE nomArtiste = :nomArtiste');
                 $stmtArtisteExists->execute([':nomArtiste' => $artiste]);
+                $idAlbum = $pdo->lastInsertId();
                 $existingArtiste = $stmtArtisteExists->fetch(PDO::FETCH_ASSOC);
                 if (!$existingArtiste) {
                     $stmArtiste->execute([
@@ -137,29 +127,33 @@ switch ($argv[1]) {
                         ':lienImage' => $lienImageArtiste
                     ]);
                 }
+                // Préparer la requête pour vérifier l'existence du genre
+                $stmGenreExists = $pdo->prepare('SELECT idGenre FROM GENRE WHERE nomGenre = :nomGenre');
 
-                $idAlbum = $pdo->lastInsertId();
+                // Boucle sur chaque genre
+                foreach ($genres as $genre) {
+                    // Exécuter la requête pour vérifier si le genre existe déjà
+                    $stmGenreExists->execute([':nomGenre' => $genre]);
+                    $existingGenre = $stmGenreExists->fetch(PDO::FETCH_ASSOC);
 
-        // Insertion des genres associés à l'album
-        foreach ($genres as $genre) {
-            // Vérifier si le genre existe déjà dans la base de données
-            $stmGenre->execute([':nomGenre' => $genre]);
-            $existingGenre = $stmGenre->fetch(PDO::FETCH_ASSOC);
-        
-            if ($existingGenre) {
-                // Si le genre existe déjà, récupérer son ID
-                $idGenre = $existingGenre['idGenre'];
-            } else {
-                // Sinon, insérer le genre dans la base de données
-                $stmGenre->execute([':nomGenre' => $genre]);
-                $idGenre = $pdo->lastInsertId();
-            }
-        
-            // Insertion de l'association entre l'album et le genre
-            $stmtPosede->execute([':idAlbum' => $idAlbum, ':idGenre' => $idGenre]);
+                    // Vérifier si le genre existe déjà dans la base de données
+                    if ($existingGenre) {
+                        // Si le genre existe déjà, récupérer son ID
+                        $idGenre = $existingGenre['idGenre'];
+                    } else {
+                        // Sinon, insérer le genre dans la base de données
+                        $stmGenre->execute([':nomGenre' => $genre]);
+                        $idGenre = $pdo->lastInsertId();
+                    }
+
+                    // Insertion de l'association entre l'album et le genre
+                    $stmtPosede->execute([':idAlbum' => $idAlbum, ':idGenre' => $idGenre]);
+                }
+
         }
+
         
-            } catch (PDOException $e) {
+             catch (PDOException $e) {
                 echo $e->getMessage() . PHP_EOL;
             }
         }
