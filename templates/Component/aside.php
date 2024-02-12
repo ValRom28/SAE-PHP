@@ -6,12 +6,17 @@
     use Database\Request;
 
     $idUtilisateur = $_SESSION['idUtilisateur'] ?? null;
-    $pdo = new \PDO('sqlite:Data/db.sqlite');
-    $request = new Request($pdo);
-    $playlist = $request->getAlbumOfPlaylist($idUtilisateur);
-    foreach ($playlist as $album) {
-    echo "<a href='index.php?action=detail&album_id=".$album['idAlbum']."'>";
-    echo "<img src='Data/images/".$album['lienImage']."' alt='".$album['nomAlbum']."' title='".$album['nomAlbum']."' />";
-    echo "</a>";
-    }?>
+    if ($idUtilisateur) {
+        $pdo = new \PDO('sqlite:Data/db.sqlite');
+        $request = new Request($pdo);
+        $playlist = $request->getAlbumOfPlaylist($idUtilisateur);
+        foreach ($playlist as $album) {
+            echo "<a href='index.php?action=detail&album_id=".$album['idAlbum']."'>";
+            echo "<img src='Data/images/".$album['lienImage']."' alt='".$album['nomAlbum']."' title='".$album['nomAlbum']."' />";
+            echo "</a>";
+        }
+    } else {
+        echo '<p>Connectez-vous pour avoir accès à votre playlist.</p>';
+    }
+    ?>
 </div>

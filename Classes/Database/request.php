@@ -51,6 +51,17 @@ class Request {
         return $stmt->fetchAll();
     }
 
+    public function isAlbumInPlaylist(int $idAlbum, int $idUtilisateur) {
+        $query = <<<EOF
+            SELECT * FROM DANS_PLAYLIST
+            WHERE idAlbum = :idAlbum
+            AND idUtilisateur = :idUtilisateur
+        EOF;
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([':idAlbum' => $idAlbum, ':idUtilisateur' => $idUtilisateur]);
+        return $stmt->fetchAll();
+    }
+
     public function connexion($mailUtilisateur, $mdpUtilisateur) {
         $stmt = $this->pdo->prepare("SELECT * FROM UTILISATEURS WHERE mailUtilisateur = ? AND mdpUtilisateur = ?");
         $stmt->execute([$mailUtilisateur, $mdpUtilisateur]);

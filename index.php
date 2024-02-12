@@ -76,6 +76,11 @@ switch ($action) {
             $controller->addToPlaylist();
             break;
 
+        case 'supprimer_playlist':
+            $controller = new PlaylistController();
+            $controller->deleteOfPlaylist();
+            break; 
+
     default:
         // Récupérer les vues
         ob_start();

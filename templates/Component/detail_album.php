@@ -1,4 +1,6 @@
 <?php
+use Database\Request;
+
 session_start();
 
 if($album) {
@@ -8,13 +10,25 @@ if($album) {
     echo "<p>Année de sortie: ".$album[0]['anneeSortie']."</p>";
     
     if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']) {
-        echo "<form action='/index.php?action=ajouter_playlist' method='post'>";
-        echo "<input type='hidden' name='album_id' value='".$album[0]['idAlbum']."'>";
-        echo "<button type='submit'>Ajouter à la playlist</button>";
-        echo "</form>";
+        $idUtilisateur = $_SESSION['idUtilisateur'];
+        $albumId = $album[0]['idAlbum'];
+        $pdo = new \PDO('sqlite:Data/db.sqlite');
+        $request = new Request($pdo);
+
+        if ($request->isAlbumInPlaylist($albumId, $idUtilisateur)) {
+            echo "<form action='/index.php?action=supprimer_playlist' method='post'>";
+            echo "<input type='hidden' name='album_id' value='".$albumId."'>";
+            echo "<button type='submit'>Supprimer de la playlist</button>";
+            echo "</form>";
+        } else {
+            echo "<form action='/index.php?action=ajouter_playlist' method='post'>";
+            echo "<input type='hidden' name='album_id' value='".$albumId."'>";
+            echo "<button type='submit'>Ajouter à la playlist</button>";
+            echo "</form>";
+        }
 
         echo "<form action='ajouter_note.php' method='post'>";
-        echo "<input type='hidden' name='album_id' value='".$album[0]['idAlbum']."'>";
+        echo "<input type='hidden' name='album_id' value='".$albumId."'>";
         echo "<input type='number' name='note' min='1' max='5' required>";
         echo "<button type='submit'>Ajouter une note</button>";
         echo "</form>";
