@@ -67,6 +67,10 @@ switch ($argv[1]) {
             INSERT INTO ARTIST (nomArtiste, lienImage)
             VALUES (:nomArtiste, :lienImage)'
         );
+        $stmtPosede = $pdo->prepare('
+            INSERT INTO POSSEDE (idAlbum, idGenre)
+            VALUES (:idAlbum, :idGenre)'
+        );
         
 
         // Préparation de la requête d'insertion pour les utilisateurs
@@ -85,34 +89,7 @@ switch ($argv[1]) {
             INSERT INTO GENRE (nomGenre)
             VALUES (:nomGenre)');
         
-        foreach ($data as $item) {
-            // Vérification de l'existence des clés
-            $nomAlbum = isset($item['title']) ? $item['title'] : null;
-            $lienImage = isset($item['img']) ? $item['img'] : 'default.jpg';
-            $anneeSortie = isset($item['releaseYear']) ? $item['releaseYear'] : null;
-            $artiste= isset($item['by']) ? $item['by'] : null;
-            $lienImageArtiste =  'default.jpg';
-            
-
-            // Insertion des données des albums
-            try {
-                $stmtAlbum->execute([
-                    ':nomAlbum' => $nomAlbum,
-                    ':lienImage' => $lienImage,
-                    ':anneeSortie' => $anneeSortie
-                ]);
-                $exist = new Request($pdo);
-                if (!$exist->artiste_exist($artiste)) {
-                    $stmArtiste->execute([
-                        ':nomArtiste' => $artiste,
-                        ':lienImage' => $lienImageArtiste
-                    ]);
-                }
-            
-            } catch (PDOException $e) {
-                echo $e->getMessage() . PHP_EOL;
-            }
-        }
+        
 
         // Insertion des données des utilisateurs
         foreach ($data2['utilisateurs'] as $user) {
@@ -129,6 +106,59 @@ switch ($argv[1]) {
         foreach ($data3 as $genre) {
             try {
                 $stmGenre->execute([':nomGenre' => $genre['nomGenre']]);
+            } catch (PDOException $e) {
+                echo $e->getMessage() . PHP_EOL;
+            }
+        }
+
+        foreach ($data as $item) {
+            // Vérification de l'existence des clés
+            $nomAlbum = isset($item['title']) ? $item['title'] : null;
+            $lienImage = isset($item['img']) ? $item['img'] : 'default.jpg';
+            $anneeSortie = isset($item['releaseYear']) ? $item['releaseYear'] : null;
+            $artiste= isset($item['by']) ? $item['by'] : null;
+            $lienImageArtiste =  'default.jpg';
+            $genres = isset($item['genre']) ? $item['genre'] : [];
+            
+
+            // Insertion des données des albums
+            try {
+                $stmtAlbum->execute([
+                    ':nomAlbum' => $nomAlbum,
+                    ':lienImage' => $lienImage,
+                    ':anneeSortie' => $anneeSortie
+                ]);
+                $stmtArtisteExists = $pdo->prepare('SELECT idArtiste FROM ARTIST WHERE nomArtiste = :nomArtiste');
+                $stmtArtisteExists->execute([':nomArtiste' => $artiste]);
+                $existingArtiste = $stmtArtisteExists->fetch(PDO::FETCH_ASSOC);
+                if (!$existingArtiste) {
+                    $stmArtiste->execute([
+                        ':nomArtiste' => $artiste,
+                        ':lienImage' => $lienImageArtiste
+                    ]);
+                }
+
+                $idAlbum = $pdo->lastInsertId();
+
+        // Insertion des genres associés à l'album
+        foreach ($genres as $genre) {
+            // Vérifier si le genre existe déjà dans la base de données
+            $stmGenre->execute([':nomGenre' => $genre]);
+            $existingGenre = $stmGenre->fetch(PDO::FETCH_ASSOC);
+        
+            if ($existingGenre) {
+                // Si le genre existe déjà, récupérer son ID
+                $idGenre = $existingGenre['idGenre'];
+            } else {
+                // Sinon, insérer le genre dans la base de données
+                $stmGenre->execute([':nomGenre' => $genre]);
+                $idGenre = $pdo->lastInsertId();
+            }
+        
+            // Insertion de l'association entre l'album et le genre
+            $stmtPosede->execute([':idAlbum' => $idAlbum, ':idGenre' => $idGenre]);
+        }
+        
             } catch (PDOException $e) {
                 echo $e->getMessage() . PHP_EOL;
             }
