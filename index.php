@@ -61,25 +61,29 @@ switch ($action) {
         }
         break;
 
-        case 'detail':
-            $albumId = $_GET['album_id'] ?? null;
-            if ($albumId) {
-                $content = (new DetailController())->show($albumId);
-            } else {
-                // Gérer le cas où aucun identifiant d'album n'est passé
-                $content = "Aucun identifiant d'album spécifié.";
-            }
-            break;        
+    case 'detail':
+        $albumId = $_GET['album_id'] ?? null;
+        if ($albumId) {
+            $content = (new DetailController())->show($albumId);
+        } else {
+            $content = "Aucun identifiant d'album spécifié.";
+        }
+        break;        
 
-        case 'ajouter_playlist':
-            $controller = new PlaylistController();
-            $controller->addToPlaylist();
-            break;
+    case 'ajouter_playlist':
+        $controller = new PlaylistController();
+        $controller->addToPlaylist();
+        break;
 
-        case 'supprimer_playlist':
-            $controller = new PlaylistController();
-            $controller->deleteOfPlaylist();
-            break; 
+    case 'supprimer_playlist':
+        $controller = new PlaylistController();
+        $controller->deleteOfPlaylist();
+        break;
+            
+    case 'noter_playlist':
+        $controller = new PlaylistController();
+        $controller->noterPlaylist();
+        break;
 
     default:
         // Récupérer les vues

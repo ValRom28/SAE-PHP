@@ -27,7 +27,6 @@ class PlaylistController
     public function deleteOfPlaylist() {
         session_start();
         $idUtilisateur = $_SESSION['idUtilisateur'] ?? null;
-
         $albumId = $_POST['album_id'] ?? null;
 
         if ($idUtilisateur && $albumId) {
@@ -39,6 +38,24 @@ class PlaylistController
             exit();
         } else {
             echo "L'utilisateur ou l'album à supprimer à la playlist n'est pas spécifié.";
+        }
+    }
+
+    public function noterPlaylist() {
+        session_start();
+        $idUtilisateur = $_SESSION['idUtilisateur'] ?? null;
+        $albumId = $_POST['album_id'] ?? null;
+        $note = $_POST['note'] ?? null;
+
+        if ($idUtilisateur && $albumId && $note) {
+            $pdo = new \PDO('sqlite:Data/db.sqlite');
+            $stmt = $pdo->prepare("UPDATE DANS_PLAYLIST SET note = ? WHERE idUtilisateur = ? AND idAlbum = ?");
+            $stmt->execute([$note, $idUtilisateur, $albumId]);
+
+            header("Location: index.php");
+            exit();
+        } else {
+            echo "L'utilisateur, l'album ou la note à ajouter n'est pas spécifié.";
         }
     }
 }

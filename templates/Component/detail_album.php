@@ -27,7 +27,7 @@ if($album) {
             echo "</form>";
         }
 
-        echo "<form action='ajouter_note.php' method='post'>";
+        echo "<form action='/index.php?action=noter_playlist' method='post'>";
         echo "<input type='hidden' name='album_id' value='".$albumId."'>";
         echo "<input type='number' name='note' min='1' max='5' required>";
         echo "<button type='submit'>Ajouter une note</button>";
