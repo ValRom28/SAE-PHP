@@ -9,6 +9,8 @@ $pdo = new \PDO('sqlite:Data/db.sqlite');
 $request = new Request($pdo);
 $playlist = $request->getAlbums();
 foreach ($playlist as $album) {
-  echo "<img src=Data/images/".$album['lienImage']." alt=".$album['nomAlbum']." title=".$album['nomAlbum']." />";
+  echo "<a href='index.php?action=detail&album_id=".$album['idAlbum']."'>";
+  echo "<img src='Data/images/".$album['lienImage']."' alt='".$album['nomAlbum']."' title='".$album['nomAlbum']."' />";
+  echo "</a>";
 }?>
 </div>

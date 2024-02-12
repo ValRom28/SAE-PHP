@@ -25,12 +25,11 @@ aside{
 header{
     background-color: #030b1e;
     color: ghostwhite;
-    padding-top: 2rem;
-    padding-left: 2rem;
-    padding-bottom: 1rem;
+    padding: 2rem 2rem 1rem 2rem;
     margin: 0;
     display: flex;
-    flex-wrap: nowrap;
+    justify-content: space-between; /* Aligne les éléments à l'extrémité gauche et droite */
+    align-items: center; /* Centre les éléments verticalement */
 }
 
 header > * {
@@ -57,6 +56,22 @@ header > * {
 }
 
 .albumAccueil img{
+    width: 10vw;
+    height: 10vw;
+    margin: 1rem;
+    border: 1px solid ghostwhite;
+    border-radius: 1rem;
+}
+
+.albumsPlaylist {
+    display: flex;
+    flex-wrap: wrap;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 45rem;
+}
+
+.albumsPlaylist img {
     width: 10vw;
     height: 10vw;
     margin: 1rem;

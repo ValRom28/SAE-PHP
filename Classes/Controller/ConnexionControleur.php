@@ -25,6 +25,7 @@ class ConnexionControleur {
 
             // Définir une variable de session pour indiquer que l'utilisateur est connecté
             $_SESSION['loggedin'] = true;
+            $_SESSION['idUtilisateur'] = $user['idUtilisateur'];
             
             // Rediriger vers la page d'accueil
             header("Location: index.php");

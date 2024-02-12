@@ -40,11 +40,34 @@ class Request {
         $stmt->execute([':idUtilisateur' => $idUtilisateur]);
         return $stmt->fetchAll();
     }
+
+    public function getAlbumById(int $idAlbum) {
+        $query = <<<EOF
+            SELECT * FROM ALBUM
+            WHERE idAlbum = :idAlbum
+        EOF;
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([':idAlbum' => $idAlbum]);
+        return $stmt->fetchAll();
+    }
+
+    public function isAlbumInPlaylist(int $idAlbum, int $idUtilisateur) {
+        $query = <<<EOF
+            SELECT * FROM DANS_PLAYLIST
+            WHERE idAlbum = :idAlbum
+            AND idUtilisateur = :idUtilisateur
+        EOF;
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([':idAlbum' => $idAlbum, ':idUtilisateur' => $idUtilisateur]);
+        return $stmt->fetchAll();
+    }
+
     public function connexion($mailUtilisateur, $mdpUtilisateur) {
         $stmt = $this->pdo->prepare("SELECT * FROM UTILISATEURS WHERE mailUtilisateur = ? AND mdpUtilisateur = ?");
         $stmt->execute([$mailUtilisateur, $mdpUtilisateur]);
         return $stmt->fetch();
     }
+
     public function inscription($pseudoUtilisateur, $mailUtilisateur, $mdpUtilisateur) {
         $stmt = $this->pdo->prepare("INSERT INTO UTILISATEURS (pseudoUtilisateur, mailUtilisateur, mdpUtilisateur) VALUES (?, ?, ?)");
         $stmt->execute([$pseudoUtilisateur, $mailUtilisateur, $mdpUtilisateur]);

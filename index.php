@@ -3,9 +3,11 @@ use Controller\SearchController;
 use Controller\ConnexionControleur;
 use Controller\DeconnexionControleur;
 use Controller\InscriptionController;
+use Controller\DetailController;
+use Controller\PlaylistController;
 use View\Template;
 
-require 'Classes/Autoloader.php'; 
+require 'Classes/autoloader.php'; 
 Autoloader::register();
 
 // Récupérer l'action à effectuer
@@ -57,6 +59,30 @@ switch ($action) {
             // Sinon, afficher simplement le formulaire d'inscription
             $content = (new InscriptionController())->pageInscription();
         }
+        break;
+
+    case 'detail':
+        $albumId = $_GET['album_id'] ?? null;
+        if ($albumId) {
+            $content = (new DetailController())->show($albumId);
+        } else {
+            $content = "Aucun identifiant d'album spécifié.";
+        }
+        break;        
+
+    case 'ajouter_playlist':
+        $controller = new PlaylistController();
+        $controller->addToPlaylist();
+        break;
+
+    case 'supprimer_playlist':
+        $controller = new PlaylistController();
+        $controller->deleteOfPlaylist();
+        break;
+            
+    case 'noter_playlist':
+        $controller = new PlaylistController();
+        $controller->noterPlaylist();
         break;
 
     default:
