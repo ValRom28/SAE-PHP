@@ -1,7 +1,6 @@
 <?php
 $DB_SQLITE = 'Data\\db.sqlite';
 $pdo = new PDO('sqlite:' . $DB_SQLITE);
-
 switch ($argv[1]) {
     case 'create-tables':
         echo 'Création des tables ...' . PHP_EOL;
@@ -10,7 +9,7 @@ switch ($argv[1]) {
                 idUtilisateur       INTEGER PRIMARY KEY AUTOINCREMENT,
                 pseudoUtilisateur   TEXT NOT NULL,
                 mailUtilisateur     TEXT NOT NULL,
-                mdpUtilisateursss      TEXT NOT NULL
+                mdpUtilisateur      TEXT NOT NULL
             );
 
             CREATE TABLE IF NOT EXISTS ALBUM (
@@ -59,39 +58,54 @@ switch ($argv[1]) {
         $command = 'python -c "import sys, yaml, json; json.dump(yaml.safe_load(sys.stdin), sys.stdout)" < Data/extrait.yml';
         $json = shell_exec($command);
         $data = json_decode($json, true);
-        $query = null;
-        $stmt = $pdo->prepare('
-            INSERT INTO ALBUM (idAlbum, nomAlbum, lienImage, anneeSortie) 
-            VALUES (:idAlbum, :nomAlbum, :lienImage, :anneeSortie)'
+
+        // Préparation de la requête d'insertion pour les albums
+        $stmtAlbum = $pdo->prepare('
+            INSERT INTO ALBUM (nomAlbum, lienImage, anneeSortie) 
+            VALUES (:nomAlbum, :lienImage, :anneeSortie)'
+        );
+
+        // Préparation de la requête d'insertion pour les utilisateurs
+        $command = 'python -c "import sys, yaml, json; json.dump(yaml.safe_load(sys.stdin), sys.stdout)" < Data/Utilisateurs.yml';
+        $json = shell_exec($command);
+        $data2 = json_decode($json, true);
+        $stmtUser = $pdo->prepare('
+            INSERT INTO UTILISATEURS (pseudoUtilisateur, mailUtilisateur, mdpUtilisateur) 
+            VALUES (:pseudoUtilisateur, :mailUtilisateur, :mdpUtilisateur)'
         );
         
-        foreach ($data as $data) {
-            if ($data['img'] == null) {
-                try {
-                    $stmt->execute([
-                        ':idAlbum' => $data['entryId'],
-                        ':nomAlbum' => $data['title'],
-                        ':lienImage' => 'default.jpg',
-                        ':anneeSortie' => $data['releaseYear']
-                    ]);
-                } catch (PDOException $e) {
-                    echo $e->getMessage() . PHP_EOL;
-                }
-            } else {
-                try {
-                    $stmt->execute([
-                        ':idAlbum' => $data['entryId'],
-                        ':nomAlbum' => $data['title'],
-                        ':lienImage' => $data['img'],
-                        ':anneeSortie' => $data['releaseYear']
-                    ]);
-                } catch (PDOException $e) {
-                    echo $e->getMessage() . PHP_EOL;
-                }
+        foreach ($data as $item) {
+            // Vérification de l'existence des clés
+            $nomAlbum = isset($item['title']) ? $item['title'] : null;
+            $lienImage = isset($item['img']) ? $item['img'] : 'default.jpg';
+            $anneeSortie = isset($item['releaseYear']) ? $item['releaseYear'] : null;
+
+            // Insertion des données des albums
+            try {
+                $stmtAlbum->execute([
+                    ':nomAlbum' => $nomAlbum,
+                    ':lienImage' => $lienImage,
+                    ':anneeSortie' => $anneeSortie
+                ]);
+            } catch (PDOException $e) {
+                echo $e->getMessage() . PHP_EOL;
             }
         }
 
-        echo 'Données insérées!'. PHP_EOL;
+        // Insertion des données des utilisateurs
+        foreach ($data2['utilisateurs'] as $user) {
+            try {
+                $stmtUser->execute([
+                    ':pseudoUtilisateur' => $user['pseudoUtilisateur'],
+                    ':mailUtilisateur' => $user['mailUtilisateur'],
+                    ':mdpUtilisateur' => $user['mdpUtilisateur']
+                ]);
+            } catch (PDOException $e) {
+                echo $e->getMessage() . PHP_EOL;
+            }
+        }
+
+        echo 'Données insérées!' . PHP_EOL;
         break;
         
     case 'delete-tables':
@@ -108,5 +122,4 @@ switch ($argv[1]) {
         echo 'Tables supprimées !' . PHP_EOL;
         break;
 }
-
 ?>
