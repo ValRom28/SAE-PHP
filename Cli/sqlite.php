@@ -23,7 +23,6 @@ switch ($argv[1]) {
                 idUtilisateur   INTEGER NOT NULL,
                 idAlbum         INTEGER NOT NULL,
                 note            INTEGER NOT NULL,
-                playlist        BOOLEAN NOT NULL,
                 PRIMARY KEY (idUtilisateur, idAlbum),
                 FOREIGN KEY (idUtilisateur) REFERENCES UTILISATEURS(idUtilisateur),
                 FOREIGN KEY (idAlbum) REFERENCES ALBUM(idAlbum)
