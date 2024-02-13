@@ -1,11 +1,52 @@
 <?php
 namespace Database;
 
-class Request {
+class Album {
     private $pdo;
 
     public function __construct(\PDO $pdo) {
         $this->pdo = $pdo;
+    }
+
+    public function createAlbum($nomAlbum, $lienImage, $anneeSortie, $idArtiste, $description) {
+        $query = <<<EOF
+        INSERT INTO album (nomAlbum, lienImage, anneeSortie, idArtiste, description)
+        VALUES (:nomAlbum, :lienImage, :anneeSortie, :idArtiste, :description)
+        EOF;
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([
+            ':nomAlbum' => $nomAlbum,
+            ':lienImage' => $lienImage,
+            ':anneeSortie' => $anneeSortie,
+            ':idArtiste' => $idArtiste,
+            ':description' => $description
+        ]);
+    }
+
+    public function updateAlbum($idAlbum, $nomAlbum, $lienImage, $anneeSortie, $idArtiste, $description) {
+        $query = <<<EOF
+        UPDATE album
+        SET nomAlbum = :nomAlbum, lienImage = :lienImage, anneeSortie = :anneeSortie, idArtiste = :idArtiste, description = :description
+        WHERE idAlbum = :idAlbum
+        EOF;
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([
+            ':idAlbum' => $idAlbum,
+            ':nomAlbum' => $nomAlbum,
+            ':lienImage' => $lienImage,
+            ':anneeSortie' => $anneeSortie,
+            ':idArtiste' => $idArtiste,
+            ':description' => $description
+        ]);
+    }
+
+    public function deleteAlbum($idAlbum) {
+        $query = <<<EOF
+        DELETE FROM album
+        WHERE idAlbum = :idAlbum
+        EOF;
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([':idAlbum' => $idAlbum]);
     }
 
     public function searchAlbums($query) {
@@ -61,28 +102,6 @@ class Request {
         $stmt->execute([':idAlbum' => $idAlbum, ':idUtilisateur' => $idUtilisateur]);
         return $stmt->fetchAll();
     }
-
-    public function connexion($mailUtilisateur, $mdpUtilisateur) {
-        $stmt = $this->pdo->prepare("SELECT * FROM UTILISATEURS WHERE mailUtilisateur = ? AND mdpUtilisateur = ?");
-        $stmt->execute([$mailUtilisateur, $mdpUtilisateur]);
-        return $stmt->fetch();
-    }
-
-    public function inscription($pseudoUtilisateur, $mailUtilisateur, $mdpUtilisateur) {
-        $stmt = $this->pdo->prepare("INSERT INTO UTILISATEURS (pseudoUtilisateur, mailUtilisateur, mdpUtilisateur,estAdmin) VALUES (?, ?, ?,?)");
-        $stmt->execute([$pseudoUtilisateur, $mailUtilisateur, $mdpUtilisateur,0]);
-    }
-    public function artiste_exist($nomArtiste) {
-        $stmt = $this->pdo->prepare("SELECT * FROM ARTISTE WHERE nomArtiste = ?");
-        $stmt->execute([$nomArtiste]);
-        return $stmt->fetch();
-    }
-    public function est_admin($idUtilisateur) {
-        $stmt = $this->pdo->prepare("SELECT estAdmin FROM UTILISATEURS WHERE idUtilisateur = ?");
-        $stmt->execute([$idUtilisateur]);
-        if($stmt->fetch()['estAdmin'] == 1){
-            return true;
-        }
-        return false;
-    }
 }
+
+?>
