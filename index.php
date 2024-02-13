@@ -85,8 +85,9 @@ switch ($action) {
         $controller = new PlaylistController();
         $controller->noterPlaylist();
         break;
+
     case 'admin':
-        $content = (new adminController())->pageAdmin();
+        $content = (new AdminController())->pageAdmin();
         break;
 
     default:
