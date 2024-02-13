@@ -5,7 +5,7 @@ switch ($argv[1]) {
     case 'create-tables':
         echo 'Création des tables ...' . PHP_EOL;
         $query = <<<EOF
-        CREATE TABLE IF NOT EXISTS ARTIST (
+        CREATE TABLE IF NOT EXISTS ARTISTE (
             idArtiste      INTEGER PRIMARY KEY AUTOINCREMENT,
             nomArtiste     TEXT NOT NULL,
             lienImage      TEXT NOT NULL
@@ -25,7 +25,7 @@ switch ($argv[1]) {
                 anneeSortie  DATE NOT NULL,
                 idArtiste    INTEGER NOT NULL,
                 description  TEXT,
-                FOREIGN KEY (idArtiste) REFERENCES ARTIST(idArtiste)
+                FOREIGN KEY (idArtiste) REFERENCES ARTISTE(idArtiste)
             );
 
             CREATE TABLE IF NOT EXISTS DANS_PLAYLIST (
@@ -77,7 +77,7 @@ switch ($argv[1]) {
             VALUES (:nomAlbum, :lienImage, :anneeSortie,:idArtiste, :description)'
         );
         $stmArtiste = $pdo->prepare('
-            INSERT INTO ARTIST (nomArtiste, lienImage)
+            INSERT INTO ARTISTE (nomArtiste, lienImage)
             VALUES (:nomArtiste, :lienImage)'
         );
         $stmtPosede = $pdo->prepare('
@@ -135,7 +135,7 @@ switch ($argv[1]) {
             try {
                 
                 // Vérifier si l'artiste existe déjà dans la base de données
-                    $stmtArtisteExists = $pdo->prepare('SELECT idArtiste FROM ARTIST WHERE nomArtiste = :nomArtiste');
+                    $stmtArtisteExists = $pdo->prepare('SELECT idArtiste FROM ARTISTE WHERE nomArtiste = :nomArtiste');
                     $stmtArtisteExists->execute([':nomArtiste' => $artiste]);
                     $existingArtiste = $stmtArtisteExists->fetch(PDO::FETCH_ASSOC);
 
@@ -222,7 +222,7 @@ switch ($argv[1]) {
             DROP TABLE IF EXISTS DANS_PLAYLIST;
             DROP TABLE IF EXISTS GENRE;
             DROP TABLE IF EXISTS POSSEDE;
-            DROP TABLE IF EXISTS ARTIST;
+            DROP TABLE IF EXISTS ARTISTE;
             DROP TABLE IF EXISTS MUSIQUE;
         EOF;
         $pdo->exec($query);

@@ -28,7 +28,7 @@ if($album) {
     else{
         echo "<h2>".$album[0]['nomAlbum']."</h2>";
     }
-    echo "<p>".$album[0]['descriptionAlbum']."</p>";
+    echo "<p>".$album[0]['description']."</p>";
     echo "<p>Année de sortie: ".$album[0]['anneeSortie']."</p></div>";
     echo "<img src='Data/images/".$album[0]['lienImage']."' alt='".$album[0]['nomAlbum']."' class='imgGroupe'/>";
 } else {

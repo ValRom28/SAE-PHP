@@ -93,6 +93,21 @@ switch ($action) {
     case 'gestion_album':
         $content = (new AdminController())->pageGestionAlbum();
         break;
+    
+    case 'supprimer_album':
+        $controller = new AdminController();
+        $controller->deleteAlbum();
+        break;
+
+    case 'page_modifier_album':
+        $controller = new AdminController();
+        $content = $controller->afficherFormulaireModifierAlbum();
+        break;
+    
+    case 'modifier_album':
+        $controller = new AdminController();
+        $controller->modifierAlbum();
+        break;
 
     default:
         // Récupérer les vues
