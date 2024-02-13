@@ -1,5 +1,3 @@
-<link rel= stylesheet href="templates/static/css/header.css">
-
 <form action="/index.php" method="get" class="recherche" id="recherche">
     <input type="hidden" name="action" value="search">
     <input type="text" name="search" placeholder="Rechercher un album" class="text-field">
@@ -8,7 +6,7 @@
 
 <div class="buttonsConnexion">
 <?php
-use Database\request as request;
+use Database\Utilisateur;
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -19,8 +17,8 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     echo '<form action="/index.php?action=logout" method="post"><button type="submit" class="déconnexion">Déconnexion</button></form>';
     $pdo = new \PDO('sqlite:Data/db.sqlite');
     
-    $request = new Request($pdo);
-    if($request->est_admin($_SESSION['idUtilisateur'])){
+    $request = new Utilisateur($pdo);
+    if($request->isAdmin($_SESSION['idUtilisateur'])){
         echo '<form action="/index.php?action=admin" method="post"><button type="submit" class="admin">Admin</button></form>';
     }
 } else {

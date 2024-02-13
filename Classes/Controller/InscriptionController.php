@@ -1,6 +1,6 @@
 <?php
 namespace Controller;
-use Database\Request;
+use Database\Utilisateur;
 
 class InscriptionController{
 
@@ -17,7 +17,7 @@ class InscriptionController{
     public function inscription($pseudoUtilisateur, $mailUtilisateur, $mdpUtilisateur) {
         // Connexion à la base de données
         $pdo = new \PDO('sqlite:Data/db.sqlite');
-        $request = new Request($pdo);
+        $request = new Utilisateur($pdo);
         if ($pseudoUtilisateur != '' | $mailUtilisateur != '' | $mdpUtilisateur != '') {
             $user = $request->inscription($pseudoUtilisateur, $mailUtilisateur, $mdpUtilisateur);
             header("Location: index.php?action=login");

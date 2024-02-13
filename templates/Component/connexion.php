@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="templates/static/css/connexion.css">
 <form method="POST" class="page_connexion" id="connexion">
     <div class="email">
         <p>Email</p>

@@ -1,5 +1,3 @@
-<link rel= stylesheet href="templates/static/css/connexion.css">
-
 <form method="POST" class="bloc_inscription" id="inscription">
 <div class="pseudoUtilisateur">
     <p>Pseudonyme</p>

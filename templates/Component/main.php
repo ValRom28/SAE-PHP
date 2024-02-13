@@ -3,10 +3,10 @@
 <?php
 require_once 'Classes/autoloader.php';
 Autoloader::register();
-use Database\Request;
+use Database\Album;
 
 $pdo = new \PDO('sqlite:Data/db.sqlite');
-$request = new Request($pdo);
+$request = new Album($pdo);
 $playlist = $request->getAlbums();
 foreach ($playlist as $album) {
   echo "<div class='listeAlbums'><a href='index.php?action=detail&album_id=".$album['idAlbum']."'>";

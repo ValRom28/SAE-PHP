@@ -1,8 +1,6 @@
 <?php
 namespace Controller;
 
-use Database\Request;
-
 class PlaylistController
 {
     public function addToPlaylist()

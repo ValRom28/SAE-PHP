@@ -1,13 +1,20 @@
 <?php
 namespace Controller;
-use Database\Request;
-class adminController {
+
+class AdminController {
     public function pageAdmin() {
-        // Obtenir le contenu de la vue
         ob_start();
         include 'templates/Component/admin.php';
         $content = ob_get_clean();
-        // Retourner le contenu de la vue
+
+        return $content;
+    }
+
+    public function pageGestionAlbum() {
+        ob_start();
+        include 'templates/Component/gestion_album.php';
+        $content = ob_get_clean();
+
         return $content;
     }
 }

@@ -1,6 +1,5 @@
 <?php
 namespace Controller;
-use Database\Request;
 
 class DeconnexionControleur
 {

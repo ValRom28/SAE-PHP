@@ -1,5 +1,5 @@
 <?php
-use Database\Request;
+use Database\Album;
 
 session_start();
 echo "<link rel='stylesheet' href='templates/static/css/detail.css'><div>";
@@ -8,7 +8,7 @@ if($album) {
         $idUtilisateur = $_SESSION['idUtilisateur'];
         $albumId = $album[0]['idAlbum'];
         $pdo = new \PDO('sqlite:Data/db.sqlite');
-        $request = new Request($pdo);
+        $request = new Album($pdo);
         if ($request->isAlbumInPlaylist($albumId, $idUtilisateur)) {
             echo "<form action='/index.php?action=supprimer_playlist' method='post'>";
             echo "<h2>".$album[0]['nomAlbum']."</h2>";

@@ -1,14 +1,14 @@
 <?php
 namespace Controller;
 
-use Database\Request;
+use Database\Album;
 use View\Template;
 
 class DetailController {
     public function show($albumId) {
         // Récupérer les détails de l'album depuis la base de données en fonction de son identifiant
         $pdo = new \PDO('sqlite:Data/db.sqlite');
-        $request = new Request($pdo);
+        $request = new Album($pdo);
         $album = $request->getAlbumById($albumId);
 
         // Obtenir le contenu de la vue

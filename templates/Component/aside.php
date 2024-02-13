@@ -3,12 +3,12 @@
     <?php
     require_once 'Classes/autoloader.php';
     Autoloader::register();
-    use Database\Request;
+    use Database\Album;
 
     $idUtilisateur = $_SESSION['idUtilisateur'] ?? null;
     if ($idUtilisateur) {
         $pdo = new \PDO('sqlite:Data/db.sqlite');
-        $request = new Request($pdo);
+        $request = new Album($pdo);
         $playlist = $request->getAlbumOfPlaylist($idUtilisateur);
         foreach ($playlist as $album) {
             echo "<a href='index.php?action=detail&album_id=".$album['idAlbum']."'>";
