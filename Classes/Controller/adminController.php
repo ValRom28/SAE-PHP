@@ -46,4 +46,11 @@ class AdminController {
         }
         header('Location: /index.php?action=gestion_album');
     }
+
+    public function creerAlbum() {
+        $pdo = new \PDO('sqlite:Data/db.sqlite');
+        $request = new Album($pdo);
+        $request->createAlbum($_POST['nom_album'], $_POST['lien_image'], $_POST['annee_sortie'], $_POST['id_artiste'], $_POST['description']);
+        header('Location: /index.php?action=gestion_album');
+    }
 }

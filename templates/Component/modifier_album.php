@@ -31,19 +31,15 @@ if ($album) {
         <input type="text" name="nouveau_lien" value="<?= $lienImage ?>">
     </label><br>
     <label>Description
-        <input type="textarea" name="nouvelle_description" value="<?= $description ?>">
+        <input type="text" name="nouvelle_description" value="<?= $description ?>">
     </label><br>
     <!-- Liste des artistes associés à l'album -->
     <label>Artiste associé à l'album :</label><br>
-    <?php
-    foreach ($artists as $artist) {
-        echo '<label><input type="radio" name="idArtiste" value="' . $artist['idArtiste'] . '"';
-        if ($artist['idArtiste'] == $album[0]['idArtiste']) {
-            echo ' checked';
-        }
-        echo '> ' . $artist['nomArtiste'] . '</label><br>';
-    }
-    ?>
+    <select name="idArtiste">
+        <?php foreach ($artists as $artist) { ?>
+            <option value="<?= $artist['idArtiste'] ?>"><?= $artist['nomArtiste'] ?></option>
+        <?php } ?>
+    </select><br>
     <button type="submit">Modifier l'album</button>
 </form>
 <?php

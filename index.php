@@ -109,6 +109,11 @@ switch ($action) {
         $controller->modifierAlbum();
         break;
 
+    case 'creer_album':
+        $controller = new AdminController();
+        $controller->creerAlbum();
+        break;
+
     default:
         // Récupérer les vues
         ob_start();
