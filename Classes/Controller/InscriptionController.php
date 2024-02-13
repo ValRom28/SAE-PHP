@@ -7,7 +7,7 @@ class InscriptionController{
     public function pageInscription() {
         // Obtenir le contenu de la vue
         ob_start();
-        include 'templates/Component/Inscription.php';
+        include 'templates/Component/inscription.php';
         $content = ob_get_clean();
 
         // Retourner le contenu de la vue
