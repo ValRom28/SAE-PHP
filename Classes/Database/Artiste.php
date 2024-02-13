@@ -1,4 +1,5 @@
 <?php
+namespace Database;
 
 class Artiste {
     private $pdo;
