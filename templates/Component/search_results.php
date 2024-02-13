@@ -1,4 +1,4 @@
-<h2>Albums</h2>
+<h2>Résultat de votre recherche</h2>
 <div class="albumAccueil">
 <?php foreach ($results as $album) : ?>
     <?php 
