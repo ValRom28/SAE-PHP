@@ -57,7 +57,7 @@ class Album {
 
     public function getAlbums(): array {
         $query = <<<EOF
-            SELECT idAlbum,nomAlbum,lienImage,anneeSortie
+            SELECT *
             FROM ALBUM
             ORDER BY nomAlbum
         EOF;
@@ -68,7 +68,7 @@ class Album {
     
     public function getAlbumOfPlaylist(int $idUtilisateur): array {
         $query = <<<EOF
-            SELECT idAlbum,nomAlbum,lienImage,anneeSortie
+            SELECT *
             FROM ALBUM
             WHERE idAlbum IN (
                 SELECT idAlbum
