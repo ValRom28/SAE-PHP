@@ -5,7 +5,7 @@ use Controller\DeconnexionControleur;
 use Controller\InscriptionController;
 use Controller\DetailController;
 use Controller\PlaylistController;
-use Controller\adminController;
+use Controller\AdminController;
 use View\Template;
 
 require 'Classes/autoloader.php'; 
@@ -88,6 +88,10 @@ switch ($action) {
 
     case 'admin':
         $content = (new AdminController())->pageAdmin();
+        break;
+    
+    case 'gestion_album':
+        $content = (new AdminController())->pageGestionAlbum();
         break;
 
     default:
