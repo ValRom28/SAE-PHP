@@ -19,6 +19,22 @@ class AdminController {
         return $content;
     }
 
+    public function afficherFormulaireModifierAlbum() {
+        ob_start();
+        include 'templates/Component/modifier_album.php';
+        $content = ob_get_clean();
+
+        return $content;
+    }
+    
+    public function afficherFormulaireModifierArtiste() {
+        ob_start();
+        include 'templates/Component/modifier_artiste.php';
+        $content = ob_get_clean();
+    
+        return $content;
+    }
+
     public function deleteAlbum() {
         $idAlbum = $_POST['id_album'] ?? null;
         if ($idAlbum) {
@@ -27,14 +43,6 @@ class AdminController {
             $request->deleteAlbum($idAlbum);
         }
         header('Location: /index.php?action=gestion_album');
-    }
-
-    public function afficherFormulaireModifierAlbum() {
-        ob_start();
-        include 'templates/Component/modifier_album.php';
-        $content = ob_get_clean();
-
-        return $content;
     }
 
     public function modifierAlbum() {
@@ -52,5 +60,32 @@ class AdminController {
         $request = new Album($pdo);
         $request->createAlbum($_POST['nom_album'], $_POST['lien_image'], $_POST['annee_sortie'], $_POST['id_artiste'], $_POST['description']);
         header('Location: /index.php?action=gestion_album');
+    }
+    
+    public function deleteArtiste() {
+        $idArtiste = $_POST['id_artiste'] ?? null;
+        if ($idArtiste) {
+            $pdo = new \PDO('sqlite:Data/db.sqlite');
+            $request = new Album($pdo);
+            $request->deleteArtiste($idArtiste);
+        }
+        header('Location: /index.php?action=gestion_artiste');
+    }
+
+    public function modifierArtiste() {
+        $idArtiste = $_POST['idArtiste'] ?? null;
+        if ($idArtiste) {
+            $pdo = new \PDO('sqlite:Data/db.sqlite');
+            $request = new Album($pdo);
+            $request->updateArtiste($idArtiste, $_POST['nouveau_nom_artiste'], $_POST['nouveau_lien_image_artiste'], $_POST['nouvelle_description_artiste']);
+        }
+        header('Location: /index.php?action=gestion_artiste');
+    }
+
+    public function creerArtiste() {
+        $pdo = new \PDO('sqlite:Data/db.sqlite');
+        $request = new Album($pdo);
+        $request->createArtiste($_POST['nom_artiste'], $_POST['lien_image_artiste'], $_POST['description_artiste']);
+        header('Location: /index.php?action=gestion_artiste');
     }
 }
