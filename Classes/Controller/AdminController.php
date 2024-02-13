@@ -19,6 +19,14 @@ class AdminController {
         return $content;
     }
 
+    public function pageGestionArtiste() {
+        ob_start();
+        include 'templates/Component/gestion_artiste.php';
+        $content = ob_get_clean();
+
+        return $content;
+    }
+
     public function afficherFormulaireModifierAlbum() {
         ob_start();
         include 'templates/Component/modifier_album.php';

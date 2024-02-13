@@ -18,16 +18,6 @@ $template = new Template('templates');
 switch ($action) {
     case 'search':
         $query = $_GET['search'] ?? '';
-        if ($query == "rickroll") {
-            $content = "<iframe width=\"560\" height=
-            \"315\" src=\"https://www.youtube.com/embed/dQw4w9WgXcQ\" 
-            frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; 
-            encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>";
-        } else {
-            $searchController = new SearchController();
-            $content = $searchController->search($query);
-        }
-        break;
         $searchController = new SearchController();
         $content = $searchController->search($query);
         break;
@@ -44,6 +34,7 @@ switch ($action) {
             $content = (new ConnexionControleur())->pageConnexion();
             }
         break;
+        
     case 'logout':
         $content= (new DeconnexionControleur())->deconnexion();
         break;
@@ -93,15 +84,15 @@ switch ($action) {
     case 'gestion_album':
         $content = (new AdminController())->pageGestionAlbum();
         break;
-    
-    case 'supprimer_album':
-        $controller = new AdminController();
-        $controller->deleteAlbum();
-        break;
-
+        
     case 'page_modifier_album':
         $controller = new AdminController();
         $content = $controller->afficherFormulaireModifierAlbum();
+        break;
+            
+    case 'supprimer_album':
+        $controller = new AdminController();
+        $controller->deleteAlbum();
         break;
     
     case 'modifier_album':
@@ -114,8 +105,27 @@ switch ($action) {
         $controller->creerAlbum();
         break;
 
+    case 'page_modifier_artiste':
+        $controller = new AdminController();
+        $content = $controller->afficherFormulaireModifierArtiste();
+        break;
+
+    case 'supprimer_artiste':
+        $controller = new AdminController();
+        $controller->deleteArtiste();
+        break;
+
+    case 'modifier_artiste':
+        $controller = new AdminController();
+        $controller->modifierArtiste();
+        break;
+
+    case 'creer_artiste':
+        $controller = new AdminController();
+        $controller->creerArtiste();
+        break;
+
     default:
-        // Récupérer les vues
         ob_start();
         include 'templates/Component/main.php';
         $content = ob_get_clean();
