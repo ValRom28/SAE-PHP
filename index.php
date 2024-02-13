@@ -85,6 +85,10 @@ switch ($action) {
         $content = (new AdminController())->pageGestionAlbum();
         break;
         
+    case 'gestion_artiste':
+        $content = (new AdminController())->pageGestionArtiste();
+        break;
+
     case 'page_modifier_album':
         $controller = new AdminController();
         $content = $controller->afficherFormulaireModifierAlbum();

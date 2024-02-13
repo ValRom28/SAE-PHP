@@ -14,23 +14,22 @@ class Artiste {
         return $stmt->fetch();
     }
 
-    public function createArtiste($nomArtiste, $lienImage, $description) {
+    public function createArtiste($nomArtiste, $lienImage) {
         $query = <<<EOF
-        INSERT INTO artiste (nomArtiste, lienImage, description)
-        VALUES (:nomArtiste, :lienImage, :description)
+        INSERT INTO artiste (nomArtiste, lienImage)
+        VALUES (:nomArtiste, :lienImage)
         EOF;
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([
             ':nomArtiste' => $nomArtiste,
             ':lienImage' => $lienImage,
-            ':description' => $description
         ]);
     }
 
-    public function updateArtiste($idArtiste, $nomArtiste, $lienImage, $description) {
+    public function updateArtiste($idArtiste, $nomArtiste, $lienImage) {
         $query = <<<EOF
         UPDATE artiste
-        SET nomArtiste = :nomArtiste, lienImage = :lienImage, description = :description
+        SET nomArtiste = :nomArtiste, lienImage = :lienImage
         WHERE idArtiste = :idArtiste
         EOF;
         $stmt = $this->pdo->prepare($query);
@@ -38,7 +37,6 @@ class Artiste {
             ':idArtiste' => $idArtiste,
             ':nomArtiste' => $nomArtiste,
             ':lienImage' => $lienImage,
-            ':description' => $description
         ]);
     }
 
@@ -53,6 +51,12 @@ class Artiste {
 
     public function getArtistes(): array {
         $stmt = $this->pdo->query("SELECT * FROM ARTISTE");
+        return $stmt->fetchAll();
+    }
+
+    public function getArtisteById($idArtiste) {
+        $stmt = $this->pdo->prepare("SELECT * FROM ARTISTE WHERE idArtiste = ?");
+        $stmt->execute([$idArtiste]);
         return $stmt->fetchAll();
     }
 }
