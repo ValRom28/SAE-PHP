@@ -26,6 +26,7 @@ switch ($argv[1]) {
                 lienImage    TEXT,
                 anneeSortie  DATE NOT NULL,
                 idArtiste    INTEGER NOT NULL,
+                description  TEXT,
                 FOREIGN KEY (idArtiste) REFERENCES ARTIST(idArtiste)
             );
 
@@ -51,6 +52,13 @@ switch ($argv[1]) {
                 FOREIGN KEY (idGenre) REFERENCES GENRE(idGenre)
             );
 
+            CREATE TABLE IF NOT EXISTS MUSIQUE (
+                idMusique       INTEGER PRIMARY KEY AUTOINCREMENT,
+                titreMusique    TEXT NOT NULL,
+                idAlbum         INTEGER NOT NULL,
+                FOREIGN KEY (idAlbum) REFERENCES ALBUM(idAlbum)
+            );
+
             
         EOF;
         $pdo->exec($query);
@@ -66,8 +74,8 @@ switch ($argv[1]) {
 
         // Préparation de la requête d'insertion pour les albums
         $stmtAlbum = $pdo->prepare('
-            INSERT INTO ALBUM (nomAlbum, lienImage, anneeSortie,idArtiste) 
-            VALUES (:nomAlbum, :lienImage, :anneeSortie,:idArtiste)'
+            INSERT INTO ALBUM (nomAlbum, lienImage, anneeSortie,idArtiste, description) 
+            VALUES (:nomAlbum, :lienImage, :anneeSortie,:idArtiste, :description)'
         );
         $stmArtiste = $pdo->prepare('
             INSERT INTO ARTIST (nomArtiste, lienImage)
@@ -91,7 +99,13 @@ switch ($argv[1]) {
             INSERT INTO GENRE (nomGenre)
             VALUES (:nomGenre)');
         
-        
+        $command = 'python -c "import sys, yaml, json; json.dump(yaml.safe_load(sys.stdin), sys.stdout)" < Data/music.yml';
+        $json = shell_exec($command);
+        $data3 = json_decode($json, true);
+        $stmtMusique = $pdo->prepare('
+            INSERT INTO MUSIQUE (titreMusique, idAlbum)
+            VALUES (:titreMusique, :idAlbum)'
+        );
 
         // Insertion des données des utilisateurs
         foreach ($data2['utilisateurs'] as $user) {
@@ -114,6 +128,7 @@ switch ($argv[1]) {
             $artiste= isset($item['by']) ? $item['by'] : null;
             $lienImageArtiste =  'default.jpg';
             $genres = isset($item['genre']) ? $item['genre'] : [];
+            $description = isset($item['description']) ? $item['description'] : null;
             
 
             // Insertion des données des albums
@@ -177,6 +192,21 @@ switch ($argv[1]) {
              catch (PDOException $e) {
                 echo $e->getMessage() . PHP_EOL;
             }
+        
+        }
+        foreach ($data3 as $item) {
+            // Vérification de l'existence des clés
+            $titreMusique = isset($item['title']) ? $item['title'] : null;
+            $idAlbum = isset($item['album']) ? $item['album'] : null;
+            // Insertion des données des musiques
+            try {
+                $stmtMusique->execute([
+                    ':titreMusique' => $titreMusique,
+                    ':idAlbum' => $idAlbum
+                ]);
+            } catch (PDOException $e) {
+                echo $e->getMessage() . PHP_EOL;
+            }
         }
       
         
@@ -193,6 +223,7 @@ switch ($argv[1]) {
             DROP TABLE IF EXISTS GENRE;
             DROP TABLE IF EXISTS POSSEDE;
             DROP TABLE IF EXISTS ARTIST;
+            DROP TABLE IF EXISTS MUSIQUE;
         EOF;
         $pdo->exec($query);
         echo 'Tables supprimées !' . PHP_EOL;
