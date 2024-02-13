@@ -58,3 +58,7 @@ header{
     color: ghostwhite;
     transition: 0.3s;
 }
+
+button {
+    cursor: pointer;
+}

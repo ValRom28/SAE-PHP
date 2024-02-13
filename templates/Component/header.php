@@ -5,6 +5,9 @@
 </form>
 
 <div class="buttonsConnexion">
+    <a href="/">
+        <button>Accueil</button>
+    </a>
 <?php
 use Database\Utilisateur;
 if (session_status() === PHP_SESSION_NONE) {
