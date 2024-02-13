@@ -5,6 +5,7 @@ use Controller\DeconnexionControleur;
 use Controller\InscriptionController;
 use Controller\DetailController;
 use Controller\PlaylistController;
+use Controller\adminController;
 use View\Template;
 
 require 'Classes/autoloader.php'; 
@@ -83,6 +84,9 @@ switch ($action) {
     case 'noter_playlist':
         $controller = new PlaylistController();
         $controller->noterPlaylist();
+        break;
+    case 'admin':
+        $content = (new adminController())->pageAdmin();
         break;
 
     default:

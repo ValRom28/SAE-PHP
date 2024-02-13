@@ -17,7 +17,8 @@ switch ($argv[1]) {
                 idUtilisateur       INTEGER PRIMARY KEY AUTOINCREMENT,
                 pseudoUtilisateur   TEXT NOT NULL,
                 mailUtilisateur     TEXT NOT NULL,
-                mdpUtilisateur      TEXT NOT NULL
+                mdpUtilisateur      TEXT NOT NULL,
+                estAdmin            BOOLEAN DEFAULT 0
             );
 
             CREATE TABLE IF NOT EXISTS ALBUM (
@@ -92,8 +93,8 @@ switch ($argv[1]) {
         $json = shell_exec($command);
         $data2 = json_decode($json, true);
         $stmtUser = $pdo->prepare('
-            INSERT INTO UTILISATEURS (pseudoUtilisateur, mailUtilisateur, mdpUtilisateur) 
-            VALUES (:pseudoUtilisateur, :mailUtilisateur, :mdpUtilisateur)'
+            INSERT INTO UTILISATEURS (pseudoUtilisateur, mailUtilisateur, mdpUtilisateur,estAdmin) 
+            VALUES (:pseudoUtilisateur, :mailUtilisateur, :mdpUtilisateur,:estAdmin)'
         );
         $stmGenre = $pdo->prepare('
             INSERT INTO GENRE (nomGenre)
@@ -113,7 +114,8 @@ switch ($argv[1]) {
                 $stmtUser->execute([
                     ':pseudoUtilisateur' => $user['pseudoUtilisateur'],
                     ':mailUtilisateur' => $user['mailUtilisateur'],
-                    ':mdpUtilisateur' => $user['mdpUtilisateur']
+                    ':mdpUtilisateur' => $user['mdpUtilisateur'],
+                    ':estAdmin' => isset($user['estAdmin']) ? $user['estAdmin'] : 0
                 ]);
             } catch (PDOException $e) {
                 echo $e->getMessage() . PHP_EOL;

@@ -3,6 +3,7 @@ utilisateurs:
     pseudoUtilisateur: bob
     mailUtilisateur: bob@gmail.com
     mdpUtilisateur: bob
+    estAdmin: 1
   - idUtilisateur: 2
     pseudoUtilisateur: utilisateur2
     mailUtilisateur: utilisateur2@example.com

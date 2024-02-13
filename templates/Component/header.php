@@ -8,6 +8,7 @@
 
 <div class="buttonsConnexion">
 <?php
+use Database\request as request;
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -16,10 +17,17 @@ if (session_status() === PHP_SESSION_NONE) {
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     // L'utilisateur est connecté, affichez le bouton de déconnexion
     echo '<form action="/index.php?action=logout" method="post"><button type="submit" class="déconnexion">Déconnexion</button></form>';
+    $pdo = new \PDO('sqlite:Data/db.sqlite');
+    
+    $request = new Request($pdo);
+    if($request->est_admin($_SESSION['idUtilisateur'])){
+        echo '<form action="/index.php?action=admin" method="post"><button type="submit" class="admin">Admin</button></form>';
+    }
 } else {
     // L'utilisateur n'est pas connecté, affichez le bouton de connexion
     echo '<form action="/index.php?action=login" method="post"><button action="/index.php?action=login" type="submit" class="connexion">Connexion</button></form>';
     echo '<form action="/index.php?action=register" method="post"><button type="submit" class="inscription">Inscription</button></form>';
 }
+
 ?>
 </div>
