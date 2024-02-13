@@ -2,7 +2,7 @@
 use Database\Request;
 
 session_start();
-
+echo "<link rel='stylesheet' href='templates/static/css/detail.css'>";
 if($album) {
     echo "<h2>Détails de l'album</h2>";
     echo "<h3>".$album[0]['nomAlbum']."</h3>";
