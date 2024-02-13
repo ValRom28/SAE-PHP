@@ -8,11 +8,12 @@
 
 section.main{
     display: flex;
-    align-items: center;
+    justify-content: space-between;
     margin: 1rem;
 }
 
 section.main div{
+    flex-grow: 1;
     margin: 2rem;
 }
 
@@ -36,10 +37,6 @@ section.main div h2{
 
 form.favForm{
     display: flex;
-    align-items: center;
+    justify-content: space-around;
     margin-bottom: 1.5rem;
-}
-
-form.favForm button{
-    margin-left: 3rem;
 }
