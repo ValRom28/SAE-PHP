@@ -1,16 +1,18 @@
-<form method="POST" class="bloc_iscription" >
+<link rel= stylesheet href="templates/static/css/connexion.css">
+
+<form method="POST" class="bloc_inscription" id="inscription">
 <div class="pseudoUtilisateur">
-    <p>pseudoUtilisateur</p>
-    <input type="text" name="pseudoUtilisateur" id="username" required>
+    <p>Pseudonyme</p>
+    <input type="text" name="pseudoUtilisateur" id="usernameInscription" required>
 </div>
 <div class="email">
     <p>Email</p>
-    <input type="email" name="email" id="email" required>
+    <input type="email" name="email" id="emailInscription" required>
    
 </div>
 <div class="password">
     <p>Mot de passe</p>
-    <input type="password" name="password" id="password" required>
+    <input type="password" name="password" id="passwordInscription" required>
    
 </div>
   

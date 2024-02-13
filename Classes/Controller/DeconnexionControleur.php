@@ -13,7 +13,7 @@ class DeconnexionControleur
         session_destroy();
 
         // Rediriger l'utilisateur vers la page d'accueil ou une autre page
-        header("Location: index.php");
+        header("Location: index.php?action=login");
         exit;
     }
 }
