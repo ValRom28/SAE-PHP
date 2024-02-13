@@ -5,11 +5,12 @@ switch ($argv[1]) {
     case 'create-tables':
         echo 'Création des tables ...' . PHP_EOL;
         $query = <<<EOF
-        CREATE TABLE IF NOT EXISTS ARTISTE (
-            idArtiste      INTEGER PRIMARY KEY AUTOINCREMENT,
-            nomArtiste     TEXT NOT NULL,
-            lienImage      TEXT NOT NULL
-        );
+            CREATE TABLE IF NOT EXISTS ARTISTE (
+                idArtiste      INTEGER PRIMARY KEY AUTOINCREMENT,
+                nomArtiste     TEXT NOT NULL,
+                lienImage      TEXT
+            );
+            
             CREATE TABLE IF NOT EXISTS UTILISATEURS (
                 idUtilisateur       INTEGER PRIMARY KEY AUTOINCREMENT,
                 pseudoUtilisateur   TEXT NOT NULL,
