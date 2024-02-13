@@ -74,6 +74,7 @@ class Album {
                 SELECT idAlbum
                 FROM DANS_PLAYLIST
                 WHERE idUtilisateur = :idUtilisateur
+                AND inPlaylist = 1
             )
             ORDER BY nomAlbum
         EOF;
@@ -97,6 +98,7 @@ class Album {
             SELECT * FROM DANS_PLAYLIST
             WHERE idAlbum = :idAlbum
             AND idUtilisateur = :idUtilisateur
+            AND inPlaylist = 1
         EOF;
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([':idAlbum' => $idAlbum, ':idUtilisateur' => $idUtilisateur]);

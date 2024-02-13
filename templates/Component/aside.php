@@ -9,6 +9,7 @@
     if ($idUtilisateur) {
         $pdo = new \PDO('sqlite:Data/db.sqlite');
         $request = new Album($pdo);
+        
         $playlist = $request->getAlbumOfPlaylist($idUtilisateur);
         foreach ($playlist as $album) {
             echo "<a href='index.php?action=detail&album_id=".$album['idAlbum']."'>";

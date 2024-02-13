@@ -9,6 +9,7 @@ if($album) {
         $albumId = $album[0]['idAlbum'];
         $pdo = new \PDO('sqlite:Data/db.sqlite');
         $request = new Album($pdo);
+        
         if ($request->isAlbumInPlaylist($albumId, $idUtilisateur)) {
             echo "<form action='/index.php?action=supprimer_playlist' method='post'>";
             echo "<h2>".$album[0]['nomAlbum']."</h2>";

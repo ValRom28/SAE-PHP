@@ -1,5 +1,6 @@
 <?php
 namespace Controller;
+use Database\DansPlaylist;
 
 class PlaylistController
 {
@@ -12,9 +13,9 @@ class PlaylistController
 
         if ($idUtilisateur && $albumId) {
             $pdo = new \PDO('sqlite:Data/db.sqlite');
-            $stmt = $pdo->prepare("INSERT INTO DANS_PLAYLIST (idUtilisateur, idAlbum, note) VALUES (?, ?, ?)");
-            $stmt->execute([$idUtilisateur, $albumId, 0]);
-
+            $request = new DansPlaylist($pdo);
+            $request->addToPlaylist($idUtilisateur, $albumId);
+            
             header("Location: index.php");
             exit();
         } else {
@@ -29,8 +30,8 @@ class PlaylistController
 
         if ($idUtilisateur && $albumId) {
             $pdo = new \PDO('sqlite:Data/db.sqlite');
-            $stmt = $pdo->prepare("DELETE FROM DANS_PLAYLIST WHERE idUtilisateur = ? AND idAlbum = ?");
-            $stmt->execute([$idUtilisateur, $albumId]);
+            $request = new DansPlaylist($pdo);
+            $request->deleteOfPlaylist($idUtilisateur, $albumId);
 
             header("Location: index.php");
             exit();

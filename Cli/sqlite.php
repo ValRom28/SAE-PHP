@@ -5,9 +5,6 @@ switch ($argv[1]) {
     case 'create-tables':
         echo 'Création des tables ...' . PHP_EOL;
         $query = <<<EOF
-
-
-
         CREATE TABLE IF NOT EXISTS ARTIST (
             idArtiste      INTEGER PRIMARY KEY AUTOINCREMENT,
             nomArtiste     TEXT NOT NULL,
@@ -34,7 +31,8 @@ switch ($argv[1]) {
             CREATE TABLE IF NOT EXISTS DANS_PLAYLIST (
                 idUtilisateur   INTEGER NOT NULL,
                 idAlbum         INTEGER NOT NULL,
-                note            INTEGER NOT NULL,
+                note            INTEGER DEFAULT NULL,
+                inPlaylist      BOOLEAN DEFAULT 0,
                 PRIMARY KEY (idUtilisateur, idAlbum),
                 FOREIGN KEY (idUtilisateur) REFERENCES UTILISATEURS(idUtilisateur),
                 FOREIGN KEY (idAlbum) REFERENCES ALBUM(idAlbum)
