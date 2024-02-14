@@ -110,8 +110,6 @@ switch ($argv[1]) {
                 $genres = isset($item['genre']) ? $item['genre'] : [];
                 $description = isset($item['description']) ? $item['description'] : null;
 
-
-        
                 try {
                     $stmtArtisteExists = $pdo->prepare('SELECT idArtiste FROM ARTISTE WHERE nomArtiste = :nomArtiste');
                     $stmtArtisteExists->execute([':nomArtiste' => $artiste]);
@@ -163,6 +161,25 @@ switch ($argv[1]) {
                         ':mailUtilisateur' => $user['mailUtilisateur'],
                         ':mdpUtilisateur' => $user['mdpUtilisateur'],
                         ':estAdmin' => isset($user['estAdmin']) ? $user['estAdmin'] : 0
+                    ]);
+                } catch (PDOException $e) {
+                    echo $e->getMessage() . PHP_EOL;
+                }
+            }
+
+            $musicLoader = new DataLoaderJson('Data/music.json');
+            $musicData = $musicLoader->getData();
+
+            $stmtMusic = $pdo->prepare('
+                INSERT INTO MUSIQUE (titreMusique, idAlbum) 
+                VALUES (:titreMusique, :idAlbum)'
+            );
+
+            foreach ($musicData as $music) {
+                try {
+                    $stmtMusic->execute([
+                        ':titreMusique' => $music['title'],
+                        ':idAlbum' => $music['album']
                     ]);
                 } catch (PDOException $e) {
                     echo $e->getMessage() . PHP_EOL;
