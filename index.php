@@ -17,9 +17,12 @@ $template = new Template('templates');
 
 switch ($action) {
     case 'search':
-        $query = $_GET['search'] ?? '';
+        $search = $_GET['search'] ?? '';
+        $genre = $_GET['genre'] ?? 0;
+        $artiste = $_GET['artiste'] ?? 0;
+        
         $searchController = new SearchController();
-        $content = $searchController->search($query);
+        $content = $searchController->search($search, $genre, $artiste);
         break;
         
     case 'login':

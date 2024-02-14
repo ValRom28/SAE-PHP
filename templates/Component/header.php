@@ -2,6 +2,29 @@
     <input type="hidden" name="action" value="search">
     <input type="text" name="search" placeholder="Rechercher un album" class="text-field">
     <button type="submit" class="full-rounded">Rechercher</button>
+    <select name="genre" class="full-rounded">
+        <option value="0">Tous les genres</option>
+        <?php
+        use Database\Genre;
+        $pdo = new \PDO('sqlite:Data/db.sqlite');
+        $request = new Genre($pdo);
+        $genres = $request->afficherGenres();
+        foreach ($genres as $genre) {
+            echo '<option value="' . $genre['idGenre'] . '">' . $genre['nomGenre'] . '</option>';
+        }
+        ?>
+    </select>
+    <select name="artiste" class="full-rounded">
+        <option value="0">Tous les artistes</option>
+        <?php
+        use Database\Artiste;
+        $request = new Artiste($pdo);
+        $artistes = $request->afficherArtistes();
+        foreach ($artistes as $artiste) {
+            echo '<option value="' . $artiste['idArtiste'] . '">' . $artiste['nomArtiste'] . '</option>';
+        }
+        ?>
+    </select>
 </form>
 
 <div class="buttonsConnexion">
