@@ -6,8 +6,6 @@ $requestArtiste = new Artiste($pdo);
 $artistes = $requestArtiste->getArtistes();
 ?>
 
-<link rel="stylesheet" href="./templates/static/css/modif.css">
-
 <h1>Gestion des Artistes</h1>
 
 <!-- Formulaire pour créer un nouvel artiste -->

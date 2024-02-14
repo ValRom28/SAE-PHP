@@ -8,7 +8,6 @@ $requestArtiste = new Artiste($pdo);
 $albums = $requestAlbum->getAlbums();
 $artistes = $requestArtiste->getArtistes();
 ?>
-<link rel="stylesheet" href="./templates/static/css/modif.css">
 
 <h1>Gestion des Albums</h1>
 

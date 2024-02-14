@@ -19,8 +19,6 @@ if ($album) {
     $artists = $requestArtiste->getArtistes();
 ?>
 
-<link rel="stylesheet" href="./templates/static/css/modif.css">
-
 <form action="/index.php?action=modifier_album" method="post">
     <fieldset>
         <legend>Modification de l'album : <?= $nomAlbum ?></legend>

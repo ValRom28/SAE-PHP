@@ -12,8 +12,6 @@ if ($artiste) {
     $lienImage = $artiste[0]['lienImage'];
 ?>
 
-<link rel="stylesheet" href="./templates/static/css/modif.css">
-
 <form action="/index.php?action=modifier_artiste" method="post">
     <fieldset>
         <legend>Modification de l'artiste : <?= $nomArtiste ?></legend>
