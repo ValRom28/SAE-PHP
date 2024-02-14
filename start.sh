@@ -1,9 +1,9 @@
 #!/bin/bash
 
-php Cli/sqlqite.php delete-tables
+php Cli/sqlite.php delete-tables
 sleep 1
-php Cli/sqlqite.php create-tables
+php Cli/sqlite.php create-tables
 sleep 1
-php Cli/sqlqite.php load-data
+php Cli/sqlite.php load-data
 sleep 1
 php -S localhost:5000
