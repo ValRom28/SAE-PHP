@@ -75,29 +75,43 @@ switch ($argv[1]) {
         
         case 'load-data':
             echo 'Insertion des données ...' . PHP_EOL;
-        
+            
+            $stmtAlbum = $pdo->prepare('
+            INSERT INTO ALBUM (nomAlbum, lienImage, anneeSortie, idArtiste, description) 
+            VALUES (:nomAlbum, :lienImage, :anneeSortie, :idArtiste, :description)'
+            );
+            
+            $stmtArtiste = $pdo->prepare('
+            INSERT INTO ARTISTE (nomArtiste, lienImage) 
+            VALUES (:nomArtiste, :lienImage)'
+            );
+            
+            $stmtGenre = $pdo->prepare('
+            INSERT INTO GENRE (nomGenre) 
+            VALUES (:nomGenre)'
+            );
+
+            $stmtPosede = $pdo->prepare('
+            INSERT INTO POSSEDE (idAlbum, idGenre) 
+            VALUES (:idAlbum, :idGenre)'
+            );
+
+            $artisteLoader = new DataLoaderJson('Data/artistes.json');
+            $artisteData = $artisteLoader->getData();
+            
+            foreach ($artisteData as $artiste) {
+                try {
+                    $stmtArtiste->execute([
+                        ':nomArtiste' => $artiste['artist'],
+                        ':lienImage' => $artiste['img']
+                    ]);
+                } catch (PDOException $e) {
+                    echo $e->getMessage() . PHP_EOL;
+                }
+            }
+
             $albumLoader = new DataLoaderYaml('Data/extrait.yml');
             $albumData = $albumLoader->getData();
-        
-            $stmtAlbum = $pdo->prepare('
-                INSERT INTO ALBUM (nomAlbum, lienImage, anneeSortie, idArtiste, description) 
-                VALUES (:nomAlbum, :lienImage, :anneeSortie, :idArtiste, :description)'
-            );
-        
-            $stmtArtiste = $pdo->prepare('
-                INSERT INTO ARTISTE (nomArtiste, lienImage) 
-                VALUES (:nomArtiste, :lienImage)'
-            );
-        
-            $stmtGenre = $pdo->prepare('
-                INSERT INTO GENRE (nomGenre) 
-                VALUES (:nomGenre)'
-            );
-        
-            $stmtPosede = $pdo->prepare('
-                INSERT INTO POSSEDE (idAlbum, idGenre) 
-                VALUES (:idAlbum, :idGenre)'
-            );
         
             foreach ($albumData as $item) {
                 $nomAlbum = isset($item['title']) ? $item['title'] : null;
@@ -111,19 +125,9 @@ switch ($argv[1]) {
                 $description = isset($item['description']) ? $item['description'] : null;
 
                 try {
-                    $stmtArtisteExists = $pdo->prepare('SELECT idArtiste FROM ARTISTE WHERE nomArtiste = :nomArtiste');
-                    $stmtArtisteExists->execute([':nomArtiste' => $artiste]);
-                    $existingArtiste = $stmtArtisteExists->fetch(PDO::FETCH_ASSOC);
-        
-                    if (!$existingArtiste) {
-                        $stmtArtiste->execute([
-                            ':nomArtiste' => $artiste,
-                            ':lienImage' => $lienImage
-                        ]);
-                        $idArtiste = $pdo->lastInsertId();
-                    } else {
-                        $idArtiste = $existingArtiste['idArtiste'];
-                    }
+                    $stmtArtiste = $pdo->prepare('SELECT idArtiste FROM ARTISTE WHERE nomArtiste = :nomArtiste');
+                    $stmtArtiste->execute([':nomArtiste' => $artiste]);
+                    $idArtiste = $stmtArtiste->fetchColumn();
         
                     $stmtAlbum->execute([
                         ':nomAlbum' => $nomAlbum,
