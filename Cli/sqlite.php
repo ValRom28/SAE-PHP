@@ -1,5 +1,5 @@
 <?php
-$DB_SQLITE = 'Data\\db.sqlite';
+$DB_SQLITE = 'Data' . DIRECTORY_SEPARATOR . 'db.sqlite';
 $pdo = new PDO('sqlite:' . $DB_SQLITE);
 switch ($argv[1]) {
     case 'create-tables':
