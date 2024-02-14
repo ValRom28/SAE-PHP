@@ -138,5 +138,137 @@
   parent: Dave Alvin
   releaseYear: 2011
   title: Eleven Eleven
-  
+- by: The Beatles
+  entryId: 10001
+  genre: [Rock, Pop]
+  img: The_White_Album.png
+  parent: The Beatles
+  releaseYear: 1968
+  title: The Beatles (White Album)
+- by: The Rolling Stones
+  entryId: 10002
+  genre: [Rock]
+  img: Let_It_Bleed.jpg
+  parent: The Rolling Stones
+  releaseYear: 1969
+  title: Let It Bleed
+- by: Led Zeppelin
+  entryId: 10003
+  genre: [Hard rock, heavy metal, blues rock]
+  img: Led_Zeppelin_IV.jpg
+  parent: Led Zeppelin
+  releaseYear: 1971
+  title: Led Zeppelin IV
+- by: Pink Floyd
+  entryId: 10004
+  genre: [Progressive rock, psychedelic rock]
+  img: Dark_Side_Of_The_Moon.jpg
+  parent: Pink Floyd
+  releaseYear: 1973
+  title: The Dark Side of the Moon
+- by: Queen
+  entryId: 10005
+  genre: [Rock]
+  img: A_Night_At_The_Opera.jpg
+  parent: Queen
+  releaseYear: 1975
+  title: A Night at the Opera
+- by: The Who
+  entryId: 10006
+  genre: [Rock]
+  img: Whos_Next.jpg
+  parent: The Who
+  releaseYear: 1971
+  title: Who's Next
+- by: AC/DC
+  entryId: 10007
+  genre: [Hard rock, blues rock, heavy metal]
+  img: ACDC_Back_in_Black.png
+  parent: AC/DC
+  releaseYear: 1980
+  title: Back in Black
+- by: Nirvana
+  entryId: 10008
+  genre: [Grunge, alternative rock]
+  img: Nevermind.jpg
+  parent: Nirvana
+  releaseYear: 1991
+  title: Nevermind
+- by: Metallica
+  entryId: 10009
+  genre: [Heavy metal, thrash metal]
+  img: Master_Of_Puppets.jpg
+  parent: Metallica
+  releaseYear: 1986
+  title: Master of Puppets
+- by: U2
+  entryId: 10010
+  genre: [Rock]
+  img: War.jpg
+  parent: U2
+  releaseYear: 1983
+  title: War
 
+- by: David Bowie
+  entryId: 10011
+  genre: [Rock, Pop rock, Pop]
+  img: David-bowie-lets-dance.jpg
+  parent: David Bowie
+  releaseYear: 1983
+  title: Let's Dance
+- by: Bob Dylan
+  entryId: 10012
+  genre: [Folk rock, rock]
+  img: Highway_61_Revisited.jpg
+  parent: Bob Dylan
+  releaseYear: 1965
+  title: Highway 61 Revisited
+- by: Bruce Springsteen
+  entryId: 10013
+  genre: [Rock]
+  img: bruce_springsteen_born_to_run.jpg
+  parent: Bruce Springsteen
+  releaseYear: 1975
+  title: Born to Run
+- by: Prince
+  entryId: 10015
+  genre: [Pop, funk, rock]
+  img: prince_purple_rain.jpg
+  parent: Prince
+  releaseYear: 1984
+  title: Purple Rain
+- by: The Beach Boys
+  entryId: 10016
+  genre: [Rock, pop]
+  img: the_beach_boys_pet_sounds.jpg
+  parent: The Beach Boys
+  releaseYear: 1966
+  title: Pet Sounds
+- by: Elvis Presley
+  entryId: 10017
+  genre: [Rock and roll]
+  img: elvis_presley_elvis_presley.jpg
+  parent: Elvis Presley
+  releaseYear: 1956
+  title: Elvis Presley
+- by: The Doors
+  entryId: 10018
+  genre: [Rock]
+  img: the_doors.jpg
+  parent: The Doors
+  releaseYear: 1967
+  title: The Doors
+- by: Jimi Hendrix
+  entryId: 10019
+  genre: [Rock]
+  img: jimi_hendrix_are_you_experienced.jpg
+  parent: Jimi Hendrix
+  releaseYear: 1967
+  title: Are You Experienced
+- by: Radiohead
+  entryId: 10020
+  genre: [Alternative rock, art rock]
+  img: radiohead_ok_computer.jpg
+  parent: Radiohead
+  releaseYear: 1997
+  title: OK Computer
