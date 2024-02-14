@@ -76,7 +76,10 @@ class AdminController {
         if ($idArtiste) {
             $pdo = new \PDO('sqlite:Data/db.sqlite');
             $request = new Artiste($pdo);
-            $request->deleteArtiste($idArtiste);
+            $possedeAlbum = $request->possedeAlbum($idArtiste);
+            if (!$possedeAlbum) {
+                $request->deleteArtiste($idArtiste);
+            }
         }
         header('Location: /index.php?action=gestion_artiste');
     }
