@@ -1,0 +1,54 @@
+.modifLabel {
+    color: ghostwhite;
+    margin-right: 2rem;
+}
+
+.modifInput {
+    color: ghostwhite;
+}
+
+.modifInput input{
+    height: 1rem;
+}
+
+.modifInput textarea{
+    height: 5rem;
+    width: 20rem;
+    /*no modification of size*/
+
+}
+
+.modifLabel label{
+    font-size: 1.2rem;
+}
+
+fieldset{
+    display: flex;
+    margin:2rem;
+    padding: 1rem;
+}
+
+fieldset legend{
+    color: ghostwhite;
+    font-size: 1.5rem;
+}
+
+fieldset button{
+    padding: 0.5rem;
+    border-radius: 0 1rem 1rem 1rem;
+    background-color: #1a0338;
+    color: ghostwhite;
+    border: 1px solid ghostwhite;
+    transition: 0.3s;
+}
+
+fieldset button:hover{
+    background-color: ghostwhite;
+    color: #1a0338;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+fieldset select{
+    margin-right: 1rem;
+}
