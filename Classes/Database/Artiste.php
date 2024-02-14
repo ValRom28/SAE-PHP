@@ -69,6 +69,16 @@ class Artiste {
         $stmt->execute([':idArtiste' => $idArtiste]);
         return $stmt->fetchAll();
     }
+
+    public function getAlbumsOfArtiste($idArtiste) {
+        $query = <<<EOF
+            SELECT * FROM ALBUM
+            WHERE idArtiste = :idArtiste
+        EOF;
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([':idArtiste' => $idArtiste]);
+        return $stmt->fetchAll();
+    }
 }
 
 ?>

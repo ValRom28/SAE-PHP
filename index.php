@@ -53,14 +53,23 @@ switch ($action) {
         }
         break;
 
-    case 'detail':
+    case 'detail-album':
         $albumId = $_GET['album_id'] ?? null;
         if ($albumId) {
-            $content = (new DetailController())->show($albumId);
+            $content = (new DetailController())->showDetailAlbum($albumId);
         } else {
             $content = "Aucun identifiant d'album spécifié.";
         }
-        break;        
+        break;
+        
+    case 'detail-artiste':
+        $artisteId = $_GET['artiste_id'] ?? null;
+        if ($artisteId) {
+            $content = (new DetailController())->showDetailArtiste($artisteId);
+        } else {
+            $content = "Aucun identifiant d'artiste spécifié.";
+        }
+        break;
 
     case 'ajouter_playlist':
         $controller = new PlaylistController();
