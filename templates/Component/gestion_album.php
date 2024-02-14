@@ -23,9 +23,9 @@ $artistes = $requestArtiste->getArtistes();
             <label for="description">Description :</label><br>
         </div>
         <div class="modifInput">
-            <input type="text" id="nom_album" name="nom_album" required><br>
-            <input type="text" id="lien_image" name="lien_image" required><br>
-            <input type="number" id="annee_sortie" name="annee_sortie" required><br>
+            <input type="text" id="nom_album" name="nom_album"  required placeholder="Absolution"><br>
+            <input type="text" id="lien_image" name="lien_image" required placeholder="cover.jpg"><br>
+            <input type="number" id="annee_sortie" name="annee_sortie" required placeholder="1978"><br>
             <select id="id_artiste" name="id_artiste" required>
                 <?php foreach ($artistes as $artiste) { ?>
                     <option value="<?= $artiste['idArtiste'] ?>"><?= $artiste['nomArtiste'] ?></option>

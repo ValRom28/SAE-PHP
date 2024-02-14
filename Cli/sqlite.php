@@ -16,7 +16,7 @@ switch ($argv[1]) {
             CREATE TABLE IF NOT EXISTS ARTISTE (
                 idArtiste      INTEGER PRIMARY KEY AUTOINCREMENT,
                 nomArtiste     TEXT NOT NULL,
-                lienImage      TEXT
+                imageArtiste      TEXT
             );
             
             CREATE TABLE IF NOT EXISTS UTILISATEURS (
@@ -30,7 +30,7 @@ switch ($argv[1]) {
             CREATE TABLE IF NOT EXISTS ALBUM (
                 idAlbum      INTEGER PRIMARY KEY AUTOINCREMENT,
                 nomAlbum     TEXT NOT NULL,
-                lienImage    TEXT,
+                imageAlbum    TEXT,
                 anneeSortie  DATE NOT NULL,
                 idArtiste    INTEGER NOT NULL,
                 description  TEXT,
@@ -77,13 +77,13 @@ switch ($argv[1]) {
             echo 'Insertion des données ...' . PHP_EOL;
             
             $stmtAlbum = $pdo->prepare('
-            INSERT INTO ALBUM (nomAlbum, lienImage, anneeSortie, idArtiste, description) 
-            VALUES (:nomAlbum, :lienImage, :anneeSortie, :idArtiste, :description)'
+            INSERT INTO ALBUM (nomAlbum, imageAlbum, anneeSortie, idArtiste, description) 
+            VALUES (:nomAlbum, :imageAlbum, :anneeSortie, :idArtiste, :description)'
             );
             
             $stmtArtiste = $pdo->prepare('
-            INSERT INTO ARTISTE (nomArtiste, lienImage) 
-            VALUES (:nomArtiste, :lienImage)'
+            INSERT INTO ARTISTE (nomArtiste, imageArtiste) 
+            VALUES (:nomArtiste, :imageArtiste)'
             );
             
             $stmtGenre = $pdo->prepare('
@@ -103,7 +103,7 @@ switch ($argv[1]) {
                 try {
                     $stmtArtiste->execute([
                         ':nomArtiste' => $artiste['artist'],
-                        ':lienImage' => $artiste['img']
+                        ':imageArtiste' => $artiste['img']
                     ]);
                 } catch (PDOException $e) {
                     echo $e->getMessage() . PHP_EOL;
@@ -115,9 +115,9 @@ switch ($argv[1]) {
         
             foreach ($albumData as $item) {
                 $nomAlbum = isset($item['title']) ? $item['title'] : null;
-                $lienImage = isset($item['img']) ? ($item['img'] !== null ? $item['img'] : 'default.jpg') : 'default.jpg';
-                if ($lienImage == 'null') {
-                    $lienImage = 'default.jpg';
+                $imageAlbum = isset($item['img']) ? ($item['img'] !== null ? $item['img'] : 'default.jpg') : 'default.jpg';
+                if ($imageAlbum == 'null') {
+                    $imageAlbum = 'default.jpg';
                 }
                 $anneeSortie = isset($item['releaseYear']) ? $item['releaseYear'] : null;
                 $artiste = isset($item['by']) ? $item['by'] : null;
@@ -131,7 +131,7 @@ switch ($argv[1]) {
         
                     $stmtAlbum->execute([
                         ':nomAlbum' => $nomAlbum,
-                        ':lienImage' => $lienImage,
+                        ':imageAlbum' => $imageAlbum,
                         ':anneeSortie' => $anneeSortie,
                         ':idArtiste' => $idArtiste,
                         ':description' => $description
