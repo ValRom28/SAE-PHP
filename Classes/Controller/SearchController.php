@@ -3,10 +3,34 @@ namespace Controller;
 use Database\Album;
 
 class SearchController {
-    public function search($query) {
+    public function search($search,$genre,$artiste) {
         $pdo = new \PDO('sqlite:Data/db.sqlite');
         $request = new Album($pdo);
-        $results = $request->searchAlbums($query);
+        $results1 = $request->searchAlbums($search);
+        if($genre != 0){
+            $results2 = $request->getAlbumByGenre($genre);
+        }
+        else{
+            $results2 = $request->searchAlbums($search);
+        }
+        if($artiste != 0){
+            $results3 = $request->getAlbumsByArtiste($artiste);
+        }
+        else{
+            $results3 =  $request->searchAlbums($search);
+        }
+        // une liste avec que les albums qui sont dans les 3 listes que si il y a des albums dans les 3 listes
+        $results = array();
+        foreach($results1 as $result1){
+            foreach($results2 as $result2){
+                foreach($results3 as $result3){
+                    if($result1['idAlbum'] == $result2['idAlbum'] && $result2['idAlbum'] == $result3['idAlbum']){
+                        array_push($results,$result1);
+                    }
+                }
+            }
+        }
+
 
         ob_start();
         include 'templates/Component/search_results.php';
