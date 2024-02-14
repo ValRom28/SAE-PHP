@@ -5,19 +5,18 @@ switch ($argv[1]) {
     case 'create-tables':
         echo 'Création des tables ...' . PHP_EOL;
         $query = <<<EOF
-
-
-
-        CREATE TABLE IF NOT EXISTS ARTIST (
-            idArtiste      INTEGER PRIMARY KEY AUTOINCREMENT,
-            nomArtiste     TEXT NOT NULL,
-            lienImage      TEXT NOT NULL
-        );
+            CREATE TABLE IF NOT EXISTS ARTISTE (
+                idArtiste      INTEGER PRIMARY KEY AUTOINCREMENT,
+                nomArtiste     TEXT NOT NULL,
+                lienImage      TEXT
+            );
+            
             CREATE TABLE IF NOT EXISTS UTILISATEURS (
                 idUtilisateur       INTEGER PRIMARY KEY AUTOINCREMENT,
                 pseudoUtilisateur   TEXT NOT NULL,
                 mailUtilisateur     TEXT NOT NULL,
-                mdpUtilisateur      TEXT NOT NULL
+                mdpUtilisateur      TEXT NOT NULL,
+                estAdmin            BOOLEAN DEFAULT 0
             );
 
             CREATE TABLE IF NOT EXISTS ALBUM (
@@ -27,13 +26,14 @@ switch ($argv[1]) {
                 anneeSortie  DATE NOT NULL,
                 idArtiste    INTEGER NOT NULL,
                 description  TEXT,
-                FOREIGN KEY (idArtiste) REFERENCES ARTIST(idArtiste)
+                FOREIGN KEY (idArtiste) REFERENCES ARTISTE(idArtiste)
             );
 
             CREATE TABLE IF NOT EXISTS DANS_PLAYLIST (
                 idUtilisateur   INTEGER NOT NULL,
                 idAlbum         INTEGER NOT NULL,
-                note            INTEGER NOT NULL,
+                note            INTEGER DEFAULT NULL,
+                inPlaylist      BOOLEAN DEFAULT 0,
                 PRIMARY KEY (idUtilisateur, idAlbum),
                 FOREIGN KEY (idUtilisateur) REFERENCES UTILISATEURS(idUtilisateur),
                 FOREIGN KEY (idAlbum) REFERENCES ALBUM(idAlbum)
@@ -78,7 +78,7 @@ switch ($argv[1]) {
             VALUES (:nomAlbum, :lienImage, :anneeSortie,:idArtiste, :description)'
         );
         $stmArtiste = $pdo->prepare('
-            INSERT INTO ARTIST (nomArtiste, lienImage)
+            INSERT INTO ARTISTE (nomArtiste, lienImage)
             VALUES (:nomArtiste, :lienImage)'
         );
         $stmtPosede = $pdo->prepare('
@@ -92,8 +92,8 @@ switch ($argv[1]) {
         $json = shell_exec($command);
         $data2 = json_decode($json, true);
         $stmtUser = $pdo->prepare('
-            INSERT INTO UTILISATEURS (pseudoUtilisateur, mailUtilisateur, mdpUtilisateur) 
-            VALUES (:pseudoUtilisateur, :mailUtilisateur, :mdpUtilisateur)'
+            INSERT INTO UTILISATEURS (pseudoUtilisateur, mailUtilisateur, mdpUtilisateur,estAdmin) 
+            VALUES (:pseudoUtilisateur, :mailUtilisateur, :mdpUtilisateur,:estAdmin)'
         );
         $stmGenre = $pdo->prepare('
             INSERT INTO GENRE (nomGenre)
@@ -113,7 +113,8 @@ switch ($argv[1]) {
                 $stmtUser->execute([
                     ':pseudoUtilisateur' => $user['pseudoUtilisateur'],
                     ':mailUtilisateur' => $user['mailUtilisateur'],
-                    ':mdpUtilisateur' => $user['mdpUtilisateur']
+                    ':mdpUtilisateur' => $user['mdpUtilisateur'],
+                    ':estAdmin' => isset($user['estAdmin']) ? $user['estAdmin'] : 0
                 ]);
             } catch (PDOException $e) {
                 echo $e->getMessage() . PHP_EOL;
@@ -135,7 +136,7 @@ switch ($argv[1]) {
             try {
                 
                 // Vérifier si l'artiste existe déjà dans la base de données
-                    $stmtArtisteExists = $pdo->prepare('SELECT idArtiste FROM ARTIST WHERE nomArtiste = :nomArtiste');
+                    $stmtArtisteExists = $pdo->prepare('SELECT idArtiste FROM ARTISTE WHERE nomArtiste = :nomArtiste');
                     $stmtArtisteExists->execute([':nomArtiste' => $artiste]);
                     $existingArtiste = $stmtArtisteExists->fetch(PDO::FETCH_ASSOC);
 
@@ -222,7 +223,7 @@ switch ($argv[1]) {
             DROP TABLE IF EXISTS DANS_PLAYLIST;
             DROP TABLE IF EXISTS GENRE;
             DROP TABLE IF EXISTS POSSEDE;
-            DROP TABLE IF EXISTS ARTIST;
+            DROP TABLE IF EXISTS ARTISTE;
             DROP TABLE IF EXISTS MUSIQUE;
         EOF;
         $pdo->exec($query);

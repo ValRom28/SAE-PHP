@@ -55,6 +55,9 @@ aside{
 section.main{
     margin: 0 auto;
     padding: 2rem;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 47rem;
 }
 
 .listeAlbums{

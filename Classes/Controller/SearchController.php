@@ -1,11 +1,11 @@
 <?php
 namespace Controller;
-use Database\Request;
+use Database\Album;
 
 class SearchController {
     public function search($query) {
         $pdo = new \PDO('sqlite:Data/db.sqlite');
-        $request = new Request($pdo);
+        $request = new Album($pdo);
         $results = $request->searchAlbums($query);
 
         ob_start();

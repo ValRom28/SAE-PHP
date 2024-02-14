@@ -1,7 +1,6 @@
 <?php
 namespace Controller;
-
-use Database\Request;
+use Database\DansPlaylist;
 
 class PlaylistController
 {
@@ -14,10 +13,10 @@ class PlaylistController
 
         if ($idUtilisateur && $albumId) {
             $pdo = new \PDO('sqlite:Data/db.sqlite');
-            $stmt = $pdo->prepare("INSERT INTO DANS_PLAYLIST (idUtilisateur, idAlbum, note) VALUES (?, ?, ?)");
-            $stmt->execute([$idUtilisateur, $albumId, 0]);
-
-            header("Location: index.php");
+            $request = new DansPlaylist($pdo);
+            $request->addToPlaylist($idUtilisateur, $albumId);
+            
+            header("Location: /index.php?action=detail&album_id=$albumId");
             exit();
         } else {
             echo "L'utilisateur ou l'album à ajouter à la playlist n'est pas spécifié.";
@@ -31,10 +30,10 @@ class PlaylistController
 
         if ($idUtilisateur && $albumId) {
             $pdo = new \PDO('sqlite:Data/db.sqlite');
-            $stmt = $pdo->prepare("DELETE FROM DANS_PLAYLIST WHERE idUtilisateur = ? AND idAlbum = ?");
-            $stmt->execute([$idUtilisateur, $albumId]);
+            $request = new DansPlaylist($pdo);
+            $request->deleteOfPlaylist($idUtilisateur, $albumId);
 
-            header("Location: index.php");
+            header("Location: /index.php?action=detail&album_id=$albumId");
             exit();
         } else {
             echo "L'utilisateur ou l'album à supprimer à la playlist n'est pas spécifié.";
@@ -52,7 +51,7 @@ class PlaylistController
             $stmt = $pdo->prepare("UPDATE DANS_PLAYLIST SET note = ? WHERE idUtilisateur = ? AND idAlbum = ?");
             $stmt->execute([$note, $idUtilisateur, $albumId]);
 
-            header("Location: index.php");
+            header("Location: /index.php?action=detail&album_id=$albumId");
             exit();
         } else {
             echo "L'utilisateur, l'album ou la note à ajouter n'est pas spécifié.";

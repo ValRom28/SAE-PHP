@@ -1,6 +1,6 @@
 <?php
 namespace Controller;
-use Database\Request;
+use Database\Utilisateur;
 
 class ConnexionControleur {
     public function pageConnexion() {
@@ -16,7 +16,7 @@ class ConnexionControleur {
     public function connexion($mailUtilisateur, $mdpUtilisateur) {
         // Connexion à la base de données
         $pdo = new \PDO('sqlite:Data/db.sqlite');
-        $request = new Request($pdo);
+        $request = new Utilisateur($pdo);
         $user = $request->connexion($mailUtilisateur, $mdpUtilisateur);
         
         if ($user) {
