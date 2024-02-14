@@ -13,14 +13,19 @@ if ($artiste) {
 ?>
 
 <form action="/index.php?action=modifier_artiste" method="post">
-    <input type="hidden" name="idArtiste" value="<?= $idArtiste ?>">
-    <label>Nom de l'artiste:
-        <input type="text" name="nouveau_nom" value="<?= $nomArtiste ?>">
-    </label><br>
-    <label>Lien de l'image:
-        <input type="text" name="nouveau_lien" value="<?= $lienImage ?>">
-    </label><br>
-    <button type="submit">Modifier l'artiste</button>
+    <fieldset>
+        <legend>Modification de l'artiste : <?= $nomArtiste ?></legend>
+            <div class="modifLabel">
+                <input type="hidden" name="idArtiste" value="<?= $idArtiste ?>">
+                <label>Nom de l'artiste</label><br>
+                <label>Lien de l'image</label><br>
+            </div>
+            <div class="modifInput">
+                <input type="text" name="nouveau_nom" value="<?= $nomArtiste ?>"><br>
+                <input type="text" name="nouveau_lien" value="<?= $lienImage ?>"><br>
+                <button type="submit">Modifier l'artiste</button>
+            </div>
+    </fieldset>
 </form>
 <?php
 } else {

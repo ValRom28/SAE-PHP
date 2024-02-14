@@ -1,0 +1,23 @@
+#album,#artiste{
+    color:ghostwhite;
+    background-color: #030b1e;
+    border: 1px solid ghostwhite;
+    text-align: center;
+    text-decoration: none;
+    padding: 1rem;
+    border-radius: 0 2rem 2rem 2rem;
+    width: 25rem;
+    height: 25rem;
+}
+
+#album img, #artiste img{
+    width: 20rem;
+    height: 20rem;
+}
+
+.divAdmin{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 1rem;
+}
