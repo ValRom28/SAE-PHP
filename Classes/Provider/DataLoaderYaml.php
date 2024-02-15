@@ -37,15 +37,30 @@ class DataLoaderYaml implements DataLoaderInterface {
                 $parsedData[$currentAlbumId]["by"] = $value;
                 $parsedData[$currentAlbumId]["genre"] = [];
             } elseif ($key === "genre") {
-                $genres = array_map('trim', explode(',', $value));
-                $parsedData[$currentAlbumId]["genre"] = $genres;
+                // Trim and remove empty genres
+                $genres = array_filter(array_map('trim', explode(',', $value)));
+                if (!empty($genres)) { // Vérifie s'il y a des genres
+                    // Merge unique genres to avoid duplicates
+                    foreach ($genres as $genre) {
+                        // Remove square brackets if present
+                        $genre = trim($genre, "[]");
+                        // Add genre to the list
+                        $parsedData[$currentAlbumId]["genre"][] = $genre;
+                    }
+                }
             } else {
                 $parsedData[$currentAlbumId][$key] = $value;
             }
         }
+    
+        // Remove duplicate genres within each album entry
+        foreach ($parsedData as $album) {
+            $album["genre"] = array_unique($album["genre"]);
+        }
+        
         return $parsedData;
     }
-      
+    
     public function getData(): array {
         return $this->data;
     }

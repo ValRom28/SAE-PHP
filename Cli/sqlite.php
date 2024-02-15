@@ -138,13 +138,31 @@ switch ($argv[1]) {
                     ]);
         
                     $idAlbum = $pdo->lastInsertId();
-        
+                    
+                    $stmtGenreExists = $pdo->prepare('SELECT idGenre FROM GENRE WHERE nomGenre = :nomGenre');
+
+                    // Boucle sur chaque genre
                     foreach ($genres as $genre) {
-                        $stmtGenre->execute([':nomGenre' => $genre]);
-                        $idGenre = $pdo->lastInsertId();
-        
+                        if (!empty($genre)) {
+                            // Exécuter la requête pour vérifier si le genre existe déjà
+                            $stmtGenreExists->execute([':nomGenre' => $genre]);
+                            $existingGenre = $stmtGenreExists->fetch(PDO::FETCH_ASSOC);
+    
+                            // Vérifier si le genre existe déjà dans la base de données
+                            if ($existingGenre) {
+                                // Si le genre existe déjà, récupérer son ID
+                                $idGenre = $existingGenre['idGenre'];
+                            } else {
+                                if ($genre != " ") {
+                                    // Sinon, insérer le genre dans la base de données
+                                    $stmtGenre->execute([':nomGenre' => $genre]);
+                                    $idGenre = $pdo->lastInsertId();
+                                }
+                            }
+                        }
+                        // Insertion de l'association entre l'album et le genre
                         $stmtPosede->execute([':idAlbum' => $idAlbum, ':idGenre' => $idGenre]);
-                    }
+                    } 
                 } catch (PDOException $e) {
                     echo $e->getMessage() . PHP_EOL;
                 }
