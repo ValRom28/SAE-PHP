@@ -2,10 +2,15 @@
 namespace Controller;
 use Database\Album;
 
-class SearchController {
+class SearchController extends AbstractController {
+    private $pdo;
+
+    public function __construct(\PDO $pdo) {
+        $this->pdo = $pdo;
+    }
+
     public function search($search,$genre,$artiste) {
-        $pdo = new \PDO('sqlite:Data/db.sqlite');
-        $request = new Album($pdo);
+        $request = new Album($this->pdo);
         $results1 = $request->searchAlbums($search);
         if($genre != 0){
             $results2 = $request->getAlbumByGenre($genre);

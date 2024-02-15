@@ -2,7 +2,12 @@
 namespace Controller;
 use Database\Utilisateur;
 
-class InscriptionController{
+class InscriptionController extends AbstractController {
+    private $pdo;
+
+    public function __construct(\PDO $pdo) {
+        $this->pdo = $pdo;
+    }
 
     public function pageInscription() {
         // Obtenir le contenu de la vue
@@ -15,9 +20,7 @@ class InscriptionController{
     }
 
     public function inscription($pseudoUtilisateur, $mailUtilisateur, $mdpUtilisateur) {
-        // Connexion à la base de données
-        $pdo = new \PDO('sqlite:Data/db.sqlite');
-        $request = new Utilisateur($pdo);
+        $request = new Utilisateur($this->pdo);
         if ($pseudoUtilisateur != '' | $mailUtilisateur != '' | $mdpUtilisateur != '') {
             $user = $request->inscription($pseudoUtilisateur, $mailUtilisateur, $mdpUtilisateur);
             header("Location: index.php?action=login");

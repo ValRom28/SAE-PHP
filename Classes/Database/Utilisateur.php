@@ -1,7 +1,7 @@
 <?php
 namespace Database;
 
-class Utilisateur {
+class Utilisateur extends AbstractTable {
     private $pdo;
 
     public function __construct(\PDO $pdo) {

@@ -1,8 +1,13 @@
 <?php
 namespace Controller;
 
-class DeconnexionControleur
-{
+class DeconnexionControleur extends AbstractController {
+    private $pdo;
+
+    public function __construct(\PDO $pdo) {
+        $this->pdo = $pdo;
+    }
+
     public function deconnexion()
     {
         // Démarrer la session

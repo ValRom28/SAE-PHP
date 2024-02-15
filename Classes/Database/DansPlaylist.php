@@ -1,7 +1,7 @@
 <?php
 namespace Database;
 
-class DansPlaylist {
+class DansPlaylist extends AbstractTable {
     private $pdo;
 
     public function __construct(\PDO $pdo) {

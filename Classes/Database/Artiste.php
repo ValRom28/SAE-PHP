@@ -1,7 +1,7 @@
 <?php
 namespace Database;
 
-class Artiste {
+class Artiste extends AbstractTable {
     private $pdo;
 
     public function __construct(\PDO $pdo) {
@@ -77,6 +77,7 @@ class Artiste {
         EOF;
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([':idArtiste' => $idArtiste]);
+        return $stmt->fetchAll();
     }
 }
 

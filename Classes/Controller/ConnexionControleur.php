@@ -2,7 +2,13 @@
 namespace Controller;
 use Database\Utilisateur;
 
-class ConnexionControleur {
+class ConnexionControleur extends AbstractController {
+    private $pdo;
+
+    public function __construct(\PDO $pdo) {
+        $this->pdo = $pdo;
+    }
+
     public function pageConnexion() {
         // Obtenir le contenu de la vue
         ob_start();
@@ -14,9 +20,7 @@ class ConnexionControleur {
     }
     
     public function connexion($mailUtilisateur, $mdpUtilisateur) {
-        // Connexion à la base de données
-        $pdo = new \PDO('sqlite:Data/db.sqlite');
-        $request = new Utilisateur($pdo);
+        $request = new Utilisateur($this->pdo);
         $user = $request->connexion($mailUtilisateur, $mdpUtilisateur);
         
         if ($user) {

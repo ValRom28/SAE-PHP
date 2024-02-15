@@ -1,7 +1,9 @@
 <?php
 namespace Database;
-class Genre{
+
+class Genre extends AbstractTable {
     private $pdo;
+    
     public function __construct(\PDO $pdo){
         $this->pdo = $pdo;
     }
