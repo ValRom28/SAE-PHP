@@ -21,6 +21,21 @@ header{
     width: 20rem;
 }
 
+.recherche select{
+    padding: 0.5rem;
+    margin: 0 0.5rem;
+    border-radius: 0 1rem 1rem 1rem ;
+    color: #1a0338;
+    background-color: ghostwhite;
+    transition: 0.3s;
+}
+
+.recherche select:hover{
+    background-color: #1a0338;
+    color: ghostwhite;
+    transition: 0.3s;
+}
+
 .recherche button{
     padding: 0.5rem 1rem;
     margin: 0 0.5rem;

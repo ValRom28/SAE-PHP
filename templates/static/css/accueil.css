@@ -55,7 +55,7 @@ aside{
 section.main{
     margin: 0 auto;
     padding: 2rem;
-    overflow-x: auto;
+    overflow-x: hidden;
     overflow-y: auto;
     max-height: 47rem;
 }
@@ -82,4 +82,37 @@ section.main{
 aside a{
     text-decoration: none;
     color: ghostwhite;
+}
+
+.genre{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    border-radius: 1rem;
+    margin: 1rem 0.5rem;
+    padding: 1rem;
+}
+
+.albumStyle{
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    padding: 1rem 1rem;
+    border-radius: 0 1rem 1rem 1rem;
+    margin: 1rem 0.5rem;
+    flex-grow: 1;
+}
+
+.albumStyle img{
+    width: 10vw;
+    height: 10vw;
+    margin: 1rem;
+    border-radius: 1rem;
+}
+
+h2{
+    width: 100%;
+    font-size: 2rem;
+    padding-left: 3rem;
+    text-align: left;
 }
