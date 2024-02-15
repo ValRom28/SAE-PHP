@@ -13,7 +13,7 @@
         $playlist = $request->getAlbumOfPlaylist($idUtilisateur);
         foreach ($playlist as $album) {
             echo "<a href='index.php?action=detail&album_id=".$album['idAlbum']."'>";
-            echo "<img src='Data/images/".$album['lienImage']."' alt='".$album['nomAlbum']."' title='".$album['nomAlbum']."' />";
+            echo "<img src='Data/images/".$album['imageAlbum']."' alt='".$album['nomAlbum']."' title='".$album['nomAlbum']."' />";
             echo "</a>";
         }
     } else {
