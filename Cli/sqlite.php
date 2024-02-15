@@ -1,5 +1,13 @@
 <?php
-$DB_SQLITE = 'Data\\db.sqlite';
+use Provider\DataLoaderYaml;
+use Provider\DataLoaderJson;
+
+require 'Classes/autoloader.php'; 
+Autoloader::register();
+
+$loaderExtrait = new DataLoaderYaml('Data/extrait.yml');
+
+$DB_SQLITE = 'Data' . DIRECTORY_SEPARATOR . 'db.sqlite';
 $pdo = new PDO('sqlite:' . $DB_SQLITE);
 switch ($argv[1]) {
     case 'create-tables':
@@ -8,7 +16,7 @@ switch ($argv[1]) {
             CREATE TABLE IF NOT EXISTS ARTISTE (
                 idArtiste      INTEGER PRIMARY KEY AUTOINCREMENT,
                 nomArtiste     TEXT NOT NULL,
-                lienImage      TEXT
+                imageArtiste      TEXT
             );
             
             CREATE TABLE IF NOT EXISTS UTILISATEURS (
@@ -22,7 +30,7 @@ switch ($argv[1]) {
             CREATE TABLE IF NOT EXISTS ALBUM (
                 idAlbum      INTEGER PRIMARY KEY AUTOINCREMENT,
                 nomAlbum     TEXT NOT NULL,
-                lienImage    TEXT,
+                imageAlbum    TEXT,
                 anneeSortie  DATE NOT NULL,
                 idArtiste    INTEGER NOT NULL,
                 description  TEXT,
@@ -64,156 +72,127 @@ switch ($argv[1]) {
         $pdo->exec($query);
         echo 'Tables créées !' . PHP_EOL;
         break;
-    
-    case 'load-data':
-        echo 'Insertion des données ...' . PHP_EOL;
-
-        $command = 'python -c "import sys, yaml, json; json.dump(yaml.safe_load(sys.stdin), sys.stdout)" < Data/extrait.yml';
-        $json = shell_exec($command);
-        $data = json_decode($json, true);
-
-        // Préparation de la requête d'insertion pour les albums
-        $stmtAlbum = $pdo->prepare('
-            INSERT INTO ALBUM (nomAlbum, lienImage, anneeSortie,idArtiste, description) 
-            VALUES (:nomAlbum, :lienImage, :anneeSortie,:idArtiste, :description)'
-        );
-        $stmArtiste = $pdo->prepare('
-            INSERT INTO ARTISTE (nomArtiste, lienImage)
-            VALUES (:nomArtiste, :lienImage)'
-        );
-        $stmtPosede = $pdo->prepare('
-            INSERT INTO POSSEDE (idAlbum, idGenre)
-            VALUES (:idAlbum, :idGenre)'
-        );
         
-
-        // Préparation de la requête d'insertion pour les utilisateurs
-        $command = 'python -c "import sys, yaml, json; json.dump(yaml.safe_load(sys.stdin), sys.stdout)" < Data/Utilisateurs.yml';
-        $json = shell_exec($command);
-        $data2 = json_decode($json, true);
-        $stmtUser = $pdo->prepare('
-            INSERT INTO UTILISATEURS (pseudoUtilisateur, mailUtilisateur, mdpUtilisateur,estAdmin) 
-            VALUES (:pseudoUtilisateur, :mailUtilisateur, :mdpUtilisateur,:estAdmin)'
-        );
-        $stmGenre = $pdo->prepare('
-            INSERT INTO GENRE (nomGenre)
-            VALUES (:nomGenre)');
-        
-        $command = 'python -c "import sys, yaml, json; json.dump(yaml.safe_load(sys.stdin), sys.stdout)" < Data/music.yml';
-        $json = shell_exec($command);
-        $data3 = json_decode($json, true);
-        $stmtMusique = $pdo->prepare('
-            INSERT INTO MUSIQUE (titreMusique, idAlbum)
-            VALUES (:titreMusique, :idAlbum)'
-        );
-
-        // Insertion des données des utilisateurs
-        foreach ($data2['utilisateurs'] as $user) {
-            try {
-                $stmtUser->execute([
-                    ':pseudoUtilisateur' => $user['pseudoUtilisateur'],
-                    ':mailUtilisateur' => $user['mailUtilisateur'],
-                    ':mdpUtilisateur' => $user['mdpUtilisateur'],
-                    ':estAdmin' => isset($user['estAdmin']) ? $user['estAdmin'] : 0
-                ]);
-            } catch (PDOException $e) {
-                echo $e->getMessage() . PHP_EOL;
-            }
-        }
-
-        foreach ($data as $item) {
-            // Vérification de l'existence des clés
-            $nomAlbum = isset($item['title']) ? $item['title'] : null;
-            $lienImage = isset($item['img']) ? $item['img'] : 'default.jpg';
-            $anneeSortie = isset($item['releaseYear']) ? $item['releaseYear'] : null;
-            $artiste= isset($item['by']) ? $item['by'] : null;
-            $lienImageArtiste =  'default.jpg';
-            $genres = isset($item['genre']) ? $item['genre'] : [];
-            $description = isset($item['description']) ? $item['description'] : null;
+        case 'load-data':
+            echo 'Insertion des données ...' . PHP_EOL;
             
+            $stmtAlbum = $pdo->prepare('
+            INSERT INTO ALBUM (nomAlbum, imageAlbum, anneeSortie, idArtiste, description) 
+            VALUES (:nomAlbum, :imageAlbum, :anneeSortie, :idArtiste, :description)'
+            );
+            
+            $stmtArtiste = $pdo->prepare('
+            INSERT INTO ARTISTE (nomArtiste, imageArtiste) 
+            VALUES (:nomArtiste, :imageArtiste)'
+            );
+            
+            $stmtGenre = $pdo->prepare('
+            INSERT INTO GENRE (nomGenre) 
+            VALUES (:nomGenre)'
+            );
 
-            // Insertion des données des albums
-            try {
-                
-                // Vérifier si l'artiste existe déjà dans la base de données
-                    $stmtArtisteExists = $pdo->prepare('SELECT idArtiste FROM ARTISTE WHERE nomArtiste = :nomArtiste');
-                    $stmtArtisteExists->execute([':nomArtiste' => $artiste]);
-                    $existingArtiste = $stmtArtisteExists->fetch(PDO::FETCH_ASSOC);
+            $stmtPosede = $pdo->prepare('
+            INSERT INTO POSSEDE (idAlbum, idGenre) 
+            VALUES (:idAlbum, :idGenre)'
+            );
 
-                    // Si l'artiste n'existe pas, l'insérer dans la table ARTIST
-                    if (!$existingArtiste) {
-                        $stmArtiste->execute([
-                            ':nomArtiste' => $artiste,
-                            ':lienImage' => $lienImageArtiste
-                        ]);
-                        // Récupérer l'ID de l'artiste nouvellement inséré
-                        $idArtiste = $pdo->lastInsertId();
-                    } else {
-                        // Si l'artiste existe déjà, récupérer son ID
-                        $idArtiste = $existingArtiste['idArtiste'];
-                    }
+            $artisteLoader = new DataLoaderJson('Data/artistes.json');
+            $artisteData = $artisteLoader->getData();
+            
+            foreach ($artisteData as $artiste) {
+                try {
+                    $stmtArtiste->execute([
+                        ':nomArtiste' => $artiste['artist'],
+                        ':imageArtiste' => $artiste['img']
+                    ]);
+                } catch (PDOException $e) {
+                    echo $e->getMessage() . PHP_EOL;
+                }
+            }
 
-                    // Insérer l'album dans la table ALBUM en utilisant l'ID de l'artiste
+            $albumLoader = new DataLoaderYaml('Data/extrait.yml');
+            $albumData = $albumLoader->getData();
+        
+            foreach ($albumData as $item) {
+                $nomAlbum = isset($item['title']) ? $item['title'] : null;
+                $imageAlbum = isset($item['img']) ? ($item['img'] !== null ? $item['img'] : 'default.jpg') : 'default.jpg';
+                if ($imageAlbum == 'null') {
+                    $imageAlbum = 'default.jpg';
+                }
+                $anneeSortie = isset($item['releaseYear']) ? $item['releaseYear'] : null;
+                $artiste = isset($item['by']) ? $item['by'] : null;
+                $genres = isset($item['genre']) ? $item['genre'] : [];
+                $description = isset($item['description']) ? $item['description'] : null;
+
+                try {
+                    $stmtArtiste = $pdo->prepare('SELECT idArtiste FROM ARTISTE WHERE nomArtiste = :nomArtiste');
+                    $stmtArtiste->execute([':nomArtiste' => $artiste]);
+                    $idArtiste = $stmtArtiste->fetchColumn();
+        
                     $stmtAlbum->execute([
                         ':nomAlbum' => $nomAlbum,
-                        ':lienImage' => $lienImage,
+                        ':imageAlbum' => $imageAlbum,
                         ':anneeSortie' => $anneeSortie,
-                        ':idArtiste' => $idArtiste
+                        ':idArtiste' => $idArtiste,
+                        ':description' => $description
                     ]);
-
-                    // Récupérer l'ID de l'album nouvellement inséré
+        
                     $idAlbum = $pdo->lastInsertId();
-                // Préparer la requête pour vérifier l'existence du genre
-                $stmGenreExists = $pdo->prepare('SELECT idGenre FROM GENRE WHERE nomGenre = :nomGenre');
-
-                // Boucle sur chaque genre
-                foreach ($genres as $genre) {
-                    // Exécuter la requête pour vérifier si le genre existe déjà
-                    $stmGenreExists->execute([':nomGenre' => $genre]);
-                    $existingGenre = $stmGenreExists->fetch(PDO::FETCH_ASSOC);
-
-                    // Vérifier si le genre existe déjà dans la base de données
-                    if ($existingGenre) {
-                        // Si le genre existe déjà, récupérer son ID
-                        $idGenre = $existingGenre['idGenre'];
-                    } else {
-                        // Sinon, insérer le genre dans la base de données
-                        $stmGenre->execute([':nomGenre' => $genre]);
+        
+                    foreach ($genres as $genre) {
+                        $stmtGenre->execute([':nomGenre' => $genre]);
                         $idGenre = $pdo->lastInsertId();
+        
+                        $stmtPosede->execute([':idAlbum' => $idAlbum, ':idGenre' => $idGenre]);
                     }
-
-                    // Insertion de l'association entre l'album et le genre
-                    $stmtPosede->execute([':idAlbum' => $idAlbum, ':idGenre' => $idGenre]);
-                    
+                } catch (PDOException $e) {
+                    echo $e->getMessage() . PHP_EOL;
                 }
-
-        }
-
-        
-             catch (PDOException $e) {
-                echo $e->getMessage() . PHP_EOL;
             }
         
-        }
-        foreach ($data3 as $item) {
-            // Vérification de l'existence des clés
-            $titreMusique = isset($item['title']) ? $item['title'] : null;
-            $idAlbum = isset($item['album']) ? $item['album'] : null;
-            // Insertion des données des musiques
-            try {
-                $stmtMusique->execute([
-                    ':titreMusique' => $titreMusique,
-                    ':idAlbum' => $idAlbum
-                ]);
-            } catch (PDOException $e) {
-                echo $e->getMessage() . PHP_EOL;
-            }
-        }
-      
+            $userLoader = new DataLoaderJson('Data/users.json');
+            $userData = $userLoader->getData();
         
+            $stmtUser = $pdo->prepare('
+                INSERT INTO UTILISATEURS (pseudoUtilisateur, mailUtilisateur, mdpUtilisateur, estAdmin) 
+                VALUES (:pseudoUtilisateur, :mailUtilisateur, :mdpUtilisateur, :estAdmin)'
+            );
+        
+            foreach ($userData as $user) {
+                try {
+                    $stmtUser->execute([
+                        ':pseudoUtilisateur' => $user['pseudoUtilisateur'],
+                        ':mailUtilisateur' => $user['mailUtilisateur'],
+                        ':mdpUtilisateur' => $user['mdpUtilisateur'],
+                        ':estAdmin' => isset($user['estAdmin']) ? $user['estAdmin'] : 0
+                    ]);
+                } catch (PDOException $e) {
+                    echo $e->getMessage() . PHP_EOL;
+                }
+            }
 
-        echo 'Données insérées!' . PHP_EOL;
-        break;
+            $musicLoader = new DataLoaderJson('Data/music.json');
+            $musicData = $musicLoader->getData();
+
+            $stmtMusic = $pdo->prepare('
+                INSERT INTO MUSIQUE (titreMusique, idAlbum) 
+                VALUES (:titreMusique, :idAlbum)'
+            );
+
+            foreach ($musicData as $music) {
+                try {
+                    $stmtMusic->execute([
+                        ':titreMusique' => $music['title'],
+                        ':idAlbum' => $music['album']
+                    ]);
+                } catch (PDOException $e) {
+                    echo $e->getMessage() . PHP_EOL;
+                }
+            }
+        
+            echo 'Données insérées!' . PHP_EOL;
+            break;
+        
         
     case 'delete-tables':
         echo 'Suppression des tables ...' . PHP_EOL;

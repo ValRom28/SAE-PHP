@@ -40,3 +40,34 @@ form.favForm{
     justify-content: space-around;
     margin-bottom: 1.5rem;
 }
+
+.listeAlbums{
+    display: flex;
+    flex-wrap: wrap;
+    width: 14vw;
+    height: 14vw;
+    justify-content: space-around;
+    border: 1px solid ghostwhite;
+    border-radius: 1rem;
+    margin: 0 0.5rem;
+    overflow-x: scroll;
+    scrollbar-color: ghostwhite #1a0338;
+}
+
+.listeAlbums p{
+    margin:0;
+    padding: 0 0.5rem;
+}
+
+.listeAlbums a{
+    text-decoration: none;
+    color: ghostwhite;
+}
+
+.listeAlbums img{
+    width: 10vw;
+    height: 10vw;
+    margin: 1rem;
+    border: 1px solid ghostwhite;
+    border-radius: 1rem;
+}

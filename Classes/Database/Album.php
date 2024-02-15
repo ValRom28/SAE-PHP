@@ -8,32 +8,32 @@ class Album {
         $this->pdo = $pdo;
     }
 
-    public function createAlbum($nomAlbum, $lienImage, $anneeSortie, $idArtiste, $description) {
+    public function createAlbum($nomAlbum, $imageAlbum, $anneeSortie, $idArtiste, $description) {
         $query = <<<EOF
-        INSERT INTO album (nomAlbum, lienImage, anneeSortie, idArtiste, description)
-        VALUES (:nomAlbum, :lienImage, :anneeSortie, :idArtiste, :description)
+        INSERT INTO album (nomAlbum, imageAlbum, anneeSortie, idArtiste, description)
+        VALUES (:nomAlbum, :imageAlbum, :anneeSortie, :idArtiste, :description)
         EOF;
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([
             ':nomAlbum' => $nomAlbum,
-            ':lienImage' => $lienImage,
+            ':imageAlbum' => $imageAlbum,
             ':anneeSortie' => $anneeSortie,
             ':idArtiste' => $idArtiste,
             ':description' => $description
         ]);
     }
 
-    public function updateAlbum($idAlbum, $nomAlbum, $lienImage, $anneeSortie, $idArtiste, $description) {
+    public function updateAlbum($idAlbum, $nomAlbum, $imageAlbum, $anneeSortie, $idArtiste, $description) {
         $query = <<<EOF
         UPDATE album
-        SET nomAlbum = :nomAlbum, lienImage = :lienImage, anneeSortie = :anneeSortie, idArtiste = :idArtiste, description = :description
+        SET nomAlbum = :nomAlbum, imageAlbum = :imageAlbum, anneeSortie = :anneeSortie, idArtiste = :idArtiste, description = :description
         WHERE idAlbum = :idAlbum
         EOF;
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([
             ':idAlbum' => $idAlbum,
             ':nomAlbum' => $nomAlbum,
-            ':lienImage' => $lienImage,
+            ':imageAlbum' => $imageAlbum,
             ':anneeSortie' => $anneeSortie,
             ':idArtiste' => $idArtiste,
             ':description' => $description
@@ -96,6 +96,7 @@ class Album {
     public function getAlbumById(int $idAlbum) {
         $query = <<<EOF
             SELECT * FROM ALBUM
+            JOIN ARTISTE ON ALBUM.idArtiste = ARTISTE.idArtiste
             WHERE idAlbum = :idAlbum
         EOF;
         $stmt = $this->pdo->prepare($query);
@@ -112,6 +113,18 @@ class Album {
         EOF;
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([':idAlbum' => $idAlbum, ':idUtilisateur' => $idUtilisateur]);
+        return $stmt->fetchAll();
+    }
+
+    public function getGenresOfAlbum(int $idAlbum) {
+        $query = <<<EOF
+            SELECT nomGenre
+            FROM GENRE
+            JOIN POSSEDE ON GENRE.idGenre = POSSEDE.idGenre
+            WHERE idAlbum = :idAlbum
+        EOF;
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([':idAlbum' => $idAlbum]);
         return $stmt->fetchAll();
     }
 }
