@@ -1,7 +1,7 @@
 <?php
 namespace Database;
 
-class Album {
+class Album extends AbstractTable {
     private $pdo;
 
     public function __construct(\PDO $pdo) {

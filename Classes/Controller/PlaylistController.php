@@ -2,8 +2,13 @@
 namespace Controller;
 use Database\DansPlaylist;
 
-class PlaylistController
-{
+class PlaylistController extends AbstractController {
+    private $pdo;
+
+    public function __construct(\PDO $pdo) {
+        $this->pdo = $pdo;
+    }
+
     public function addToPlaylist()
     {
         session_start();
@@ -12,8 +17,7 @@ class PlaylistController
         $albumId = $_POST['album_id'] ?? null;
 
         if ($idUtilisateur && $albumId) {
-            $pdo = new \PDO('sqlite:Data/db.sqlite');
-            $request = new DansPlaylist($pdo);
+            $request = new DansPlaylist($this->pdo);
             $request->addToPlaylist($idUtilisateur, $albumId);
             
             header("Location: /index.php?action=detail&album_id=$albumId");
@@ -29,8 +33,7 @@ class PlaylistController
         $albumId = $_POST['album_id'] ?? null;
 
         if ($idUtilisateur && $albumId) {
-            $pdo = new \PDO('sqlite:Data/db.sqlite');
-            $request = new DansPlaylist($pdo);
+            $request = new DansPlaylist($this->pdo);
             $request->deleteOfPlaylist($idUtilisateur, $albumId);
 
             header("Location: /index.php?action=detail&album_id=$albumId");
@@ -47,8 +50,7 @@ class PlaylistController
         $note = $_POST['note'] ?? null;
 
         if ($idUtilisateur && $albumId && $note) {
-            $pdo = new \PDO('sqlite:Data/db.sqlite');
-            $stmt = $pdo->prepare("UPDATE DANS_PLAYLIST SET note = ? WHERE idUtilisateur = ? AND idAlbum = ?");
+            $stmt = $this->pdo->prepare("UPDATE DANS_PLAYLIST SET note = ? WHERE idUtilisateur = ? AND idAlbum = ?");
             $stmt->execute([$note, $idUtilisateur, $albumId]);
 
             header("Location: /index.php?action=detail&album_id=$albumId");

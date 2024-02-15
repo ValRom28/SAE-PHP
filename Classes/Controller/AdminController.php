@@ -3,7 +3,13 @@ namespace Controller;
 use Database\Album;
 use Database\Artiste;
 
-class AdminController {
+class AdminController extends AbstractController {
+    private $pdo;
+
+    public function __construct(\PDO $pdo) {
+        $this->pdo = $pdo;
+    }
+
     public function pageAdmin() {
         ob_start();
         include 'templates/Component/admin.php';
@@ -47,8 +53,7 @@ class AdminController {
     public function deleteAlbum() {
         $idAlbum = $_POST['id_album'] ?? null;
         if ($idAlbum) {
-            $pdo = new \PDO('sqlite:Data/db.sqlite');
-            $request = new Album($pdo);
+            $request = new Album($this->pdo);
             $request->deleteAlbum($idAlbum);
         }
         header('Location: /index.php?action=gestion_album');
@@ -57,16 +62,14 @@ class AdminController {
     public function modifierAlbum() {
         $idAlbum = $_POST['idAlbum'] ?? null;
         if ($idAlbum) {
-            $pdo = new \PDO('sqlite:Data/db.sqlite');
-            $request = new Album($pdo);
+            $request = new Album($this->pdo);
             $request->updateAlbum($idAlbum, $_POST['nouveau_nom'], $_POST['nouveau_lien'], $_POST['nouvelle_annee'], $_POST['idArtiste'], $_POST['nouvelle_description']);
         }
         header('Location: /index.php?action=gestion_album');
     }
 
     public function creerAlbum() {
-        $pdo = new \PDO('sqlite:Data/db.sqlite');
-        $request = new Album($pdo);
+        $request = new Album($this->pdo);
         $request->createAlbum($_POST['nom_album'], $_POST['lien_image'], $_POST['annee_sortie'], $_POST['id_artiste'], $_POST['description']);
         header('Location: /index.php?action=gestion_album');
     }
@@ -74,8 +77,7 @@ class AdminController {
     public function deleteArtiste() {
         $idArtiste = $_POST['id_artiste'] ?? null;
         if ($idArtiste) {
-            $pdo = new \PDO('sqlite:Data/db.sqlite');
-            $request = new Artiste($pdo);
+            $request = new Artiste($this->pdo);
             $possedeAlbum = $request->possedeAlbum($idArtiste);
             if (!$possedeAlbum) {
                 $request->deleteArtiste($idArtiste);
@@ -87,16 +89,14 @@ class AdminController {
     public function modifierArtiste() {
         $idArtiste = $_POST['idArtiste'] ?? null;
         if ($idArtiste) {
-            $pdo = new \PDO('sqlite:Data/db.sqlite');
-            $request = new Artiste($pdo);
+            $request = new Artiste($this->pdo);
             $request->updateArtiste($idArtiste, $_POST['nouveau_nom'], $_POST['nouveau_lien']);
         }
         header('Location: /index.php?action=gestion_artiste');
     }
 
     public function creerArtiste() {
-        $pdo = new \PDO('sqlite:Data/db.sqlite');
-        $request = new Artiste($pdo);
+        $request = new Artiste($this->pdo);
         $request->createArtiste($_POST['nom_artiste'], $_POST['lien_image']);
         header('Location: /index.php?action=gestion_artiste');
     }
