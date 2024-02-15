@@ -1,6 +1,4 @@
 <?php
-use Database\Artiste;
-
 session_start();
 
 echo "<link rel='stylesheet' href='templates/static/css/detail.css'><div>";

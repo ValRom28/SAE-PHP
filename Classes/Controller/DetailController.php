@@ -28,7 +28,6 @@ class DetailController {
         $request = new Artiste($pdo);
         $artiste = $request->getArtisteById($artisteId);
         $albums = $request->getAlbumsOfArtiste($artisteId);
-
         // Obtenir le contenu de la vue
         ob_start();
         include 'templates/Component/detail_artiste.php';

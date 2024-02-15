@@ -77,6 +77,7 @@ class Artiste {
         EOF;
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([':idArtiste' => $idArtiste]);
+        return $stmt->fetchAll();
     }
 }
 
