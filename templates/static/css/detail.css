@@ -71,3 +71,9 @@ form.favForm{
     border: 1px solid ghostwhite;
     border-radius: 1rem;
 }
+
+section.main a,section.main p{
+    text-decoration: none;
+    color: ghostwhite;
+    font-size: 2rem;
+}
