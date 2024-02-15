@@ -1,9 +1,10 @@
 <div class="genre">
   <?php
-  require_once 'Classes/autoloader.php';
-  Autoloader::register();
   use Database\Album;
   use Database\Genre;
+  require_once 'Classes/autoloader.php';
+  Autoloader::register();
+
   $pdo = new \PDO('sqlite:Data/db.sqlite');
   $request2 = new Genre($pdo);
   $request3= new Album($pdo);

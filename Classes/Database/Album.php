@@ -104,7 +104,7 @@ class Album extends AbstractTable {
         EOF;
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([':idAlbum' => $idAlbum]);
-        return $stmt->fetchAll();
+        return $stmt->fetch();
     }
 
     public function isAlbumInPlaylist(int $idAlbum, int $idUtilisateur) {

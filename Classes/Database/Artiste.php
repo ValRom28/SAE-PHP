@@ -57,7 +57,7 @@ class Artiste extends AbstractTable {
     public function getArtisteById($idArtiste) {
         $stmt = $this->pdo->prepare("SELECT * FROM ARTISTE WHERE idArtiste = ?");
         $stmt->execute([$idArtiste]);
-        return $stmt->fetchAll();
+        return $stmt->fetch();
     }
 
     public function possedeAlbum($idArtiste) {
