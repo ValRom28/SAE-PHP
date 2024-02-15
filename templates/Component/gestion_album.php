@@ -5,7 +5,7 @@ use Database\Artiste;
 $pdo = new \PDO('sqlite:Data/db.sqlite');
 $requestAlbum = new Album($pdo);
 $requestArtiste = new Artiste($pdo);
-$albums = $requestAlbum->getAlbums();
+$albums = $requestAlbum->getAllAlbums();
 $artistes = $requestArtiste->getArtistes();
 ?>
 
@@ -23,9 +23,9 @@ $artistes = $requestArtiste->getArtistes();
             <label for="description">Description </label><br>
         </div>
         <div class="modifInput">
-            <input type="text" id="nom_album" name="nom_album"  required placeholder="Absolution"><br>
-            <input type="text" id="lien_image" name="lien_image" required placeholder="cover.jpg"><br>
-            <input type="number" id="annee_sortie" name="annee_sortie" required placeholder="1978"><br>
+            <input type="text" id="nom_album" name="nom_album"  required placeholder="Exemple : Absolution"><br>
+            <input type="text" id="lien_image" name="lien_image" required placeholder="Exemple : cover.jpg"><br>
+            <input type="number" id="annee_sortie" name="annee_sortie" required placeholder="Exemple : 1978"><br>
             <select id="id_artiste" name="id_artiste" required>
                 <?php foreach ($artistes as $artiste) { ?>
                     <option value="<?= $artiste['idArtiste'] ?>"><?= $artiste['nomArtiste'] ?></option>

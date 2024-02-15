@@ -10,10 +10,10 @@ $idAlbum = $_POST['id_album'] ?? null;
 $album = $requestAlbum->getAlbumById($idAlbum);
 
 if ($album) {
-    $nomAlbum = $album[0]['nomAlbum'];
-    $anneeSortie = $album[0]['anneeSortie'];
-    $description = $album[0]['description'];
-    $lienImage = $album[0]['lienImage'];
+    $nomAlbum = $album['nomAlbum'];
+    $anneeSortie = $album['anneeSortie'];
+    $description = $album['description'];
+    $lienImage = $album['imageAlbum'];
 
     // Récupérer tous les artistes disponibles
     $artists = $requestArtiste->getArtistes();
@@ -28,7 +28,7 @@ if ($album) {
             <label>Année de sortie</label><br>
             <label>Lien de l'image</label><br>
             <!-- Liste des artistes associés à l'album -->
-            <label>Artiste associé à l'album </label>
+            <label>Artiste associé à l'album </label><br>
             <label>Description</label><br>
         </div>
         <div class="modifInput">

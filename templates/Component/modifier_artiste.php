@@ -8,8 +8,8 @@ $idArtiste = $_POST['id_artiste'] ?? null;
 $artiste = $requestArtiste->getArtisteById($idArtiste);
 
 if ($artiste) {
-    $nomArtiste = $artiste[0]['nomArtiste'];
-    $lienImage = $artiste[0]['imageArtiste'];
+    $nomArtiste = $artiste['nomArtiste'];
+    $lienImage = $artiste['imageArtiste'];
 ?>
 
 <form action="/index.php?action=modifier_artiste" method="post">

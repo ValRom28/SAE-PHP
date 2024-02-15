@@ -17,7 +17,7 @@ $artistes = $requestArtiste->getArtistes();
             <label for="lien_image">Lien de l'image de l'artiste </label><br>
         </div>
         <div class="modifInput">
-            <input type="text" id="nom_artiste" name="nom_artiste" required><br>
+            <input type="text" id="nom_artiste" name="nom_artiste" required placeholder="Exemple : U2"><br>
             <input type="text" id="lien_image" name="lien_image"><br>
             <button type="submit">Créer l'artiste</buttonx>
         </div>
