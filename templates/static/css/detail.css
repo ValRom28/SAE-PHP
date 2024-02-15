@@ -31,7 +31,7 @@ section.main div h2{
     width: 3rem;
     height: 3rem;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 1rem;
     color : white;
 }
 
@@ -45,7 +45,8 @@ form.favForm{
     display: flex;
     flex-wrap: wrap;
     width: 14vw;
-    height: 14vw;
+    overflow-x: hidden;
+    overflow-y: hidden;
     justify-content: space-around;
     border: 1px solid ghostwhite;
     border-radius: 1rem;
@@ -61,7 +62,6 @@ form.favForm{
 
 .listeAlbums a{
     text-decoration: none;
-    color: ghostwhite;
 }
 
 .listeAlbums img{
@@ -73,7 +73,10 @@ form.favForm{
 }
 
 section.main a,section.main p{
-    text-decoration: none;
-    color: ghostwhite;
     font-size: 2rem;
+    color: ghostwhite;
+}
+
+.noteDetail strong{
+    font-size: 0.2rem;
 }

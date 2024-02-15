@@ -18,12 +18,24 @@ if($album) {
             echo "<input type='hidden' name='album_id' value='".$albumId."'>";
             echo "<button type='submit' class='favImg'><img src='templates/static/images/favFull.png'></button>";
             echo "</form>";
-            echo "<p>Notes moyennes: ".$requestPlaylist->getMoyenne($albumId)."/10</p>";
-            echo "<p>Nombre de notes: ".$requestPlaylist->getNbNotes($albumId)."</p>";
+            if ($album[0]['description'] != null) {
+                echo "<p>Description: ".$album[0]['description']."</p>";
+            }
+            echo "<p>Année de sortie: ".$album[0]['anneeSortie']."</p>";
+            echo "<p>Artiste: ";
+            echo "<a href='index.php?action=detail-artiste&artiste_id=".$album[0]['idArtiste']."'>".$album[0]['nomArtiste']."</a>";
+            echo "<p>Genres: ";
+            foreach($genres as $genre) {
+                echo $genre['nomGenre']." ";
+            }
+            echo "</p>";
+            echo "<div class=\"noteDetail\">";
+            echo "<p>Notes moyennes ".$requestPlaylist->getMoyenne($albumId)."/10</p>";
+            echo "<p>Nombre de notes ".$requestPlaylist->getNbNotes($albumId)."</p>";
             if ($requestPlaylist->hasNote($idUtilisateur, $albumId)) {
                 echo "<p>Ma note: ".$requestPlaylist->getNote($idUtilisateur, $albumId)['note']."</p>";
             }
-            echo "<p>Noter :</p>";
+            echo "<p>Noter </p>";
             echo "<form action='/index.php?action=noter_album' method='post'>";
             echo "<input type='hidden' name='album_id' value='".$albumId."'>";
             echo "<input type='number' name='note' min='0' max='10'>";
@@ -35,6 +47,18 @@ if($album) {
             echo "<input type='hidden' name='album_id' value='".$albumId."'>";
             echo "<button type='submit' class='favImg'><img src='templates/static/images/favEmpty.png'></button>";
             echo "</form>";
+            if ($album[0]['description'] != null) {
+                echo "<p>Description: ".$album[0]['description']."</p>";
+            }
+            echo "<p>Année de sortie: ".$album[0]['anneeSortie']."</p>";
+            echo "<p>Artiste: ";
+            echo "<a href='index.php?action=detail-artiste&artiste_id=".$album[0]['idArtiste']."'>".$album[0]['nomArtiste']."</a>";
+            echo "<p>Genres: ";
+            foreach($genres as $genre) {
+                echo $genre['nomGenre']." ";
+            }
+            echo "</p>";
+            echo "<div class=\"noteDetail\">";
             echo "<p>Notes moyennes: ".$requestPlaylist->getMoyenne($albumId)."/10</p>";
             echo "<p>Nombre de notes: ".$requestPlaylist->getNbNotes($albumId)."</p>";
             if ($requestPlaylist->hasNote($idUtilisateur, $albumId)) {
@@ -52,17 +76,7 @@ if($album) {
     else{
         echo "<h2>".$album[0]['nomAlbum']."</h2>";
     }
-    if ($album[0]['description'] != null) {
-        echo "<p>Description: ".$album[0]['description']."</p>";
-    }
-    echo "<p>Année de sortie: ".$album[0]['anneeSortie']."</p>";
-    echo "<p>Artiste: ";
-    echo "<a href='index.php?action=detail-artiste&artiste_id=".$album[0]['idArtiste']."'>".$album[0]['nomArtiste']."</a>";
-    echo "<p>Genres: ";
-    foreach($genres as $genre) {
-        echo $genre['nomGenre']." ";
-    }
-    echo "</p>";
+    echo "</div>";
     echo "</div>";
     echo "<img src='Data/images/".$album[0]['imageAlbum']."' alt='".$album[0]['nomAlbum']."' class='imgGroupe'/>";
 } else {

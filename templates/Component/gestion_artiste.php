@@ -13,8 +13,8 @@ $artistes = $requestArtiste->getArtistes();
     <fieldset>
         <legend>Créer un nouvel artiste</legend>
         <div class="modifLabel">
-            <label for="nom_artiste">Nom de l'artiste :</label><br>
-            <label for="lien_image">Lien de l'image de l'artiste :</label><br>
+            <label for="nom_artiste">Nom de l'artiste </label><br>
+            <label for="lien_image">Lien de l'image de l'artiste </label><br>
         </div>
         <div class="modifInput">
             <input type="text" id="nom_artiste" name="nom_artiste" required><br>
@@ -27,7 +27,7 @@ $artistes = $requestArtiste->getArtistes();
 <!-- Formulaire pour modifier un artiste existant -->
 <form action="/index.php?action=page_modifier_artiste" method="post">
     <fieldset>
-        <legend>Choisir l'artiste à modifier :</legend>
+        <legend>Choisir l'artiste à modifier </legend>
         <select id="id_artiste" name="id_artiste">
             <?php foreach ($artistes as $artiste) { ?>
                 <option value="<?= $artiste['idArtiste'] ?>"><?= $artiste['nomArtiste'] ?></option>
@@ -40,7 +40,7 @@ $artistes = $requestArtiste->getArtistes();
 <!-- Formulaire pour supprimer un artiste existant -->
 <form action="/index.php?action=supprimer_artiste" method="post">
     <fieldset>
-        <legend>Choisir l'artiste à supprimer :</legend>
+        <legend>Choisir l'artiste à supprimer </legend>
         <select id="id_artiste" name="id_artiste">
             <?php foreach ($artistes as $artiste) { ?>
                 <option value="<?= $artiste['idArtiste'] ?>"><?= $artiste['nomArtiste'] ?></option>

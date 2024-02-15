@@ -14,7 +14,7 @@ if ($artiste) {
 
 <form action="/index.php?action=modifier_artiste" method="post">
     <fieldset>
-        <legend>Modification de l'artiste : <?= $nomArtiste ?></legend>
+        <legend>Modification de l'artiste <?= $nomArtiste ?></legend>
             <div class="modifLabel">
                 <input type="hidden" name="idArtiste" value="<?= $idArtiste ?>">
                 <label>Nom de l'artiste</label><br>

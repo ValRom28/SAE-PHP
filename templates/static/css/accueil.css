@@ -42,7 +42,7 @@ aside{
     flex-wrap: wrap;
     overflow-x: auto;
     overflow-y: auto;
-    max-height: 45rem;
+    max-height: 35rem;
     justify-content: center;
 }
 
@@ -66,9 +66,19 @@ section.main{
     flex-wrap: wrap;
     justify-content: space-around;
     border: 1px solid ghostwhite;
+    background-color: #1a0338;
+    color: ghostwhite;
     border-radius: 1rem;
     margin: 0 0.5rem;
+    transition: 0.3s;
 }
+
+.listeAlbums:hover{
+    background-color: ghostwhite;
+    color: #030b1e;
+    transition: 0.3s;
+}
+
 
 .listeAlbums p{
     margin:0;
@@ -78,6 +88,12 @@ section.main{
 .listeAlbums a{
     text-decoration: none;
     color: ghostwhite;
+    transition: 0.3s;
+}
+
+.listeAlbums a:hover{
+    color: #030b1e;
+    transition: 0.3s;
 }
 
 aside a{

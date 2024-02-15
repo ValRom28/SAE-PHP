@@ -16,11 +16,11 @@ $artistes = $requestArtiste->getArtistes();
     <fieldset>
         <legend>Créer un nouvel album</legend>
         <div class="modifLabel">
-            <label for="nom_album">Nom de l'album :</label><br>
-            <label for="lien_image">Lien de l'image de l'album :</label><br>
-            <label for="annee_sortie">Année de sortie :</label><br>
-            <label for="id_artiste">Artiste :</label><br>
-            <label for="description">Description :</label><br>
+            <label for="nom_album">Nom de l'album </label><br>
+            <label for="lien_image">Lien de l'image de l'album </label><br>
+            <label for="annee_sortie">Année de sortie </label><br>
+            <label for="id_artiste">Artiste </label><br>
+            <label for="description">Description </label><br>
         </div>
         <div class="modifInput">
             <input type="text" id="nom_album" name="nom_album"  required placeholder="Absolution"><br>
@@ -40,7 +40,7 @@ $artistes = $requestArtiste->getArtistes();
 <!-- Formulaire pour modifier un album existant -->
 <form action="/index.php?action=page_modifier_album" method="post">
     <fieldset>
-        <legend>Choisir l'album à modifier :</legend>
+        <legend>Choisir l'album à modifier</legend>
         <select id="id_album" name="id_album">
             <?php foreach ($albums as $album) { ?>
                 <option value="<?= $album['idAlbum'] ?>"><?= $album['nomAlbum'] ?></option>

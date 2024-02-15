@@ -27,9 +27,9 @@ if ($album) {
             <label>Nom de l'album</label><br>
             <label>Année de sortie</label><br>
             <label>Lien de l'image</label><br>
-            <label>Description</label><br>
             <!-- Liste des artistes associés à l'album -->
-            <label>Artiste associé à l'album :</label>
+            <label>Artiste associé à l'album </label>
+            <label>Description</label><br>
         </div>
         <div class="modifInput">
             <input type="text" name="nouveau_nom" value="<?= $nomAlbum ?>"><br>
