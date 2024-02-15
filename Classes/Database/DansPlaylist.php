@@ -9,12 +9,12 @@ class DansPlaylist extends AbstractTable {
     }
 
     public function deleteOfPlaylist(int $idUtilisateur, int $albumId) {
-        if (!$this->hasNote($idUtilisateur, $albumId)) {
-            $stmt = $this->pdo->prepare("DELETE FROM DANS_PLAYLIST WHERE idUtilisateur = ? AND idAlbum = ? AND note IS NOT NULL");
-            $stmt->execute([$idUtilisateur, $albumId]);
-        } else {
+        if ($this->hasNote($idUtilisateur, $albumId)) {
             $stmt = $this->pdo->prepare("UPDATE DANS_PLAYLIST SET inPlaylist = ? WHERE idUtilisateur = ? AND idAlbum = ?");
             $stmt->execute([0, $idUtilisateur, $albumId]);
+        } else {
+            $stmt = $this->pdo->prepare("DELETE FROM DANS_PLAYLIST WHERE idUtilisateur = ? AND idAlbum = ?");
+            $stmt->execute([$idUtilisateur, $albumId]);
         }
     }
     
