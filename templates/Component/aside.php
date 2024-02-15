@@ -1,3 +1,6 @@
+<a href="/" class="retourAccueil">
+    <button><img src="templates/static/images/icon.png" alt="accueil"></button>
+</a>
 <h1>Votre Playlist</h1>
 <div class='albumsPlaylist'>
     <?php
