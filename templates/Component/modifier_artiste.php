@@ -9,7 +9,7 @@ $artiste = $requestArtiste->getArtisteById($idArtiste);
 
 if ($artiste) {
     $nomArtiste = $artiste[0]['nomArtiste'];
-    $lienImage = $artiste[0]['lienImage'];
+    $lienImage = $artiste[0]['imageArtiste'];
 ?>
 
 <form action="/index.php?action=modifier_artiste" method="post">

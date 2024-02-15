@@ -14,29 +14,29 @@ class Artiste {
         return $stmt->fetch();
     }
 
-    public function createArtiste($nomArtiste, $lienImage) {
+    public function createArtiste($nomArtiste, $imageArtiste) {
         $query = <<<EOF
-        INSERT INTO artiste (nomArtiste, lienImage)
-        VALUES (:nomArtiste, :lienImage)
+        INSERT INTO artiste (nomArtiste, imageArtiste)
+        VALUES (:nomArtiste, :imageArtiste)
         EOF;
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([
             ':nomArtiste' => $nomArtiste,
-            ':lienImage' => $lienImage,
+            ':imageArtiste' => $imageArtiste,
         ]);
     }
 
-    public function updateArtiste($idArtiste, $nomArtiste, $lienImage) {
+    public function updateArtiste($idArtiste, $nomArtiste, $imageArtiste) {
         $query = <<<EOF
         UPDATE artiste
-        SET nomArtiste = :nomArtiste, lienImage = :lienImage
+        SET nomArtiste = :nomArtiste, imageArtiste = :imageArtiste
         WHERE idArtiste = :idArtiste
         EOF;
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([
             ':idArtiste' => $idArtiste,
             ':nomArtiste' => $nomArtiste,
-            ':lienImage' => $lienImage,
+            ':imageArtiste' => $imageArtiste,
         ]);
     }
 
