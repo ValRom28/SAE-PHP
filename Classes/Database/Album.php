@@ -54,13 +54,15 @@ class Album extends AbstractTable {
         $stmt->execute(["%$query%"]);
         return $stmt->fetchAll();
     }
+
     public function getAlbumsByArtiste($idArtiste) {
         $stmt = $this->pdo->prepare("SELECT * FROM ALBUM WHERE idArtiste = ?");
         $stmt->execute([$idArtiste]);
         return $stmt->fetchAll();
     }
+
     public function getAlbumByGenre($idGenre) {
-        $stmt = $this->pdo->prepare("SELECT * FROM ALBUM WHERE idAlbum IN (SELECT idAlbum FROM POSSEDE WHERE idGenre = ?)");
+        $stmt = $this->pdo->prepare("SELECT * FROM ALBUM WHERE idAlbum IN (SELECT idAlbum FROM POSSEDE WHERE idGenre = ? LIMIT 6)");
         $stmt->execute([$idGenre]);
         return $stmt->fetchAll();
     }
@@ -70,6 +72,7 @@ class Album extends AbstractTable {
             SELECT *
             FROM ALBUM
             ORDER BY nomAlbum
+            LIMIT 6
         EOF;
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
@@ -101,7 +104,7 @@ class Album extends AbstractTable {
         EOF;
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([':idAlbum' => $idAlbum]);
-        return $stmt->fetchAll();
+        return $stmt->fetch();
     }
 
     public function isAlbumInPlaylist(int $idAlbum, int $idUtilisateur) {
