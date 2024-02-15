@@ -78,6 +78,17 @@ class Album extends AbstractTable {
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public function getAllAlbums(): array {
+        $query = <<<EOF
+            SELECT *
+            FROM ALBUM
+            ORDER BY nomAlbum
+        EOF;
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
     
     public function getAlbumOfPlaylist(int $idUtilisateur): array {
         $query = <<<EOF
