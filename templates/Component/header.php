@@ -19,7 +19,7 @@
         <?php
         use Database\Artiste;
         $request = new Artiste($pdo);
-        $artistes = $request->afficherArtistes();
+        $artistes = $request->getArtistes();
         foreach ($artistes as $artiste) {
             echo '<option value="' . $artiste['idArtiste'] . '">' . $artiste['nomArtiste'] . '</option>';
         }

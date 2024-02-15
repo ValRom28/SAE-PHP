@@ -78,12 +78,6 @@ class Artiste {
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([':idArtiste' => $idArtiste]);
     }
-
-    public function afficherArtistes(){
-        $stmt = $this->pdo->prepare("SELECT * FROM artiste");
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
 }
 
 ?>
