@@ -75,6 +75,20 @@ if($album) {
     }
     else{
         echo "<h2>".$album[0]['nomAlbum']."</h2>";
+        if ($album[0]['description'] != null) {
+            echo "<p>Description: ".$album[0]['description']."</p>";
+        }
+        echo "<p>Année de sortie: ".$album[0]['anneeSortie']."</p>";
+        echo "<p>Artiste: ";
+        echo "<a href='index.php?action=detail-artiste&artiste_id=".$album[0]['idArtiste']."'>".$album[0]['nomArtiste']."</a>";
+        echo "<p>Genres: ";
+        foreach($genres as $genre) {
+            echo $genre['nomGenre']." ";
+        }
+        echo "</p>";
+        echo "<div class=\"noteDetail\">";
+        echo "<p>Notes moyennes: ".$requestPlaylist->getMoyenne($albumId)."/10</p>";
+        echo "<p>Nombre de notes: ".$requestPlaylist->getNbNotes($albumId)."</p></div>";
     }
     echo "</div>";
     echo "</div>";
