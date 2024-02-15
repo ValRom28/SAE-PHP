@@ -85,8 +85,8 @@ switch ($action) {
         $controller->deleteOfPlaylist();
         break;
             
-    case 'noter_playlist':
-        $controller = new PlaylistController($pdo);
+    case 'noter_album':
+        $controller = (new PlaylistController($pdo))->noterAlbum();
         $controller->noterPlaylist();
         break;
 

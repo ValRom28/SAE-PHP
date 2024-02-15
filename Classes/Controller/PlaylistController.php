@@ -43,17 +43,16 @@ class PlaylistController extends AbstractController {
         }
     }
 
-    public function noterPlaylist() {
+    public function noterAlbum() {
         session_start();
         $idUtilisateur = $_SESSION['idUtilisateur'] ?? null;
         $albumId = $_POST['album_id'] ?? null;
         $note = $_POST['note'] ?? null;
+        $request = new DansPlaylist($this->pdo);
 
         if ($idUtilisateur && $albumId && $note) {
-            $stmt = $this->pdo->prepare("UPDATE DANS_PLAYLIST SET note = ? WHERE idUtilisateur = ? AND idAlbum = ?");
-            $stmt->execute([$note, $idUtilisateur, $albumId]);
-
-            header("Location: /index.php?action=detail&album_id=$albumId");
+            $request->noterAlbum($idUtilisateur, $albumId, $note);
+            header("Location: /index.php?action=detail-album&album_id=$albumId");
             exit();
         } else {
             echo "L'utilisateur, l'album ou la note à ajouter n'est pas spécifié.";
