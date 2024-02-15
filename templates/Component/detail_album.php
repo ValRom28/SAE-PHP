@@ -28,7 +28,7 @@ if($album) {
     else{
         echo "<h2>".$album[0]['nomAlbum']."</h2>";
     }
-    echo "<p>".$album[0]['description']."</p>";
+    echo "<p>Description: ".$album[0]['description']."</p>";
     echo "<p>Année de sortie: ".$album[0]['anneeSortie']."</p>";
     echo "<p>Artiste: ";
     echo "<a href='index.php?action=detail-artiste&artiste_id=".$album[0]['idArtiste']."'>".$album[0]['nomArtiste']."</a>";
