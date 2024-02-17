@@ -2,6 +2,7 @@
 namespace Controller;
 use Database\Album;
 use Database\Artiste;
+use Database\Possede;
 
 class AdminController extends AbstractController {
     private $pdo;
@@ -61,16 +62,36 @@ class AdminController extends AbstractController {
 
     public function modifierAlbum() {
         $idAlbum = $_POST['idAlbum'] ?? null;
+        var_dump($_POST);
         if ($idAlbum) {
-            $request = new Album($this->pdo);
-            $request->updateAlbum($idAlbum, $_POST['nouveau_nom'], $_POST['nouveau_lien'], $_POST['nouvelle_annee'], $_POST['idArtiste'], $_POST['nouvelle_description']);
+            $requestAlbum = new Album($this->pdo);
+            $requestPossede = new Possede($this->pdo);
+            $requestAlbum->updateAlbum($idAlbum, $_POST['nouveau_nom'], $_POST['nouveau_lien'], $_POST['nouvelle_annee'], $_POST['idArtiste'], $_POST['nouvelle_description']);
+            foreach ($requestAlbum->getGenresOfAlbum($idAlbum) as $genre) {
+                if ($_POST['genres'] == null || !in_array($genre['nomGenre'], $_POST['genres'])) {
+                    $requestPossede->deletePossede($idAlbum, $genre['idGenre']);
+                }
+            }
+            foreach ($_POST['genres'] as $genre) {
+                $requestPossede->possedeGenre($idAlbum, $genre);
+                if (!$requestPossede->possedeGenre($idAlbum, $genre)) {
+                    $requestPossede->insertPossede($idAlbum, $genre);
+                }
+            }
         }
         header('Location: /index.php?action=gestion_album');
     }
 
     public function creerAlbum() {
-        $request = new Album($this->pdo);
-        $request->createAlbum($_POST['nom_album'], $_POST['lien_image'], $_POST['annee_sortie'], $_POST['id_artiste'], $_POST['description']);
+        $requestAlbum = new Album($this->pdo);
+        $requestPossede = new Possede($this->pdo);
+        $requestAlbum->createAlbum($_POST['nom_album'], $_POST['lien_image'], $_POST['annee_sortie'], $_POST['id_artiste'], $_POST['description']);
+        $idAlbum = $requestAlbum->getLastAlbumId();
+        foreach ($_POST['genres'] as $idGenre) {
+            var_dump($idGenre);
+            var_dump($idAlbum);
+            $requestPossede->insertPossede($idAlbum, $idGenre);
+        }
         header('Location: /index.php?action=gestion_album');
     }
     

@@ -7,7 +7,7 @@
         use Database\Genre;
         $pdo = new \PDO('sqlite:Data/db.sqlite');
         $request = new Genre($pdo);
-        $genres = $request->afficherGenres();
+        $genres = $request->getGenres();
         foreach ($genres as $genre) {
             echo '<option value="' . $genre['idGenre'] . '">' . $genre['nomGenre'] . '</option>';
         }

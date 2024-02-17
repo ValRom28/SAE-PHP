@@ -1,12 +1,15 @@
 <?php
 use Database\Album;
 use Database\Artiste;
+use Database\Genre;
 
 $pdo = new \PDO('sqlite:Data/db.sqlite');
 $requestAlbum = new Album($pdo);
 $requestArtiste = new Artiste($pdo);
+$requestGenre = new Genre($pdo);
 $albums = $requestAlbum->getAllAlbums();
 $artistes = $requestArtiste->getArtistes();
+$genres = $requestGenre->getGenres();
 ?>
 
 <h1>Gestion des Albums</h1>
@@ -21,6 +24,7 @@ $artistes = $requestArtiste->getArtistes();
             <label for="annee_sortie">Année de sortie </label><br>
             <label for="id_artiste">Artiste </label><br>
             <label for="description">Description </label><br>
+            <label for="genres">Genres</label><br>
         </div>
         <div class="modifInput">
             <input type="text" id="nom_album" name="nom_album"  required placeholder="Exemple : Absolution"><br>
@@ -32,6 +36,18 @@ $artistes = $requestArtiste->getArtistes();
                 <?php } ?>
             </select><br>
             <textarea id="description" name="description" required placeholder="Description de l'album"></textarea><br>
+            <div class="dropdown-container">
+                <div class="dropdown">
+                    <input type="button" id="dropdown-button" value="Liste des genres  ▼"></input>
+                    <div class="dropdown-content" id="dropdownContent">
+                        <?php
+                        foreach ($genres as $genre) {
+                            echo "<input type='checkbox' name='genres[]' value='" . $genre['idGenre'] . "'>" . $genre['nomGenre'] . "<br>";
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
             <button type="submit">Créer l'album</button>
         </div>
     </fieldset>
@@ -62,3 +78,4 @@ $artistes = $requestArtiste->getArtistes();
         <button type="submit">Supprimer l'album sélectionné</button>
     </fieldset>
 </form>
+<script src="templates/static/js/dropdown.js"></script>
