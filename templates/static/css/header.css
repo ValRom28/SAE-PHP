@@ -74,6 +74,6 @@ header{
     transition: 0.3s;
 }
 
-button {
+button, select {
     cursor: pointer;
 }

@@ -152,7 +152,7 @@ class Album extends AbstractTable {
         return $stmt->fetchColumn();
     }
 
-    public function getAlbumByNom($nomAlbum) {
+    public function getAlbumByName($nomAlbum) {
         $query = <<<EOF
             SELECT * FROM ALBUM
             WHERE nomAlbum = :nomAlbum

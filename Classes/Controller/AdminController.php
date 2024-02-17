@@ -88,10 +88,15 @@ class AdminController extends AbstractController {
         if ($_POST['lien_image'] == null) {
             $_POST['lien_image'] = 'default.jpg';
         }
-        $requestAlbum->createAlbum($_POST['nom_album'], $_POST['lien_image'], $_POST['annee_sortie'], $_POST['id_artiste'], $_POST['description']);
-        $idAlbum = $requestAlbum->getLastAlbumId();
-        foreach ($_POST['genres'] as $idGenre) {
-            $requestPossede->insertPossede($idAlbum, $idGenre);
+        if ($requestAlbum->getAlbumByName($_POST['nom_album'])) {
+            header('Location: /index.php?action=gestion_album');
+            print_r($requestAlbum->getAlbumByName($_POST['nom_album']));
+        } else {
+            $requestAlbum->createAlbum($_POST['nom_album'], $_POST['lien_image'], $_POST['annee_sortie'], $_POST['id_artiste'], $_POST['description']);
+            $idAlbum = $requestAlbum->getLastAlbumId();
+            foreach ($_POST['genres'] as $idGenre) {
+                $requestPossede->insertPossede($idAlbum, $idGenre);
+            }
         }
         header('Location: /index.php?action=gestion_album');
     }
