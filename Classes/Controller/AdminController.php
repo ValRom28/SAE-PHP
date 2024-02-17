@@ -85,11 +85,12 @@ class AdminController extends AbstractController {
     public function creerAlbum() {
         $requestAlbum = new Album($this->pdo);
         $requestPossede = new Possede($this->pdo);
+        if ($_POST['lien_image'] == null) {
+            $_POST['lien_image'] = 'default.jpg';
+        }
         $requestAlbum->createAlbum($_POST['nom_album'], $_POST['lien_image'], $_POST['annee_sortie'], $_POST['id_artiste'], $_POST['description']);
         $idAlbum = $requestAlbum->getLastAlbumId();
         foreach ($_POST['genres'] as $idGenre) {
-            var_dump($idGenre);
-            var_dump($idAlbum);
             $requestPossede->insertPossede($idAlbum, $idGenre);
         }
         header('Location: /index.php?action=gestion_album');
@@ -118,6 +119,9 @@ class AdminController extends AbstractController {
 
     public function creerArtiste() {
         $request = new Artiste($this->pdo);
+        if ($_POST['lien_image'] == null) {
+            $_POST['lien_image'] = 'default.jpg';
+        }
         $request->createArtiste($_POST['nom_artiste'], $_POST['lien_image']);
         header('Location: /index.php?action=gestion_artiste');
     }

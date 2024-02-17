@@ -151,6 +151,16 @@ class Album extends AbstractTable {
         $stmt->execute();
         return $stmt->fetchColumn();
     }
+
+    public function getAlbumByNom($nomAlbum) {
+        $query = <<<EOF
+            SELECT * FROM ALBUM
+            WHERE nomAlbum = :nomAlbum
+        EOF;
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([':nomAlbum' => $nomAlbum]);
+        return $stmt->fetch();
+    }
 }
 
 ?>

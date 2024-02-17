@@ -15,9 +15,13 @@
     $albums = $request3->getAlbumByGenre($genre['idGenre']);
     foreach ($albums as $album) {
       echo "<div class='listeAlbums'><a href='index.php?action=detail-album&album_id=".$album['idAlbum']."'>";
+      if (filter_var($album['imageAlbum'], FILTER_VALIDATE_URL)) {
+        echo "<img src='".$album['imageAlbum']."' alt='".$album['nomAlbum']."' title='".$album['nomAlbum']."' />";
+      } else {
         echo "<img src='Data/images/".$album['imageAlbum']."' alt='".$album['nomAlbum']."' title='".$album['nomAlbum']."' />";
-        echo "<p>".$album['nomAlbum']."</p>";
-        echo "</a></div>";
+      }
+      echo "<p>".$album['nomAlbum']."</p>";
+      echo "</a></div>";
     }
     echo "</div>";
   }?>
@@ -31,7 +35,11 @@ $request = new Album($pdo);
 $playlist = $request->getAlbums();
 foreach ($playlist as $album) {
   echo "<div class='listeAlbums'><a href='index.php?action=detail-album&album_id=".$album['idAlbum']."'>";
-  echo "<img src='Data/images/".$album['imageAlbum']."' alt='".$album['nomAlbum']."' title='".$album['nomAlbum']."' />";
+  if (filter_var($album['imageAlbum'], FILTER_VALIDATE_URL)) {
+    echo "<img src='".$album['imageAlbum']."' alt='".$album['nomAlbum']."' title='".$album['nomAlbum']."' />";
+  } else {
+    echo "<img src='Data/images/".$album['imageAlbum']."' alt='".$album['nomAlbum']."' title='".$album['nomAlbum']."' />";
+  }
   echo "<p>".$album['nomAlbum']."</p>";
   echo "</a></div>";
 }?>

@@ -28,7 +28,7 @@ $genres = $requestGenre->getGenres();
         </div>
         <div class="modifInput">
             <input type="text" id="nom_album" name="nom_album"  required placeholder="Exemple : Absolution"><br>
-            <input type="text" id="lien_image" name="lien_image" required placeholder="Exemple : cover.jpg"><br>
+            <input type="text" id="lien_image" name="lien_image" placeholder="Exemple : cover.jpg"><br>
             <input type="number" id="annee_sortie" name="annee_sortie" required placeholder="Exemple : 1978"><br>
             <select id="id_artiste" name="id_artiste" required>
                 <?php foreach ($artistes as $artiste) { ?>
