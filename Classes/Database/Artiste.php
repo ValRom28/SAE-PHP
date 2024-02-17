@@ -50,7 +50,7 @@ class Artiste extends AbstractTable {
     }
 
     public function getArtistes(): array {
-        $stmt = $this->pdo->query("SELECT * FROM ARTISTE");
+        $stmt = $this->pdo->query("SELECT * FROM ARTISTE ORDER BY nomArtiste ASC");
         return $stmt->fetchAll();
     }
 
