@@ -132,7 +132,7 @@ class Album extends AbstractTable {
 
     public function getGenresOfAlbum(int $idAlbum) {
         $query = <<<EOF
-            SELECT nomGenre
+            SELECT GENRE.idGenre, nomGenre
             FROM GENRE
             JOIN POSSEDE ON GENRE.idGenre = POSSEDE.idGenre
             WHERE idAlbum = :idAlbum
@@ -140,6 +140,16 @@ class Album extends AbstractTable {
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([':idAlbum' => $idAlbum]);
         return $stmt->fetchAll();
+    }
+
+    public function getLastAlbumId() {
+        $query = <<<EOF
+            SELECT MAX(idAlbum) as idAlbum
+            FROM ALBUM
+        EOF;
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchColumn();
     }
 }
 
