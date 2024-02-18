@@ -1,0 +1,117 @@
+header{
+    background-color: #030b1e;
+    color: ghostwhite;
+    padding: 2rem 2rem 1rem 2rem;
+    margin: 0;
+    display: flex;
+    justify-content: space-between; /* Aligne les éléments à l'extrémité gauche et droite */
+    align-items: center; /* Centre les éléments verticalement */
+}
+
+.recherche{
+    display: flex;
+}
+
+.recherche input{
+    padding: 0.5rem;
+    margin: 0 0.5rem;
+    border-radius: 0 1rem 1rem 1rem ;
+    color: #1a0338;
+    background-color: ghostwhite;
+    width: 20rem;
+}
+
+.recherche select{
+    padding: 0.5rem;
+    margin: 0 0.5rem;
+    border-radius: 0 1rem 1rem 1rem ;
+    color: #1a0338;
+    background-color: ghostwhite;
+    transition: 0.3s;
+}
+
+.recherche select:hover{
+    background-color: #1a0338;
+    color: ghostwhite;
+    transition: 0.3s;
+}
+
+.recherche button{
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    border-radius: 0 1rem 1rem 1rem ;
+    border:1px solid #1a0338;
+    color: #1a0338;
+    background-color: ghostwhite;
+}
+
+.recherche button:hover{
+    border: 1px solid ghostwhite;
+    background-color: #1a0338;
+    color: ghostwhite;
+    transition: 0.3s;
+}
+
+.buttonsConnexion{
+    display: flex;
+    margin: 0.5rem;
+}
+
+.buttonsConnexion button{
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    border-radius: 0 1rem 1rem 1rem ;
+    color: #1a0338;
+    border: 1px solid #1a0338;
+    background-color: ghostwhite;
+    transition: 0.3s;
+}
+
+.buttonsConnexion button:hover{
+    border: 1px solid ghostwhite;
+    background-color: #1a0338;
+    color: ghostwhite;
+    transition: 0.3s;
+}
+
+button, select {
+    cursor: pointer;
+}
+
+/* Pour les écrans de taille moyenne (tablettes) */
+@media screen and (max-width: 1100px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .recherche input,
+    .recherche select,
+    .recherche button {
+        width: auto;
+        margin: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .recherche button {
+        min-width: 7rem;
+    }
+}
+
+
+/* Pour les écrans de petite taille (téléphones) */
+@media screen and (max-width: 576px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .recherche, .buttonsConnexion {
+        margin: 0.5rem 0;
+    }
+    
+    .recherche input, .recherche select, .recherche button, .buttonsConnexion button {
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+}

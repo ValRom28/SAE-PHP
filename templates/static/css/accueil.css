@@ -1,0 +1,228 @@
+body{
+    display: flex;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    background-color: #1a0338;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+main{
+    width: 80vw;
+    background-color:#1a0338;
+    color: ghostwhite;
+}
+
+aside{
+    width: 15vw;
+    padding: 2.5vw;
+    background-color:#030b1e;
+    color: ghostwhite;
+    padding-bottom: 100vh;
+    border-right: 1px solid ghostwhite;
+}
+
+.albumAccueil{
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    scrollbar-color: ghostwhite #1a0338;
+}
+
+.albumAccueil img{
+    width: 10vw;
+    height: 10vw;
+    margin: 1rem;
+    border: 1px solid ghostwhite;
+    border-radius: 1rem;
+}
+
+.albumsPlaylist {
+    display: flex;
+    flex-wrap: wrap;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 35rem;
+    justify-content: center;
+}
+
+.albumsPlaylist img {
+    width: 10vw;
+    height: 10vw;
+    margin: 1rem;
+    border-radius: 1rem;
+}
+
+section.main{
+    margin: 0 auto;
+    padding: 2rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+.listeAlbums{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    border: 1px solid ghostwhite;
+    background-color: #1a0338;
+    color: ghostwhite;
+    border-radius: 1rem;
+    margin: 0 0.5rem;
+    transition: 0.3s;
+}
+
+.listeAlbums:hover{
+    background-color: ghostwhite;
+    color: #030b1e;
+    transition: 0.3s;
+}
+
+
+.listeAlbums p{
+    margin:0;
+    padding: 0 0.5rem;
+}
+
+.listeAlbums a{
+    text-decoration: none;
+    color: ghostwhite;
+    transition: 0.3s;
+}
+
+.listeAlbums a:hover{
+    color: #030b1e;
+    transition: 0.3s;
+}
+
+aside a{
+    text-decoration: none;
+    color: ghostwhite;
+}
+
+.genre{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    border-radius: 1rem;
+}
+
+.albumStyle{
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    border-radius: 0 1rem 1rem 1rem;
+    margin: 1rem 0.5rem;
+    flex-grow: 1;
+}
+
+.albumStyle img{
+    width: 10vw;
+    height: 10vw;
+    margin: 1rem;
+    border-radius: 1rem;
+}
+
+h2{
+    font-size: 2rem;
+    padding-left: 3rem;
+    text-align: left;
+    margin-right: 2rem;
+}
+
+.retourAccueil{
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+}
+
+.retourAccueil button{
+    background-color: #030b1e;
+    border: none;
+}
+
+.retourAccueil img{
+    width: 10rem;
+    height: 10rem;
+}
+
+.toutVoir {
+    display: flex;
+    margin: 0.5rem;
+    align-items: center;
+}
+
+.toutVoir button {
+    padding: 0.5rem 1rem;
+    margin-left: 0.5rem;
+    border-radius: 0 1rem 1rem 1rem ;
+    color: #1a0338;
+    border: 1px solid #1a0338;
+    background-color: ghostwhite;
+    transition: 0.3s;
+}
+
+.toutVoir button:hover{
+    border: 1px solid ghostwhite;
+    background-color: #1a0338;
+    color: ghostwhite;
+    transition: 0.3s;
+}
+
+.blocGenre {
+    display: flex;
+    flex-wrap: nowrap;
+    border-radius: 1rem;
+    flex-basis: 100%;
+}
+
+h1{
+    margin-top: 7rem;
+    text-align: center;
+}
+
+
+/* Pour les iPads */
+@media screen and (max-width: 1100px) {
+    main {
+        width: 80vw;
+    }
+
+    aside {
+        width: 20vw;
+    }
+
+    .retourAccueil img {
+        width: 5rem;
+        height: 5rem;
+    }
+}
+
+/* Pour les écrans de petite taille (téléphone) */
+@media screen and (max-width: 576px) {
+    main {
+        width: 100vw;
+    }
+
+    aside {
+        display: 10vw;
+    }
+
+    .retourAccueil img {
+        width: 5rem;
+        height: 5rem;
+    }
+
+    .albumAccueil img,
+    .albumsPlaylist img,
+    .albumStyle img {
+        width: 20vw;
+        height: 20vw;
+        padding: 2vw;
+    }
+
+    .listeAlbums {
+        margin: 2vw;
+    }
+}

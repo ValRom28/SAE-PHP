@@ -1,0 +1,1262 @@
+[
+  {
+    "title": "Do The Vampire",
+    "idAlbum": 1
+  },
+  {
+    "title": "Hellbent",
+    "idAlbum": 1
+  },
+  {
+    "title": "Do The Vampire",
+    "idAlbum": 1
+  },
+  {
+    "title": "Hutterite Mile",
+    "idAlbum": 2
+  },
+  {
+    "title": "Outlaw Song",
+    "idAlbum": 2
+  },
+  {
+    "title": "Blessed Persistence",
+    "idAlbum": 2
+  },
+  {
+    "title": "Single Girl",
+    "idAlbum": 2
+  },
+  {
+    "title": "Horse Head Fiddle",
+    "idAlbum": 2
+  },
+  {
+    "title": "Flutter",
+    "idAlbum": 2
+  },
+  {
+    "title": "Strong Man",
+    "idAlbum": 2
+  },
+  {
+    "title": "Silver Saddle",
+    "idAlbum": 2
+  },
+  {
+    "title": "Electro-Charger",
+    "idAlbum": 3
+  },
+  {
+    "title": "Orion",
+    "idAlbum": 3
+  },
+  {
+    "title": "Mental Radio",
+    "idAlbum": 3
+  },
+  {
+    "title": "Powerslide",
+    "idAlbum": 3
+  },
+  {
+    "title": "Downtime",
+    "idAlbum": 3
+  },
+  {
+    "title": "Chrome Horse",
+    "idAlbum": 3
+  },
+  {
+    "title": "Paranoia Key of E",
+    "idAlbum": 3
+  },
+  {
+    "title": "Gimme a Shot",
+    "idAlbum": 3
+  },
+  {
+    "title": "Hard Luck Story",
+    "idAlbum": 4
+  },
+  {
+    "title": "Silver Wings",
+    "idAlbum": 4
+  },
+  {
+    "title": "What the Devil Wanted",
+    "idAlbum": 4
+  },
+  {
+    "title": "Wasted",
+    "idAlbum": 4
+  },
+  {
+    "title": "Too Drunk to Dream",
+    "idAlbum": 4
+  },
+  {
+    "title": "For Dearest in the Dream",
+    "idAlbum": 4
+  },
+  {
+    "title": "Blackbird",
+    "idAlbum": 4
+  },
+  {
+    "title": "Leaves of Fate",
+    "idAlbum": 4
+  },
+  {
+    "title": "Queen of the Underworld",
+    "idAlbum": 5
+  },
+  {
+    "title": "TKO",
+    "idAlbum": 5
+  },
+  {
+    "title": "Mona Lisa",
+    "idAlbum": 5
+  },
+  {
+    "title": "God's Lonely People",
+    "idAlbum": 5
+  },
+  {
+    "title": "Winner's Circle",
+    "idAlbum": 5
+  },
+  {
+    "title": "Wendy",
+    "idAlbum": 5
+  },
+  {
+    "title": "Downliner",
+    "idAlbum": 5
+  },
+  {
+    "title": "High Lonesome",
+    "idAlbum": 5
+  },
+  {
+    "title": "Roll On",
+    "idAlbum": 6
+  },
+  {
+    "title": "Because I Care",
+    "idAlbum": 6
+  },
+  {
+    "title": "Laughing",
+    "idAlbum": 6
+  },
+  {
+    "title": "Anyone Can Play Guitar",
+    "idAlbum": 6
+  },
+  {
+    "title": "Fly Like an Eagle",
+    "idAlbum": 6
+  },
+  {
+    "title": "No Emotions",
+    "idAlbum": 6
+  },
+  {
+    "title": "Wish You Were Here",
+    "idAlbum": 6
+  },
+  {
+    "title": "Paranoid Android",
+    "idAlbum": 6
+  },
+  {
+    "title": "Someday Soon",
+    "idAlbum": 7
+  },
+  {
+    "title": "Riding on the Wings of Your Love",
+    "idAlbum": 7
+  },
+  {
+    "title": "When You Go Down",
+    "idAlbum": 7
+  },
+  {
+    "title": "Clementine",
+    "idAlbum": 7
+  },
+  {
+    "title": "In The Modern World",
+    "idAlbum": 7
+  },
+  {
+    "title": "High Lonesome",
+    "idAlbum": 7
+  },
+  {
+    "title": "Be My Baby",
+    "idAlbum": 7
+  },
+  {
+    "title": "Gorgeous",
+    "idAlbum": 7
+  },
+  {
+    "title": "When Will You Come Back Home?",
+    "idAlbum": 8
+  },
+  {
+    "title": "Why Baby Why?",
+    "idAlbum": 8
+  },
+  {
+    "title": "Raining In My Heart",
+    "idAlbum": 8
+  },
+  {
+    "title": "Hungry Heart",
+    "idAlbum": 8
+  },
+  {
+    "title": "Everybody's Talkin'",
+    "idAlbum": 8
+  },
+  {
+    "title": "Burn That Candle",
+    "idAlbum": 8
+  },
+  {
+    "title": "Indian Summer",
+    "idAlbum": 8
+  },
+  {
+    "title": "Without Your Love",
+    "idAlbum": 8
+  },
+  {
+    "title": "Mining For Gold",
+    "idAlbum": 9
+  },
+  {
+    "title": "Misguided Angel",
+    "idAlbum": 9
+  },
+  {
+    "title": "Blue Moon Revisited (Song for Elvis)",
+    "idAlbum": 9
+  },
+  {
+    "title": "I Don't Get It",
+    "idAlbum": 9
+  },
+  {
+    "title": "I'm So Lonesome I Could Cry",
+    "idAlbum": 9
+  },
+  {
+    "title": "To Love Is To Bury",
+    "idAlbum": 9
+  },
+  {
+    "title": "200 More Miles",
+    "idAlbum": 9
+  },
+  {
+    "title": "Dreaming My Dreams With You",
+    "idAlbum": 9
+  },
+  {
+    "title": "Sound & Color",
+    "idAlbum": 10
+  },
+  {
+    "title": "Don't Wanna Fight",
+    "idAlbum": 10
+  },
+  {
+    "title": "Dunes",
+    "idAlbum": 10
+  },
+  {
+    "title": "Future People",
+    "idAlbum": 10
+  },
+  {
+    "title": "Gimme All Your Love",
+    "idAlbum": 10
+  },
+  {
+    "title": "This Feeling",
+    "idAlbum": 10
+  },
+  {
+    "title": "Guess Who",
+    "idAlbum": 10
+  },
+  {
+    "title": "The Greatest",
+    "idAlbum": 10
+  },
+  {
+    "title": "Shoegaze",
+    "idAlbum": 10
+  },
+  {
+    "title": "Miss You",
+    "idAlbum": 10
+  },
+  {
+    "title": "Gemini",
+    "idAlbum": 10
+  },
+  {
+    "title": "Over My Head",
+    "idAlbum": 10
+  },
+  {
+    "title": "Over My Head",
+    "idAlbum": 10
+  },
+  {
+    "title": "Gimme All Your Love",
+    "idAlbum": 10
+  },
+  {
+    "title": "Highway 61 Revisited",
+    "idAlbum": 11
+  },
+  {
+    "title": "Let's Dance",
+    "idAlbum": 11
+  },
+  {
+    "title": "This Heart",
+    "idAlbum": 11
+  },
+  {
+    "title": "I Wanna Destroy You",
+    "idAlbum": 11
+  },
+  {
+    "title": "Queen of the Underworld",
+    "idAlbum": 11
+  },
+  {
+    "title": "TKO",
+    "idAlbum": 11
+  },
+  {
+    "title": "Lonely Position of Neutral",
+    "idAlbum": 11
+  },
+  {
+    "title": "Broken Radio",
+    "idAlbum": 11
+  },
+  {
+    "title": "I'm Lost",
+    "idAlbum": 12
+  },
+  {
+    "title": "4th of July",
+    "idAlbum": 12
+  },
+  {
+    "title": "In This House That I Call Home",
+    "idAlbum": 12
+  },
+  {
+    "title": "It's Who You Know",
+    "idAlbum": 12
+  },
+  {
+    "title": "I Must Not Think Bad Thoughts",
+    "idAlbum": 12
+  },
+  {
+    "title": "Devil Doll",
+    "idAlbum": 12
+  },
+  {
+    "title": "Paint It Black",
+    "idAlbum": 12
+  },
+  {
+    "title": "The Have Nots",
+    "idAlbum": 12
+  },
+  {
+    "title": "I'm Coming Over",
+    "idAlbum": 12
+  },
+  {
+    "title": "Adult Books",
+    "idAlbum": 12
+  },
+  {
+    "title": "Universal Corner",
+    "idAlbum": 12
+  },
+  {
+    "title": "Train in Vain",
+    "idAlbum": 12
+  },
+  {
+    "title": "Riding With Mary",
+    "idAlbum": 12
+  },
+  {
+    "title": "So Long",
+    "idAlbum": 12
+  },
+  {
+    "title": "I Must Not Think Bad Thoughts",
+    "idAlbum": 12
+  },
+  {
+    "title": "The World's A Mess It's In My Kiss",
+    "idAlbum": 12
+  },
+  {
+    "title": "Harlan County Line",
+    "idAlbum": 13
+  },
+  {
+    "title": "Johnny Ace Is Dead",
+    "idAlbum": 13
+  },
+  {
+    "title": "The Man in the Bed",
+    "idAlbum": 13
+  },
+  {
+    "title": "Gary, Indiana 1959",
+    "idAlbum": 13
+  },
+  {
+    "title": "Run Conejo Run",
+    "idAlbum": 13
+  },
+  {
+    "title": "No Worries Mija",
+    "idAlbum": 13
+  },
+  {
+    "title": "What's Up With Your Brother?",
+    "idAlbum": 13
+  },
+  {
+    "title": "Murrietta's Head",
+    "idAlbum": 13
+  },
+  {
+    "title": "Manzanita",
+    "idAlbum": 13
+  },
+  {
+    "title": "Dirty Water",
+    "idAlbum": 13
+  },
+  {
+    "title": "Two Lucky Bums",
+    "idAlbum": 13
+  },
+  {
+    "title": "Wrote a Song for Everyone",
+    "idAlbum": 13
+  },
+  {
+    "title": "Back in the U.S.S.R.",
+    "idAlbum": 14
+  },
+  {
+    "title": "Dear Prudence",
+    "idAlbum": 14
+  },
+  {
+    "title": "Glass Onion",
+    "idAlbum": 14
+  },
+  {
+    "title": "Ob-La-Di, Ob-La-Da",
+    "idAlbum": 14
+  },
+  {
+    "title": "Wild Honey Pie",
+    "idAlbum": 14
+  },
+  {
+    "title": "The Continuing Story of Bungalow Bill",
+    "idAlbum": 14
+  },
+  {
+    "title": "While My Guitar Gently Weeps",
+    "idAlbum": 14
+  },
+  {
+    "title": "Happiness Is a Warm Gun",
+    "idAlbum": 14
+  },
+  {
+    "title": "Martha My Dear",
+    "idAlbum": 14
+  },
+  {
+    "title": "I'm So Tired",
+    "idAlbum": 14
+  },
+  {
+    "title": "Blackbird",
+    "idAlbum": 14
+  },
+  {
+    "title": "Piggies",
+    "idAlbum": 14
+  },
+  {
+    "title": "Rocky Raccoon",
+    "idAlbum": 14
+  },
+  {
+    "title": "Don't Pass Me By",
+    "idAlbum": 14
+  },
+  {
+    "title": "Why Don't We Do It in the Road?",
+    "idAlbum": 14
+  },
+  {
+    "title": "I Will",
+    "idAlbum": 14
+  },
+  {
+    "title": "Julia",
+    "idAlbum": 14
+  },
+  {
+    "title": "Gimme Shelter",
+    "idAlbum": 15
+  },
+  {
+    "title": "Love in Vain",
+    "idAlbum": 15
+  },
+  {
+    "title": "Country Honk",
+    "idAlbum": 15
+  },
+  {
+    "title": "Live with Me",
+    "idAlbum": 15
+  },
+  {
+    "title": "Let It Bleed",
+    "idAlbum": 15
+  },
+  {
+    "title": "Midnight Rambler",
+    "idAlbum": 15
+  },
+  {
+    "title": "You Got the Silver",
+    "idAlbum": 15
+  },
+  {
+    "title": "Monkey Man",
+    "idAlbum": 15
+  },
+  {
+    "title": "You Can't Always Get What You Want",
+    "idAlbum": 15
+  },
+  {
+    "title": "Black Dog",
+    "idAlbum": 16
+  },
+  {
+    "title": "Rock and Roll",
+    "idAlbum": 16
+  },
+  {
+    "title": "The Battle of Evermore",
+    "idAlbum": 16
+  },
+  {
+    "title": "Stairway to Heaven",
+    "idAlbum": 16
+  },
+  {
+    "title": "Misty Mountain Hop",
+    "idAlbum": 16
+  },
+  {
+    "title": "Four Sticks",
+    "idAlbum": 16
+  },
+  {
+    "title": "Going to California",
+    "idAlbum": 16
+  },
+  {
+    "title": "When the Levee Breaks",
+    "idAlbum": 16
+  },
+  {
+    "title": "Speak to Me",
+    "idAlbum": 17
+  },
+  {
+    "title": "Breathe",
+    "idAlbum": 17
+  },
+  {
+    "title": "On the Run",
+    "idAlbum": 17
+  },
+  {
+    "title": "Time",
+    "idAlbum": 17
+  },
+  {
+    "title": "The Great Gig in the Sky",
+    "idAlbum": 17
+  },
+  {
+    "title": "Money",
+    "idAlbum": 17
+  },
+  {
+    "title": "Us and Them",
+    "idAlbum": 17
+  },
+  {
+    "title": "Any Colour You Like",
+    "idAlbum": 17
+  },
+  {
+    "title": "Brain Damage",
+    "idAlbum": 17
+  },
+  {
+    "title": "Eclipse",
+    "idAlbum": 17
+  },
+  {
+    "title": "Death on Two Legs (Dedicated to...)",
+    "idAlbum": 18
+  },
+  {
+    "title": "Lazing on a Sunday Afternoon",
+    "idAlbum": 18
+  },
+  {
+    "title": "I'm in Love with My Car",
+    "idAlbum": 18
+  },
+  {
+    "title": "You're My Best Friend",
+    "idAlbum": 18
+  },
+  {
+    "title": "'39",
+    "idAlbum": 18
+  },
+  {
+    "title": "Sweet Lady",
+    "idAlbum": 18
+  },
+  {
+    "title": "Seaside Rendezvous",
+    "idAlbum": 18
+  },
+  {
+    "title": "The Prophet's Song",
+    "idAlbum": 18
+  },
+  {
+    "title": "Love of My Life",
+    "idAlbum": 18
+  },
+  {
+    "title": "Good Company",
+    "idAlbum": 18
+  },
+  {
+    "title": "Bohemian Rhapsody",
+    "idAlbum": 18
+  },
+  {
+    "title": "God Save the Queen",
+    "idAlbum": 18
+  },
+  {
+    "title": "Baba O'Riley",
+    "idAlbum": 19
+  },
+  {
+    "title": "Bargain",
+    "idAlbum": 19
+  },
+  {
+    "title": "Love Ain't for Keeping",
+    "idAlbum": 19
+  },
+  {
+    "title": "My Wife",
+    "idAlbum": 19
+  },
+  {
+    "title": "The Song Is Over",
+    "idAlbum": 19
+  },
+  {
+    "title": "Getting in Tune",
+    "idAlbum": 19
+  },
+  {
+    "title": "Going Mobile",
+    "idAlbum": 19
+  },
+  {
+    "title": "Behind Blue Eyes",
+    "idAlbum": 19
+  },
+  {
+    "title": "Won't Get Fooled Again",
+    "idAlbum": 19
+  },
+  {
+    "title": "Hells Bells",
+    "idAlbum": 20
+  },
+  {
+    "title": "Shoot to Thrill",
+    "idAlbum": 20
+  },
+  {
+    "title": "What Do You Do for Money Honey",
+    "idAlbum": 20
+  },
+  {
+    "title": "Givin the Dog a Bone",
+    "idAlbum": 20
+  },
+  {
+    "title": "Let Me Put My Love Into You",
+    "idAlbum": 20
+  },
+  {
+    "title": "Back in Black",
+    "idAlbum": 20
+  },
+  {
+    "title": "You Shook Me All Night Long",
+    "idAlbum": 20
+  },
+  {
+    "title": "Have a Drink on Me",
+    "idAlbum": 20
+  },
+  {
+    "title": "Shake a Leg",
+    "idAlbum": 20
+  },
+  {
+    "title": "Rock and Roll Ain't Noise Pollution",
+    "idAlbum": 20
+  },
+  {
+    "title": "Smells Like Teen Spirit",
+    "idAlbum": 21
+  },
+  {
+    "title": "In Bloom",
+    "idAlbum": 21
+  },
+  {
+    "title": "Come as You Are",
+    "idAlbum": 21
+  },
+  {
+    "title": "Breed",
+    "idAlbum": 21
+  },
+  {
+    "title": "Lithium",
+    "idAlbum": 21
+  },
+  {
+    "title": "Polly",
+    "idAlbum": 21
+  },
+  {
+    "title": "Territorial Pissings",
+    "idAlbum": 21
+  },
+  {
+    "title": "Drain You",
+    "idAlbum": 21
+  },
+  {
+    "title": "Lounge Act",
+    "idAlbum": 21
+  },
+  {
+    "title": "Stay Away",
+    "idAlbum": 21
+  },
+  {
+    "title": "On a Plain",
+    "idAlbum": 21
+  },
+  {
+    "title": "Something in the Way",
+    "idAlbum": 21
+  },
+  {
+    "title": "Battery",
+    "idAlbum": 22
+  },
+  {
+    "title": "Master of Puppets",
+    "idAlbum": 22
+  },
+  {
+    "title": "The Thing That Should Not Be",
+    "idAlbum": 22
+  },
+  {
+    "title": "Welcome Home (Sanitarium)",
+    "idAlbum": 22
+  },
+  {
+    "title": "Disposable Heroes",
+    "idAlbum": 22
+  },
+  {
+    "title": "Leper Messiah",
+    "idAlbum": 22
+  },
+  {
+    "title": "Orion",
+    "idAlbum": 22
+  },
+  {
+    "title": "Damage, Inc.",
+    "idAlbum": 22
+  },
+  {
+    "title": "Sunday Bloody Sunday",
+    "idAlbum": 23
+  },
+  {
+    "title": "Seconds",
+    "idAlbum": 23
+  },
+  {
+    "title": "New Year's Day",
+    "idAlbum": 23
+  },
+  {
+    "title": "Like a Song...",
+    "idAlbum": 23
+  },
+  {
+    "title": "Drowning Man",
+    "idAlbum": 23
+  },
+  {
+    "title": "The Refugee",
+    "idAlbum": 23
+  },
+  {
+    "title": "Two Hearts Beat as One",
+    "idAlbum": 23
+  },
+  {
+    "title": "Red Light",
+    "idAlbum": 23
+  },
+  {
+    "title": "Surrender",
+    "idAlbum": 23
+  },
+  {
+    "title": "40",
+    "idAlbum": 23
+  },
+  {
+    "title": "Modern Love",
+    "idAlbum": 24
+  },
+  {
+    "title": "China Girl",
+    "idAlbum": 24
+  },
+  {
+    "title": "Let's Dance",
+    "idAlbum": 24
+  },
+  {
+    "title": "Without You",
+    "idAlbum": 24
+  },
+  {
+    "title": "Ricochet",
+    "idAlbum": 24
+  },
+  {
+    "title": "Criminal World",
+    "idAlbum": 24
+  },
+  {
+    "title": "Cat People (Putting Out Fire)",
+    "idAlbum": 24
+  },
+  {
+    "title": "Shake It",
+    "idAlbum": 24
+  },
+  {
+    "title": "Like a Rolling Stone",
+    "idAlbum": 25
+  },
+  {
+    "title": "Tombstone Blues",
+    "idAlbum": 25
+  },
+  {
+    "title": "It Takes a Lot to Laugh, It Takes a Train to Cry",
+    "idAlbum": 25
+  },
+  {
+    "title": "From a Buick 6",
+    "idAlbum": 25
+  },
+  {
+    "title": "Ballad of a Thin Man",
+    "idAlbum": 25
+  },
+  {
+    "title": "Queen Jane Approximately",
+    "idAlbum": 25
+  },
+  {
+    "title": "Highway 61 Revisited",
+    "idAlbum": 25
+  },
+  {
+    "title": "Just Like Tom Thumb's Blues",
+    "idAlbum": 25
+  },
+  {
+    "title": "Desolation Row",
+    "idAlbum": 25
+  },
+  {
+    "title": "Thunder Road",
+    "idAlbum": 26
+  },
+  {
+    "title": "Tenth Avenue Freeze-Out",
+    "idAlbum": 26
+  },
+  {
+    "title": "Night",
+    "idAlbum": 26
+  },
+  {
+    "title": "Backstreets",
+    "idAlbum": 26
+  },
+  {
+    "title": "Born to Run",
+    "idAlbum": 26
+  },
+  {
+    "title": "She's the One",
+    "idAlbum": 26
+  },
+  {
+    "title": "Meeting Across the River",
+    "idAlbum": 26
+  },
+  {
+    "title": "Jungleland",
+    "idAlbum": 26
+  },
+  {
+    "title": "Let's Go Crazy",
+    "idAlbum": 27
+  },
+  {
+    "title": "Take Me with U",
+    "idAlbum": 27
+  },
+  {
+    "title": "The Beautiful Ones",
+    "idAlbum": 27
+  },
+  {
+    "title": "Computer Blue",
+    "idAlbum": 27
+  },
+  {
+    "title": "Darling Nikki",
+    "idAlbum": 27
+  },
+  {
+    "title": "When Doves Cry",
+    "idAlbum": 27
+  },
+  {
+    "title": "I Would Die 4 U",
+    "idAlbum": 27
+  },
+  {
+    "title": "Baby I'm a Star",
+    "idAlbum": 27
+  },
+  {
+    "title": "Purple Rain",
+    "idAlbum": 27
+  },
+  {
+    "title": "Wouldn't It Be Nice",
+    "idAlbum": 28
+  },
+  {
+    "title": "You Still Believe in Me",
+    "idAlbum": 28
+  },
+  {
+    "title": "That's Not Me",
+    "idAlbum": 28
+  },
+  {
+    "title": "Don't Talk (Put Your Head on My Shoulder)",
+    "idAlbum": 28
+  },
+  {
+    "title": "I'm Waiting for the Day",
+    "idAlbum": 28
+  },
+  {
+    "title": "Let's Go Away for Awhile",
+    "idAlbum": 28
+  },
+  {
+    "title": "Sloop John B",
+    "idAlbum": 28
+  },
+  {
+    "title": "God Only Knows",
+    "idAlbum": 28
+  },
+  {
+    "title": "I Know There's an Answer",
+    "idAlbum": 28
+  },
+  {
+    "title": "Here Today",
+    "idAlbum": 28
+  },
+  {
+    "title": "I Just Wasn't Made for These Times",
+    "idAlbum": 28
+  },
+  {
+    "title": "Pet Sounds",
+    "idAlbum": 28
+  },
+  {
+    "title": "Caroline, No",
+    "idAlbum": 28
+  },
+  {
+    "title": "Blue Suede Shoes",
+    "idAlbum": 29
+  },
+  {
+    "title": "I'm Counting on You",
+    "idAlbum": 29
+  },
+  {
+    "title": "I Got a Woman",
+    "idAlbum": 29
+  },
+  {
+    "title": "One-Sided Love Affair",
+    "idAlbum": 29
+  },
+  {
+    "title": "I Love You Because",
+    "idAlbum": 29
+  },
+  {
+    "title": "Just Because",
+    "idAlbum": 29
+  },
+  {
+    "title": "Tutti Frutti",
+    "idAlbum": 29
+  },
+  {
+    "title": "Trying to Get to You",
+    "idAlbum": 29
+  },
+  {
+    "title": "I'm Gonna Sit Right Down and Cry (Over You)",
+    "idAlbum": 29
+  },
+  {
+    "title": "I'll Never Let You Go (Little Darlin')",
+    "idAlbum": 29
+  },
+  {
+    "title": "Blue Moon",
+    "idAlbum": 29
+  },
+  {
+    "title": "Money Honey",
+    "idAlbum": 29
+  },
+  {
+    "title": "Break on Through (To the Other Side)",
+    "idAlbum": 30
+  },
+  {
+    "title": "Soul Kitchen",
+    "idAlbum": 30
+  },
+  {
+    "title": "The Crystal Ship",
+    "idAlbum": 30
+  },
+  {
+    "title": "Twentieth Century Fox",
+    "idAlbum": 30
+  },
+  {
+    "title": "Alabama Song (Whisky Bar)",
+    "idAlbum": 30
+  },
+  {
+    "title": "Light My Fire",
+    "idAlbum": 30
+  },
+  {
+    "title": "Back Door Man",
+    "idAlbum": 30
+  },
+  {
+    "title": "I Looked at You",
+    "idAlbum": 30
+  },
+  {
+    "title": "End of the Night",
+    "idAlbum": 30
+  },
+  {
+    "title": "Take It as It Comes",
+    "idAlbum": 30
+  },
+  {
+    "title": "The End",
+    "idAlbum": 30
+  },
+  {
+    "title": "Purple Haze",
+    "idAlbum": 31
+  },
+  {
+    "title": "Manic Depression",
+    "idAlbum": 31
+  },
+  {
+    "title": "Hey Joe",
+    "idAlbum": 31
+  },
+  {
+    "title": "Love or Confusion",
+    "idAlbum": 31
+  },
+  {
+    "title": "May This Be Love",
+    "idAlbum": 31
+  },
+  {
+    "title": "I Don't Live Today",
+    "idAlbum": 31
+  },
+  {
+    "title": "The Wind Cries Mary",
+    "idAlbum": 31
+  },
+  {
+    "title": "Fire",
+    "idAlbum": 31
+  },
+  {
+    "title": "Third Stone from the Sun",
+    "idAlbum": 31
+  },
+  {
+    "title": "Foxy Lady",
+    "idAlbum": 31
+  },
+  {
+    "title": "Are You Experienced?",
+    "idAlbum": 31
+  },
+  {
+    "title": "Airbag",
+    "idAlbum": 32
+  },
+  {
+    "title": "Paranoid Android",
+    "idAlbum": 32
+  },
+  {
+    "title": "Subterranean Homesick Alien",
+    "idAlbum": 32
+  },
+  {
+    "title": "Exit Music (For a Film)",
+    "idAlbum": 32
+  },
+  {
+    "title": "Let Down",
+    "idAlbum": 32
+  },
+  {
+    "title": "Karma Police",
+    "idAlbum": 32
+  },
+  {
+    "title": "Fitter Happier",
+    "idAlbum": 32
+  },
+  {
+    "title": "Electioneering",
+    "idAlbum": 32
+  },
+  {
+    "title": "Climbing Up the Walls",
+    "idAlbum": 32
+  },
+  {
+    "title": "No Surprises",
+    "idAlbum": 32
+  },
+  {
+    "title": "Lucky",
+    "idAlbum": 32
+  },
+  {
+    "title": "The Tourist",
+    "idAlbum": 32
+  }
+]

@@ -1,0 +1,56 @@
+.page_connexion ,.bloc_inscription{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: ghostwhite;
+    border: 1px solid ghostwhite;
+    border-radius: 1rem;
+    margin: 0 10rem;
+}
+
+.page_connexion div, .bloc_inscription div{
+    margin: 0.7rem;
+}
+
+.page_connexion input, .bloc_inscription input{
+    padding: 0.5rem;
+    border-radius: 0 1rem 1rem 1rem ;
+    border: 1px solid #1a0338;
+    width: 20rem;
+}
+
+.page_connexion input[type="submit"], .bloc_inscription input[type="submit"]{
+    width: 7rem;
+    transition: 0.3s;
+}
+
+.page_connexion input[type="submit"]:hover, .bloc_inscription input[type="submit"]:hover{
+    border: 1px solid ghostwhite;
+    background-color: #030b1e;
+    color: ghostwhite;
+    transition: 0.3s;
+}
+
+/* Pour les écrans de taille moyenne (tablettes) */
+@media screen and (max-width: 1100px) {
+    .page_connexion,
+    .bloc_inscription {
+        margin: 0 5rem;
+    }
+    .page_connexion input,
+    .bloc_inscription input {
+        width: 90%;
+    }
+}
+
+/* Pour les écrans de petite taille (téléphones) */
+@media screen and (max-width: 576px) {
+    .page_connexion,
+    .bloc_inscription {
+        margin: 0 2rem;
+    }
+    .page_connexion input,
+    .bloc_inscription input {
+        width: 80%;
+    }
+}
