@@ -143,8 +143,8 @@ class AdminController extends AbstractController {
         if ($_POST['lien_image'] == null) {
             $_POST['lien_image'] = 'default.jpg';
         }
-        if ($request->getArtisteByName($_POST['nom_artiste'])) {
-            $_SESSION['message'] = "Cet artiste existe déjà";
+        if ($requestAlbum->getAlbumByName($_POST['nom_album'])) {
+            $_SESSION['message'] = "Cet album existe déjà";
         } else {
             $requestAlbum->createAlbum($_POST['nom_album'], $_POST['lien_image'], $_POST['annee_sortie'], $_POST['id_artiste'], $_POST['description']);
             $idAlbum = $requestAlbum->getLastAlbumId();
