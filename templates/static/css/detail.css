@@ -32,11 +32,12 @@ section.main div h2{
     object-fit: cover;
     border-radius: 1rem;
     color : white;
+    margin-left: 3rem;
 }
 
 form.favForm{
     display: flex;
-    justify-content: space-around;
+    justify-content: left;
     margin-bottom: 1.5rem;
 }
 

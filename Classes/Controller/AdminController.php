@@ -61,21 +61,28 @@ class AdminController extends AbstractController {
     }
 
     public function modifierAlbum() {
+        session_start();
         $idAlbum = $_POST['idAlbum'] ?? null;
-        var_dump($_POST);
         if ($idAlbum) {
             $requestAlbum = new Album($this->pdo);
             $requestPossede = new Possede($this->pdo);
-            $requestAlbum->updateAlbum($idAlbum, $_POST['nouveau_nom'], $_POST['nouveau_lien'], $_POST['nouvelle_annee'], $_POST['idArtiste'], $_POST['nouvelle_description']);
-            foreach ($requestAlbum->getGenresOfAlbum($idAlbum) as $genre) {
-                if ($_POST['genres'] == null || !in_array($genre['nomGenre'], $_POST['genres'])) {
-                    $requestPossede->deletePossede($idAlbum, $genre['idGenre']);
-                }
+            if ($_POST['nouveau_lien'] == null) {
+                $_POST['nouveau_lien'] = 'default.jpg';
             }
-            foreach ($_POST['genres'] as $genre) {
-                $requestPossede->possedeGenre($idAlbum, $genre);
-                if (!$requestPossede->possedeGenre($idAlbum, $genre)) {
-                    $requestPossede->insertPossede($idAlbum, $genre);
+            if ($requestAlbum->getAlbumByName($_POST['nouveau_nom']) && $idAlbum != $requestAlbum->getAlbumByName($_POST['nouveau_nom'])[0]) {
+                $_SESSION['message'] = "Cet nom d'album est déjà utilisé";
+            } else {
+                $requestAlbum->updateAlbum($idAlbum, $_POST['nouveau_nom'], $_POST['nouveau_lien'], $_POST['nouvelle_annee'], $_POST['idArtiste'], $_POST['nouvelle_description']);
+                foreach ($requestAlbum->getGenresOfAlbum($idAlbum) as $genre) {
+                    if ($_POST['genres'] == null || !in_array($genre['nomGenre'], $_POST['genres'])) {
+                        $requestPossede->deletePossede($idAlbum, $genre['idGenre']);
+                    }
+                }
+                foreach ($_POST['genres'] as $genre) {
+                    $requestPossede->possedeGenre($idAlbum, $genre);
+                    if (!$requestPossede->possedeGenre($idAlbum, $genre)) {
+                        $requestPossede->insertPossede($idAlbum, $genre);
+                    }
                 }
             }
         }
@@ -89,8 +96,8 @@ class AdminController extends AbstractController {
         if ($_POST['lien_image'] == null) {
             $_POST['lien_image'] = 'default.jpg';
         }
-        if ($requestAlbum->getAlbumByName($_POST['nom_album'])) {
-            $_SESSION['message'] = "Cet album existe déjà";
+        if ($request->getArtisteByName($_POST['nom_artiste'])) {
+            $_SESSION['message'] = "Cet artiste existe déjà";
         } else {
             $requestAlbum->createAlbum($_POST['nom_album'], $_POST['lien_image'], $_POST['annee_sortie'], $_POST['id_artiste'], $_POST['description']);
             $idAlbum = $requestAlbum->getLastAlbumId();
@@ -114,10 +121,18 @@ class AdminController extends AbstractController {
     }
 
     public function modifierArtiste() {
+        session_start();
         $idArtiste = $_POST['idArtiste'] ?? null;
         if ($idArtiste) {
             $request = new Artiste($this->pdo);
-            $request->updateArtiste($idArtiste, $_POST['nouveau_nom'], $_POST['nouveau_lien']);
+            if ($_POST['nouveau_lien'] == null) {
+                $_POST['nouveau_lien'] = 'default.jpg';
+            }
+            if ($request->getArtisteByName($_POST['nouveau_nom']) && $idArtiste != $request->getArtisteByName($_POST['nouveau_nom'])[0]) {
+                $_SESSION['message'] = "Ce nom d'artiste est déjà utilisé";
+            } else {
+                $request->updateArtiste($idArtiste, $_POST['nouveau_nom'], $_POST['nouveau_lien']);
+            }
         }
         header('Location: /index.php?action=gestion_artiste');
     }
