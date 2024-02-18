@@ -123,11 +123,16 @@ class AdminController extends AbstractController {
     }
 
     public function creerArtiste() {
+        session_start();
         $request = new Artiste($this->pdo);
         if ($_POST['lien_image'] == null) {
             $_POST['lien_image'] = 'default.jpg';
         }
-        $request->createArtiste($_POST['nom_artiste'], $_POST['lien_image']);
+        if ($request->getArtisteByName($_POST['nom_artiste'])) {
+            $_SESSION['message'] = "Cet artiste existe déjà";
+        } else {
+            $request->createArtiste($_POST['nom_artiste'], $_POST['lien_image']);
+        }
         header('Location: /index.php?action=gestion_artiste');
     }
 }

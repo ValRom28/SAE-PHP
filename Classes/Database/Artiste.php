@@ -79,6 +79,16 @@ class Artiste extends AbstractTable {
         $stmt->execute([':idArtiste' => $idArtiste]);
         return $stmt->fetchAll();
     }
+
+    public function getArtisteByName($nomArtiste) {
+        $stmt = <<<EOF
+            SELECT * FROM ARTISTE
+            WHERE LOWER(nomArtiste) = LOWER(:nomArtiste)
+        EOF;
+        $stmt = $this->pdo->prepare($stmt);
+        $stmt->execute([':nomArtiste' => $nomArtiste]);
+        return $stmt->fetch();
+    }
 }
 
 ?>

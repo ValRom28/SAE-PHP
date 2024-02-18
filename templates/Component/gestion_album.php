@@ -14,7 +14,7 @@ $genres = $requestGenre->getGenres();
 session_start();
 if (isset($_SESSION['message'])) {
     echo '<script>alert("' . $_SESSION['message'] . '")</script>';
-    unset($_SESSION['message']); // Effacez le message de la session après l'avoir affiché
+    unset($_SESSION['message']);
 }
 ?>
 
