@@ -18,7 +18,7 @@
 
 ## <u>Présentation</u>
 
-Sound IUT'O est une application web permettant de consulter un catalogue d'albums musicaux. L'application permet de consulter les albums et les artiste et les utilisateurs peuvent ajouter des albums à leur playlist. Quant à eux, les administrateurs peuvent ajouter, modifier et supprimer des albums et des artistes.
+Sound IUT'O est une application web permettant de consulter un catalogue d'albums musicaux. L'application permet de consulter les albums et les artiste et les utilisateurs peuvent ajouter des albums à leur playlist. Quant à eux, les administrateurs peuvent ajouter, modifier et supprimer des albums et des artistes. Vous pouvez consulter le projet sur [GitHub](https://github.com/ValRom28/SAE-PHP.git).
 
 ## <u>Installation</u>
 
