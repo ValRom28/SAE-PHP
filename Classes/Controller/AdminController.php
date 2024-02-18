@@ -2,6 +2,7 @@
 namespace Controller;
 use Database\Album;
 use Database\Artiste;
+use Database\Possede;
 
 class AdminController extends AbstractController {
     private $pdo;
@@ -60,17 +61,50 @@ class AdminController extends AbstractController {
     }
 
     public function modifierAlbum() {
+        session_start();
         $idAlbum = $_POST['idAlbum'] ?? null;
         if ($idAlbum) {
-            $request = new Album($this->pdo);
-            $request->updateAlbum($idAlbum, $_POST['nouveau_nom'], $_POST['nouveau_lien'], $_POST['nouvelle_annee'], $_POST['idArtiste'], $_POST['nouvelle_description']);
+            $requestAlbum = new Album($this->pdo);
+            $requestPossede = new Possede($this->pdo);
+            if ($_POST['nouveau_lien'] == null) {
+                $_POST['nouveau_lien'] = 'default.jpg';
+            }
+            if ($requestAlbum->getAlbumByName($_POST['nouveau_nom']) && $idAlbum != $requestAlbum->getAlbumByName($_POST['nouveau_nom'])[0]) {
+                $_SESSION['message'] = "Cet nom d'album est déjà utilisé";
+            } else {
+                $requestAlbum->updateAlbum($idAlbum, $_POST['nouveau_nom'], $_POST['nouveau_lien'], $_POST['nouvelle_annee'], $_POST['idArtiste'], $_POST['nouvelle_description']);
+                foreach ($requestAlbum->getGenresOfAlbum($idAlbum) as $genre) {
+                    if ($_POST['genres'] == null || !in_array($genre['nomGenre'], $_POST['genres'])) {
+                        $requestPossede->deletePossede($idAlbum, $genre['idGenre']);
+                    }
+                }
+                foreach ($_POST['genres'] as $genre) {
+                    $requestPossede->possedeGenre($idAlbum, $genre);
+                    if (!$requestPossede->possedeGenre($idAlbum, $genre)) {
+                        $requestPossede->insertPossede($idAlbum, $genre);
+                    }
+                }
+            }
         }
         header('Location: /index.php?action=gestion_album');
     }
 
     public function creerAlbum() {
-        $request = new Album($this->pdo);
-        $request->createAlbum($_POST['nom_album'], $_POST['lien_image'], $_POST['annee_sortie'], $_POST['id_artiste'], $_POST['description']);
+        session_start();
+        $requestAlbum = new Album($this->pdo);
+        $requestPossede = new Possede($this->pdo);
+        if ($_POST['lien_image'] == null) {
+            $_POST['lien_image'] = 'default.jpg';
+        }
+        if ($request->getArtisteByName($_POST['nom_artiste'])) {
+            $_SESSION['message'] = "Cet artiste existe déjà";
+        } else {
+            $requestAlbum->createAlbum($_POST['nom_album'], $_POST['lien_image'], $_POST['annee_sortie'], $_POST['id_artiste'], $_POST['description']);
+            $idAlbum = $requestAlbum->getLastAlbumId();
+            foreach ($_POST['genres'] as $idGenre) {
+                $requestPossede->insertPossede($idAlbum, $idGenre);
+            }
+        }
         header('Location: /index.php?action=gestion_album');
     }
     
@@ -87,17 +121,33 @@ class AdminController extends AbstractController {
     }
 
     public function modifierArtiste() {
+        session_start();
         $idArtiste = $_POST['idArtiste'] ?? null;
         if ($idArtiste) {
             $request = new Artiste($this->pdo);
-            $request->updateArtiste($idArtiste, $_POST['nouveau_nom'], $_POST['nouveau_lien']);
+            if ($_POST['nouveau_lien'] == null) {
+                $_POST['nouveau_lien'] = 'default.jpg';
+            }
+            if ($request->getArtisteByName($_POST['nouveau_nom']) && $idArtiste != $request->getArtisteByName($_POST['nouveau_nom'])[0]) {
+                $_SESSION['message'] = "Ce nom d'artiste est déjà utilisé";
+            } else {
+                $request->updateArtiste($idArtiste, $_POST['nouveau_nom'], $_POST['nouveau_lien']);
+            }
         }
         header('Location: /index.php?action=gestion_artiste');
     }
 
     public function creerArtiste() {
+        session_start();
         $request = new Artiste($this->pdo);
-        $request->createArtiste($_POST['nom_artiste'], $_POST['lien_image']);
+        if ($_POST['lien_image'] == null) {
+            $_POST['lien_image'] = 'default.jpg';
+        }
+        if ($request->getArtisteByName($_POST['nom_artiste'])) {
+            $_SESSION['message'] = "Cet artiste existe déjà";
+        } else {
+            $request->createArtiste($_POST['nom_artiste'], $_POST['lien_image']);
+        }
         header('Location: /index.php?action=gestion_artiste');
     }
 }

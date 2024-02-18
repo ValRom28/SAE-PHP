@@ -78,6 +78,17 @@ class Album extends AbstractTable {
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public function getAllAlbums(): array {
+        $query = <<<EOF
+            SELECT *
+            FROM ALBUM
+            ORDER BY nomAlbum
+        EOF;
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
     
     public function getAlbumOfPlaylist(int $idUtilisateur): array {
         $query = <<<EOF
@@ -121,7 +132,7 @@ class Album extends AbstractTable {
 
     public function getGenresOfAlbum(int $idAlbum) {
         $query = <<<EOF
-            SELECT nomGenre
+            SELECT GENRE.idGenre, nomGenre
             FROM GENRE
             JOIN POSSEDE ON GENRE.idGenre = POSSEDE.idGenre
             WHERE idAlbum = :idAlbum
@@ -130,6 +141,25 @@ class Album extends AbstractTable {
         $stmt->execute([':idAlbum' => $idAlbum]);
         return $stmt->fetchAll();
     }
-}
 
+    public function getLastAlbumId() {
+        $query = <<<EOF
+            SELECT MAX(idAlbum) as idAlbum
+            FROM ALBUM
+        EOF;
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+
+    public function getAlbumByName($nomAlbum) {
+        $query = <<<EOF
+            SELECT * FROM ALBUM
+            WHERE LOWER(nomAlbum) = LOWER(:nomAlbum)
+        EOF;
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([':nomAlbum' => $nomAlbum]);
+        return $stmt->fetch();
+    }
+}
 ?>

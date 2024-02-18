@@ -7,19 +7,51 @@
     color: ghostwhite;
 }
 
-.modifInput input{
+.modifInput input {
     height: 1rem;
 }
 
 .modifInput textarea{
     height: 5rem;
     width: 20rem;
-    /*no modification of size*/
-
+    resize: none;
 }
 
 .modifLabel label{
     font-size: 1.2rem;
+}
+
+.modifInput > * {
+    margin-bottom: 0.5rem;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-container {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.dropdown-content {
+    display: none;
+    background-color: #f9f9f9;
+    color: #1a0338;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+    margin-top: 10px;
+}
+
+.dropdown-content input[type="checkbox"] {
+  display: line;
+}
+
+#dropdown-button {
+    height: auto;
+    display: inline-block;
 }
 
 fieldset{
@@ -51,4 +83,18 @@ fieldset button:hover{
 
 fieldset select{
     margin-right: 1rem;
+}
+
+/* Pour les écrans de taille moyenne (tablettes) */
+@media screen and (max-width: 1100px) {
+    .modifInput textarea {
+        width: 100%;
+    }
+}
+
+/* Pour les écrans de petite taille (téléphones) */
+@media screen and (max-width: 576px) {
+    .modifInput textarea {
+        width: 100%;
+    }
 }

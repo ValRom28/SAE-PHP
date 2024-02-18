@@ -1,13 +1,13 @@
 <form action="/index.php" method="get" class="recherche" id="recherche">
     <input type="hidden" name="action" value="search">
-    <input type="text" name="search" placeholder="Rechercher un album" class="text-field">
+    <input type="text" name="" placeholder="Rechercher un album" class="text-field">
     <select name="genre" class="full-rounded">
         <option value="0">Tous les genres</option>
         <?php
         use Database\Genre;
         $pdo = new \PDO('sqlite:Data/db.sqlite');
         $request = new Genre($pdo);
-        $genres = $request->afficherGenres();
+        $genres = $request->getGenres();
         foreach ($genres as $genre) {
             echo '<option value="' . $genre['idGenre'] . '">' . $genre['nomGenre'] . '</option>';
         }

@@ -30,3 +30,27 @@
     color: ghostwhite;
     transition: 0.3s;
 }
+
+/* Pour les écrans de taille moyenne (tablettes) */
+@media screen and (max-width: 1100px) {
+    .page_connexion,
+    .bloc_inscription {
+        margin: 0 5rem;
+    }
+    .page_connexion input,
+    .bloc_inscription input {
+        width: 90%;
+    }
+}
+
+/* Pour les écrans de petite taille (téléphones) */
+@media screen and (max-width: 576px) {
+    .page_connexion,
+    .bloc_inscription {
+        margin: 0 2rem;
+    }
+    .page_connexion input,
+    .bloc_inscription input {
+        width: 80%;
+    }
+}
