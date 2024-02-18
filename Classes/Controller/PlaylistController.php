@@ -2,15 +2,27 @@
 namespace Controller;
 use Database\DansPlaylist;
 
+/**
+ * Classe pour le contrôleur de la playlist
+ * 
+ */
 class PlaylistController extends AbstractController {
     private $pdo;
 
+    /**
+     * Constructeur de la classe
+     * 
+     * @param \PDO $pdo
+     */
     public function __construct(\PDO $pdo) {
         $this->pdo = $pdo;
     }
 
-    public function addToPlaylist()
-    {
+    /**
+     * Ajoute un album à la playlist
+     * 
+     */
+    public function addToPlaylist() {
         session_start();
         $idUtilisateur = $_SESSION['idUtilisateur'] ?? null;
 
@@ -27,6 +39,10 @@ class PlaylistController extends AbstractController {
         }
     }
 
+    /**
+     * Supprime un album de la playlist
+     * 
+     */
     public function deleteOfPlaylist() {
         session_start();
         $idUtilisateur = $_SESSION['idUtilisateur'] ?? null;
@@ -43,6 +59,10 @@ class PlaylistController extends AbstractController {
         }
     }
 
+    /**
+     * Note un album
+     * 
+     */
     public function noterAlbum() {
         session_start();
         $idUtilisateur = $_SESSION['idUtilisateur'] ?? null;

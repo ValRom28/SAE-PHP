@@ -2,14 +2,31 @@
 namespace Controller;
 use Database\Album;
 
+/**
+ * Classe pour le contrôleur de la recherche
+ * 
+ */
 class SearchController extends AbstractController {
     private $pdo;
 
+    /**
+     * Constructeur de la classe
+     * 
+     * @param \PDO $pdo
+     */
     public function __construct(\PDO $pdo) {
         $this->pdo = $pdo;
     }
 
-    public function search($search,$genre,$artiste) {
+    /**
+     * Affiche la page de recherche
+     * 
+     * @param string $search
+     * @param int $genre
+     * @param int $artiste
+     * @return string
+     */
+    public function search($search, $genre, $artiste) {
         $request = new Album($this->pdo);
         $results1 = $request->searchAlbums($search);
         if($genre != 0){
@@ -24,7 +41,7 @@ class SearchController extends AbstractController {
         else{
             $results3 =  $request->searchAlbums($search);
         }
-        // une liste avec que les albums qui sont dans les 3 listes que si il y a des albums dans les 3 listes
+
         $results = array();
         foreach($results1 as $result1){
             foreach($results2 as $result2){
@@ -35,7 +52,6 @@ class SearchController extends AbstractController {
                 }
             }
         }
-
 
         ob_start();
         include 'templates/Component/search_results.php';

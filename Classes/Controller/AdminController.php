@@ -4,13 +4,27 @@ use Database\Album;
 use Database\Artiste;
 use Database\Possede;
 
+/**
+ * Classe pour le contrôleur de l'administration
+ * 
+ */
 class AdminController extends AbstractController {
     private $pdo;
 
+    /**
+     * Constructeur de la classe
+     * 
+     * @param \PDO $pdo
+     */
     public function __construct(\PDO $pdo) {
         $this->pdo = $pdo;
     }
 
+    /**
+     * Affiche la page d'administration
+     * 
+     * @return string
+     */
     public function pageAdmin() {
         ob_start();
         include 'templates/Component/admin.php';
@@ -19,6 +33,11 @@ class AdminController extends AbstractController {
         return $content;
     }
 
+    /**
+     * Affiche la page de gestion des albums
+     * 
+     * @return string
+     */
     public function pageGestionAlbum() {
         ob_start();
         include 'templates/Component/gestion_album.php';
@@ -27,6 +46,11 @@ class AdminController extends AbstractController {
         return $content;
     }
 
+    /**
+     * Affiche la page de gestion des artistes
+     * 
+     * @return string
+     */
     public function pageGestionArtiste() {
         ob_start();
         include 'templates/Component/gestion_artiste.php';
@@ -35,6 +59,11 @@ class AdminController extends AbstractController {
         return $content;
     }
 
+    /**
+     * Affiche la page de modification d'un album
+     * 
+     * @return string
+     */
     public function afficherFormulaireModifierAlbum() {
         ob_start();
         include 'templates/Component/modifier_album.php';
@@ -43,6 +72,11 @@ class AdminController extends AbstractController {
         return $content;
     }
     
+    /**
+     * Affiche la page de modification d'un artiste
+     * 
+     * @return string
+     */
     public function afficherFormulaireModifierArtiste() {
         ob_start();
         include 'templates/Component/modifier_artiste.php';
@@ -51,6 +85,11 @@ class AdminController extends AbstractController {
         return $content;
     }
 
+
+    /**
+     * Méthode pour supprimer un album
+     * 
+     */
     public function deleteAlbum() {
         $idAlbum = $_POST['id_album'] ?? null;
         if ($idAlbum) {
@@ -60,6 +99,10 @@ class AdminController extends AbstractController {
         header('Location: /index.php?action=gestion_album');
     }
 
+    /**
+     * Méthode pour modifier un album
+     * 
+     */
     public function modifierAlbum() {
         session_start();
         $idAlbum = $_POST['idAlbum'] ?? null;
@@ -89,6 +132,10 @@ class AdminController extends AbstractController {
         header('Location: /index.php?action=gestion_album');
     }
 
+    /**
+     * Méthode pour créer un album
+     * 
+     */
     public function creerAlbum() {
         session_start();
         $requestAlbum = new Album($this->pdo);
@@ -108,6 +155,10 @@ class AdminController extends AbstractController {
         header('Location: /index.php?action=gestion_album');
     }
     
+    /**
+     * Méthode pour supprimer un artiste
+     * 
+     */
     public function deleteArtiste() {
         $idArtiste = $_POST['id_artiste'] ?? null;
         if ($idArtiste) {
@@ -120,6 +171,11 @@ class AdminController extends AbstractController {
         header('Location: /index.php?action=gestion_artiste');
     }
 
+
+    /**
+     * Méthode pour modifier un artiste
+     * 
+     */
     public function modifierArtiste() {
         session_start();
         $idArtiste = $_POST['idArtiste'] ?? null;
@@ -137,6 +193,11 @@ class AdminController extends AbstractController {
         header('Location: /index.php?action=gestion_artiste');
     }
 
+
+    /**
+     * Méthode pour créer un artiste
+     * 
+     */
     public function creerArtiste() {
         session_start();
         $request = new Artiste($this->pdo);

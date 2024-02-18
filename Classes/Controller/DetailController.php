@@ -5,39 +5,55 @@ use Database\Album;
 use Database\Artiste;
 use View\Template;
 
+/**
+ * Classe pour le contrôleur des détails
+ * 
+ */
 class DetailController extends AbstractController {
     private $pdo;
 
+    /**
+     * Constructeur de la classe
+     * 
+     * @param \PDO $pdo
+     */
     public function __construct(\PDO $pdo) {
         $this->pdo = $pdo;
     }
 
+    /**
+     * Affiche la page des détails d'un album
+     * 
+     * @param int $albumId
+     * @return string
+     */
     public function showDetailAlbum($albumId) {
-        // Récupérer les détails de l'album depuis la base de données en fonction de son identifiant
         $request = new Album($this->pdo);
         $album = $request->getAlbumById($albumId);
         $genres = $request->getGenresOfAlbum($albumId);
 
-        // Obtenir le contenu de la vue
         ob_start();
         include 'templates/Component/detail_album.php';
         $content = ob_get_clean();
 
-        // Retourner le contenu de la vue
         return $content;
     }
 
+    /**
+     * Affiche la page des détails d'un artiste
+     * 
+     * @param int $artisteId
+     * @return string
+     */
     public function showDetailArtiste($artisteId) {
-        // Récupérer les détails de l'artiste depuis la base de données en fonction de son identifiant
         $request = new Artiste($this->pdo);
         $artiste = $request->getArtisteById($artisteId);
         $albums = $request->getAlbumsOfArtiste($artisteId);
-        // Obtenir le contenu de la vue
+
         ob_start();
         include 'templates/Component/detail_artiste.php';
         $content = ob_get_clean();
 
-        // Retourner le contenu de la vue
         return $content;
     }
 }

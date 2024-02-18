@@ -1,22 +1,32 @@
 <?php
 namespace Controller;
 
+/**
+ * Classe pour le contrôleur de la déconnexion
+ * 
+ */
 class DeconnexionControleur extends AbstractController {
     private $pdo;
 
+    /**
+     * Constructeur de la classe
+     * 
+     * @param \PDO $pdo
+     */
     public function __construct(\PDO $pdo) {
         $this->pdo = $pdo;
     }
 
+    /**
+     * Déconnecte l'utilisateur
+     * 
+     */
     public function deconnexion()
     {
-        // Démarrer la session
         session_start();
 
-        // Détruire toutes les données de session
         session_destroy();
 
-        // Rediriger l'utilisateur vers la page d'accueil ou une autre page
         header("Location: index.php");
         exit;
     }
