@@ -83,14 +83,14 @@ class AdminController extends AbstractController {
     }
 
     public function creerAlbum() {
+        session_start();
         $requestAlbum = new Album($this->pdo);
         $requestPossede = new Possede($this->pdo);
         if ($_POST['lien_image'] == null) {
             $_POST['lien_image'] = 'default.jpg';
         }
         if ($requestAlbum->getAlbumByName($_POST['nom_album'])) {
-            header('Location: /index.php?action=gestion_album');
-            print_r($requestAlbum->getAlbumByName($_POST['nom_album']));
+            $_SESSION['message'] = "Cet album existe déjà";
         } else {
             $requestAlbum->createAlbum($_POST['nom_album'], $_POST['lien_image'], $_POST['annee_sortie'], $_POST['id_artiste'], $_POST['description']);
             $idAlbum = $requestAlbum->getLastAlbumId();

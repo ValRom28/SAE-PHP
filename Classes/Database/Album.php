@@ -155,12 +155,11 @@ class Album extends AbstractTable {
     public function getAlbumByName($nomAlbum) {
         $query = <<<EOF
             SELECT * FROM ALBUM
-            WHERE nomAlbum = :nomAlbum
+            WHERE LOWER(nomAlbum) = LOWER(:nomAlbum)
         EOF;
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([':nomAlbum' => $nomAlbum]);
         return $stmt->fetch();
     }
 }
-
 ?>

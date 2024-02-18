@@ -15,6 +15,7 @@ Autoloader::register();
 $action = $_GET['action'] ?? '';
 $template = new Template('templates');
 $pdo = new \PDO('sqlite:Data/db.sqlite');
+$content = '';
 
 switch ($action) {
     case 'search':
