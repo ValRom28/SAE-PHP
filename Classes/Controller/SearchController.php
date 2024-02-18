@@ -13,7 +13,7 @@ class SearchController extends AbstractController {
         $request = new Album($this->pdo);
         $results1 = $request->searchAlbums($search);
         if($genre != 0){
-            $results2 = $request->getAlbumByGenre($genre);
+            $results2 = $request->getAllAlbumByGenre($genre);
         }
         else{
             $results2 = $request->searchAlbums($search);

@@ -16,7 +16,11 @@
         $playlist = $request->getAlbumOfPlaylist($idUtilisateur);
         foreach ($playlist as $album) {
             echo "<a href='index.php?action=detail-album&album_id=".$album['idAlbum']."'>";
-            echo "<img src='Data/images/".$album['imageAlbum']."' alt='".$album['nomAlbum']."' title='".$album['nomAlbum']."' />";
+            if (filter_var($album['imageAlbum'], FILTER_VALIDATE_URL)) {
+                echo "<img src='".$album['imageAlbum']."' alt='".$album['nomAlbum']."' title='".$album['nomAlbum']."' />";
+            } else {
+                echo "<img src='Data/images/".$album['imageAlbum']."' alt='".$album['nomAlbum']."' title='".$album['nomAlbum']."' />";
+            }
             echo "</a>";
         }
     } else {
