@@ -81,6 +81,15 @@ section.main a,section.main p{
     font-size: 0.2rem;
 }
 
+.musiques > li {
+    list-style: none;
+    font-size: 1.5rem;
+}
+
+.musiques > li::before {
+    content: "🎵 ";
+}
+
 /* Pour les écrans de taille moyenne (tablettes) */
 @media screen and (max-width: 1100px) {
     .listeAlbums {
