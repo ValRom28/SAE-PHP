@@ -58,7 +58,7 @@ section.main{
     padding: 2rem;
     overflow-x: hidden;
     overflow-y: auto;
-    max-height: 47rem;
+    max-height: 80vh;
 }
 
 .listeAlbums{
