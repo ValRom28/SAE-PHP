@@ -201,7 +201,7 @@ switch ($argv[1]) {
                 try {
                     $stmtMusic->execute([
                         ':titreMusique' => $music['title'],
-                        ':idAlbum' => $music['album']
+                        ':idAlbum' => $music['idAlbum']
                     ]);
                 } catch (PDOException $e) {
                     echo $e->getMessage() . PHP_EOL;
