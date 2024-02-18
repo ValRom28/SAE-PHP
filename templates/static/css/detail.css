@@ -41,23 +41,13 @@ form.favForm{
     margin-bottom: 1.5rem;
 }
 
-.listeAlbums{
+.listeAlbums {
     display: flex;
     flex-wrap: wrap;
-    width: 14vw;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    width: 12vw;
     justify-content: space-around;
     border: 1px solid ghostwhite;
     border-radius: 1rem;
-    margin: 0 0.5rem;
-    overflow-x: scroll;
-    scrollbar-color: ghostwhite #1a0338;
-}
-
-.listeAlbums p{
-    margin:0;
-    padding: 0 0.5rem;
 }
 
 .listeAlbums a{
@@ -68,6 +58,21 @@ form.favForm{
     width: 10vw;
     height: 10vw;
     margin: 1rem;
+    border: 1px solid ghostwhite;
+    border-radius: 1rem;
+}
+
+.gridAlbum {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 20px;
+    justify-items: center;
+}
+
+.gridAlbum img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
     border: 1px solid ghostwhite;
     border-radius: 1rem;
 }
@@ -88,6 +93,11 @@ section.main a,section.main p{
 
 .musiques > li::before {
     content: "🎵 ";
+}
+
+h3 {
+    font-size: 1.7rem;
+    color: ghostwhite;
 }
 
 /* Pour les écrans de taille moyenne (tablettes) */
