@@ -92,7 +92,11 @@ if($album) {
     }
     echo "</div>";
     echo "</div>";
-    echo "<img src='Data/images/".$album['imageAlbum']."' alt='".$album['nomAlbum']."' class='imgGroupe'/>";
+    if (filter_var($album['imageAlbum'], FILTER_VALIDATE_URL)) {
+        echo "<img src='".$album['imageAlbum']."' alt='".$album['nomAlbum']."' title='".$album['nomAlbum']."' class='imgGroupe'/>";
+    } else {
+        echo "<img src='Data/images/".$album['imageAlbum']."' alt='".$album['nomAlbum']."' title='".$album['nomAlbum']."' class='imgGroupe'/>";
+    }
 } else {
     echo "<p>L'album demandé n'existe pas.</p>";
 }

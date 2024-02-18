@@ -10,6 +10,12 @@ $requestGenre = new Genre($pdo);
 $albums = $requestAlbum->getAllAlbums();
 $artistes = $requestArtiste->getArtistes();
 $genres = $requestGenre->getGenres();
+
+session_start();
+if (isset($_SESSION['message'])) {
+    echo '<script>alert("' . $_SESSION['message'] . '")</script>';
+    unset($_SESSION['message']); // Effacez le message de la session après l'avoir affiché
+}
 ?>
 
 <h1>Gestion des Albums</h1>
