@@ -151,3 +151,48 @@ h1{
     margin-top: 7rem;
     text-align: center;
 }
+
+
+/* Pour les iPads */
+@media screen and (max-width: 1100px) {
+    main {
+        width: 80vw;
+    }
+
+    aside {
+        width: 20vw;
+    }
+
+    .retourAccueil img {
+        width: 5rem;
+        height: 5rem;
+    }
+}
+
+/* Pour les écrans de petite taille (téléphone) */
+@media screen and (max-width: 576px) {
+    main {
+        width: 100vw;
+    }
+
+    aside {
+        display: 10vw;
+    }
+
+    .retourAccueil img {
+        width: 5rem;
+        height: 5rem;
+    }
+
+    .albumAccueil img,
+    .albumsPlaylist img,
+    .albumStyle img {
+        width: 20vw;
+        height: 20vw;
+        padding: 2vw;
+    }
+
+    .listeAlbums {
+        margin: 2vw;
+    }
+}

@@ -77,3 +77,34 @@ header{
 button, select {
     cursor: pointer;
 }
+
+/* Pour les écrans de taille moyenne (tablettes) */
+@media screen and (max-width: 1100px) {
+    .recherche input,
+    .recherche select,
+    .recherche button {
+        width: auto;
+        margin: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .recherche button {
+        min-width: 7rem;
+    }
+}
+
+
+/* Pour les écrans de petite taille (téléphones) */
+@media screen and (max-width: 576px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .recherche, .buttonsConnexion {
+        margin: 0.5rem 0;
+    }
+    .recherche input, .recherche select, .recherche button, .buttonsConnexion button {
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+}

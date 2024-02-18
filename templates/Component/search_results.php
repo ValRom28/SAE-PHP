@@ -1,5 +1,5 @@
 <h2>Résultat de votre recherche</h2>
-<div class="albumAccueil">
+<div class="albumSearch">
 <?php foreach ($results as $album) : ?>
     <?php 
         echo "<div class='listeAlbums'><a href='index.php?action=detail-album&album_id=".$album['idAlbum']."'>";
