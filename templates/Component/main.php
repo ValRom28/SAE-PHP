@@ -10,7 +10,10 @@
   $request3= new Album($pdo);
   $genres = $request2->getGenresLesPlusPopulaires();
   foreach ($genres as $genre) {
+    echo "<div class='blocGenre'>";
     echo "<h2>".$genre['nomGenre']."</h2>";
+    echo "<form action='/index.php?action=search&genre=".$genre['idGenre']."' method=post class=toutVoir><button type=submit>Tout afficher</button></form>";
+    echo "</div>";
     echo "<div class='albumStyle'>";
     $albums = $request3->getAlbumByGenre($genre['idGenre']);
     foreach ($albums as $album) {
@@ -27,7 +30,10 @@
   }?>
 </div>
 
-<h2>Tout les albums</h2>
+<div class="blocGenre">
+  <h2>Tout les albums</h2>
+  <form action='/index.php?action=search' method=post class=toutVoir><button type=submit>Tout afficher</button></form>
+</div>
 <div class="albumAccueil">
 <?php
 $pdo = new \PDO('sqlite:Data/db.sqlite');

@@ -125,10 +125,10 @@ aside a{
 }
 
 h2{
-    width: 100%;
     font-size: 2rem;
     padding-left: 3rem;
     text-align: left;
+    margin-right: 2rem;
 }
 
 .retourAccueil{
@@ -145,6 +145,36 @@ h2{
 .retourAccueil img{
     width: 10rem;
     height: 10rem;
+}
+
+.toutVoir {
+    display: flex;
+    margin: 0.5rem;
+    align-items: center;
+}
+
+.toutVoir button {
+    padding: 0.5rem 1rem;
+    margin-left: 0.5rem;
+    border-radius: 0 1rem 1rem 1rem ;
+    color: #1a0338;
+    border: 1px solid #1a0338;
+    background-color: ghostwhite;
+    transition: 0.3s;
+}
+
+.toutVoir button:hover{
+    border: 1px solid ghostwhite;
+    background-color: #1a0338;
+    color: ghostwhite;
+    transition: 0.3s;
+}
+
+.blocGenre {
+    display: flex;
+    flex-wrap: nowrap;
+    border-radius: 1rem;
+    flex-basis: 100%;
 }
 
 h1{
