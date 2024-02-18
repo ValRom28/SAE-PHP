@@ -1,18 +1,21 @@
 <?php
 use Database\Album;
 use Database\DansPlaylist;
+use Database\Musique;
 
 session_start();
 echo "<link rel='stylesheet' href='templates/static/css/detail.css'><div>";
 if($album) {
     $pdo = new \PDO('sqlite:Data/db.sqlite');
     $albumId = $album['idAlbum'];
-    $request = new Album($pdo);
+    $requestAlbum = new Album($pdo);
     $requestPlaylist = new DansPlaylist($pdo);
+    $requestMusique = new Musique($pdo);
+    $musiques = $requestMusique->getMusiques($albumId);
     if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']) {
         $idUtilisateur = $_SESSION['idUtilisateur'];
         
-        if ($request->isAlbumInPlaylist($albumId, $idUtilisateur)) {
+        if ($requestAlbum->isAlbumInPlaylist($albumId, $idUtilisateur)) {
             echo "<form action='/index.php?action=supprimer_playlist' method='post'class='favForm'>";
             echo "<h2>".$album['nomAlbum']."</h2>";
             echo "<input type='hidden' name='album_id' value='".$albumId."'>";
@@ -29,6 +32,14 @@ if($album) {
                 echo $genre['nomGenre']." ";
             }
             echo "</p>";
+            if ($musiques) {
+                echo "<p>Musiques: </p>";
+                echo "<ul class='musiques'>";
+                foreach($musiques as $musique) {
+                    echo "<li>".$musique['titreMusique']."</li>";
+                }
+                echo "</ul>";
+            }
             echo "<div class=\"noteDetail\">";
             echo "<p>Notes moyennes: ".$requestPlaylist->getMoyenne($albumId)."/10</p>";
             echo "<p>Nombre de notes: ".$requestPlaylist->getNbNotes($albumId)."</p>";
@@ -58,6 +69,14 @@ if($album) {
                 echo $genre['nomGenre']." ";
             }
             echo "</p>";
+            if ($musiques) {
+                echo "<p>Musiques: </p>";
+                echo "<ul class='musiques'>";
+                foreach($musiques as $musique) {
+                    echo "<li>".$musique['titreMusique']."</li>";
+                }
+                echo "</ul>";
+            }
             echo "<div class=\"noteDetail\">";
             echo "<p>Notes moyennes: ".$requestPlaylist->getMoyenne($albumId)."/10</p>";
             echo "<p>Nombre de notes: ".$requestPlaylist->getNbNotes($albumId)."</p>";
@@ -86,6 +105,14 @@ if($album) {
             echo $genre['nomGenre']." ";
         }
         echo "</p>";
+        if ($musiques) {
+            echo "<p>Musiques: </p>";
+            echo "<ul class='musiques'>";
+            foreach($musiques as $musique) {
+                echo "<li>".$musique['titreMusique']."</li>";
+            }
+            echo "</ul>";
+        }
         echo "<div class=\"noteDetail\">";
         echo "<p>Notes moyennes: ".$requestPlaylist->getMoyenne($albumId)."/10</p>";
         echo "<p>Nombre de notes: ".$requestPlaylist->getNbNotes($albumId)."</p></div>";
