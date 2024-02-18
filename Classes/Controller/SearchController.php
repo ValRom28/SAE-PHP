@@ -35,8 +35,6 @@ class SearchController extends AbstractController {
                 }
             }
         }
-
-
         ob_start();
         include 'templates/Component/search_results.php';
         $content = ob_get_clean();

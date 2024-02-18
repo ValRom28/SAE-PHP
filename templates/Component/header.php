@@ -1,6 +1,6 @@
 <form action="/index.php" method="get" class="recherche" id="recherche">
     <input type="hidden" name="action" value="search">
-    <input type="text" name="" placeholder="Rechercher un album" class="text-field">
+    <input type="text" name="search" placeholder="Rechercher un album" class="text-field">
     <select name="genre" class="full-rounded">
         <option value="0">Tous les genres</option>
         <?php
