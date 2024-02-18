@@ -119,6 +119,18 @@ class Album extends AbstractTable {
     }
 
     /**
+     * Récupère touts les albums d'un genre
+     * 
+     * @param int $idGenre
+     * @return array
+     */
+    public function getAllAlbumByGenre($idGenre) {
+        $stmt = $this->pdo->prepare("SELECT * FROM ALBUM WHERE idAlbum IN (SELECT idAlbum FROM POSSEDE WHERE idGenre = ?)");
+        $stmt->execute([$idGenre]);
+        return $stmt->fetchAll();
+    }
+
+    /**
      * Récupère les 6 premiers albums
      * 
      * @return array
