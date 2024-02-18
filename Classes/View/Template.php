@@ -2,74 +2,126 @@
 declare(strict_types=1);
 
 namespace View;
-final class Template
-{
+
+/**
+ * Classe pour les templates
+ * 
+ */
+final class Template {
     private string $path;
     private string $layout;
     private string $header;
     private string $aside;
     private string $content;
 
-    public function __construct(string $path)
-    {
+    /**
+     * Constructeur de la classe
+     * 
+     * @param string $path
+     */
+    public function __construct(string $path) {
         $this->path = $path;
     }
 
-    public function getPath(): string
-    {
+    /**
+     * Retourne le chemin
+     * 
+     * @return string
+     */
+    public function getPath(): string {
         return $this->path;
     }
 
-    public function getLayout(): string
-    {
+    /**
+     * Retourne le layout
+     * 
+     * @return string
+     */
+    public function getLayout(): string {
         return $this->layout;
     }
 
-    public function setLayout(string $layout): self
-    {
+    /**
+     * Définit le layout
+     * 
+     * @param string $layout
+     * @return self
+     */
+    public function setLayout(string $layout): self {
         $this->layout = $layout;
 
         return $this;
     }
 
-    public function getContent(): string
-    {
+    /**
+     * Retourne le contenu
+     * 
+     * @return string
+     */
+    public function getContent(): string {
         return $this->content;
     }
 
-    public function setContent(string $content): self
-    {
+    /**
+     * Définit le contenu
+     * 
+     * @param string $content
+     * @return self
+     */
+    public function setContent(string $content): self {
         $this->content = $content;
 
         return $this;
     }
 
-    public function getHeader(): string
-    {
+    /**
+     * Retourne le header
+     * 
+     * @return string
+     */
+    public function getHeader(): string {
         return $this->header;
     }
 
-    public function setHeader(string $header): self
-    {
+    /**
+     * Définit le header
+     * 
+     * @param string $header
+     * @return self
+     */
+    public function setHeader(string $header): self {
         $this->header = $header;
 
         return $this;
     }
 
-    public function getAside(): string
-    {
+    /**
+     * Retourne l'aside
+     * 
+     * @return string
+     */
+    public function getAside(): string {
         return $this->aside;
     }
 
-    public function setAside(string $aside): self
-    {
+    /**
+     * Définit l'aside
+     * 
+     * @param string $aside
+     * @return self
+     */
+    public function setAside(string $aside): self {
         $this->aside = $aside;
 
         return $this;
     }
 
-    public function compile(): string
-    {
+    /**
+     * Compile le template
+     * 
+     * @return string
+     */
+    public function compile(): string {
         $content = $this->getContent();
         $header = $this->getHeader();
         $aside = $this->getAside();
