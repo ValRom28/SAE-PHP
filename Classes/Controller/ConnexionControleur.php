@@ -2,45 +2,59 @@
 namespace Controller;
 use Database\Utilisateur;
 
+/**
+ * Classe pour le contrôleur de la connexion
+ * 
+ */
 class ConnexionControleur extends AbstractController {
     private $pdo;
 
+    /**
+     * Constructeur de la classe
+     * 
+     * @param \PDO $pdo
+     */
     public function __construct(\PDO $pdo) {
         $this->pdo = $pdo;
     }
 
+    /**
+     * Affiche la page de connexion
+     * 
+     * @return string
+     */
     public function pageConnexion() {
-        // Obtenir le contenu de la vue
         ob_start();
         include 'templates/Component/connexion.php';
         $content = ob_get_clean();
 
-        // Retourner le contenu de la vue
         return $content;
     }
     
+    /**
+     * Connecte l'utilisateur
+     * 
+     * @param string $mailUtilisateur
+     * @param string $mdpUtilisateur
+     * @return string
+     */
     public function connexion($mailUtilisateur, $mdpUtilisateur) {
         $request = new Utilisateur($this->pdo);
         $user = $request->connexion($mailUtilisateur, $mdpUtilisateur);
         
         if ($user) {
-            // Démarrer la session
             session_start();
 
-            // Définir une variable de session pour indiquer que l'utilisateur est connecté
             $_SESSION['loggedin'] = true;
             $_SESSION['idUtilisateur'] = $user['idUtilisateur'];
             
-            // Rediriger vers la page d'accueil
             header("Location: index.php");
-            exit(); // Assurez-vous de terminer le script après la redirection
+            exit();
         } else {
-            // Obtenir le contenu de la vue
             ob_start();
             include 'templates/Component/connexion.php';
             $content = ob_get_clean();
 
-            // Retourner le contenu de la vue
             return $content;
         }
     }

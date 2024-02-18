@@ -1,13 +1,31 @@
 <?php
 namespace Database;
 
+/**
+ * Classe pour la table Album
+ * 
+ */
 class Album extends AbstractTable {
     private $pdo;
 
+    /**
+     * Constructeur de la classe
+     * 
+     * @param \PDO $pdo
+     */
     public function __construct(\PDO $pdo) {
         $this->pdo = $pdo;
     }
 
+    /**
+     * Crée un album
+     * 
+     * @param string $nomAlbum
+     * @param string $imageAlbum
+     * @param int $anneeSortie
+     * @param int $idArtiste
+     * @param string $description
+     */
     public function createAlbum($nomAlbum, $imageAlbum, $anneeSortie, $idArtiste, $description) {
         $query = <<<EOF
         INSERT INTO album (nomAlbum, imageAlbum, anneeSortie, idArtiste, description)
@@ -23,6 +41,16 @@ class Album extends AbstractTable {
         ]);
     }
 
+    /**
+     * Met à jour un album
+     * 
+     * @param int $idAlbum
+     * @param string $nomAlbum
+     * @param string $imageAlbum
+     * @param int $anneeSortie
+     * @param int $idArtiste
+     * @param string $description
+     */
     public function updateAlbum($idAlbum, $nomAlbum, $imageAlbum, $anneeSortie, $idArtiste, $description) {
         $query = <<<EOF
         UPDATE album
@@ -40,6 +68,11 @@ class Album extends AbstractTable {
         ]);
     }
 
+    /**
+     * Supprime un album
+     * 
+     * @param int $idAlbum
+     */
     public function deleteAlbum($idAlbum) {
         $query = <<<EOF
         DELETE FROM album
@@ -49,24 +82,47 @@ class Album extends AbstractTable {
         $stmt->execute([':idAlbum' => $idAlbum]);
     }
 
+    /**
+     * Recherche des albums
+     * 
+     * @param string $query
+     * @return array
+     */
     public function searchAlbums($query) {
         $stmt = $this->pdo->prepare("SELECT * FROM ALBUM WHERE nomAlbum LIKE ?");
         $stmt->execute(["%$query%"]);
         return $stmt->fetchAll();
     }
 
+    /**
+     * Récupère les albums d'un artiste
+     * 
+     * @param int $idArtiste
+     * @return array
+     */
     public function getAlbumsByArtiste($idArtiste) {
         $stmt = $this->pdo->prepare("SELECT * FROM ALBUM WHERE idArtiste = ?");
         $stmt->execute([$idArtiste]);
         return $stmt->fetchAll();
     }
 
+    /**
+     * Récupère les albums d'un genre
+     * 
+     * @param int $idGenre
+     * @return array
+     */
     public function getAlbumByGenre($idGenre) {
         $stmt = $this->pdo->prepare("SELECT * FROM ALBUM WHERE idAlbum IN (SELECT idAlbum FROM POSSEDE WHERE idGenre = ? LIMIT 6)");
         $stmt->execute([$idGenre]);
         return $stmt->fetchAll();
     }
 
+    /**
+     * Récupère les 6 premiers albums
+     * 
+     * @return array
+     */
     public function getAlbums(): array {
         $query = <<<EOF
             SELECT *
@@ -79,6 +135,11 @@ class Album extends AbstractTable {
         return $stmt->fetchAll();
     }
 
+    /**
+     * Récupère tous les albums
+     * 
+     * @return array
+     */
     public function getAllAlbums(): array {
         $query = <<<EOF
             SELECT *
@@ -90,6 +151,12 @@ class Album extends AbstractTable {
         return $stmt->fetchAll();
     }
     
+    /**
+     * Récupère les albums d'une playlist
+     * 
+     * @param int $idUtilisateur
+     * @return array
+     */
     public function getAlbumOfPlaylist(int $idUtilisateur): array {
         $query = <<<EOF
             SELECT *
@@ -107,6 +174,12 @@ class Album extends AbstractTable {
         return $stmt->fetchAll();
     }
 
+    /**
+     * Récupère un album par son id
+     * 
+     * @param int $idAlbum
+     * @return array
+     */
     public function getAlbumById(int $idAlbum) {
         $query = <<<EOF
             SELECT * FROM ALBUM
@@ -118,6 +191,12 @@ class Album extends AbstractTable {
         return $stmt->fetch();
     }
 
+    /**
+     * Récupère les albums d'un artiste
+     * 
+     * @param int $idArtiste
+     * @return array
+     */
     public function isAlbumInPlaylist(int $idAlbum, int $idUtilisateur) {
         $query = <<<EOF
             SELECT * FROM DANS_PLAYLIST
@@ -130,6 +209,12 @@ class Album extends AbstractTable {
         return $stmt->fetchAll();
     }
 
+    /**
+     * Récupère les genres d'un album
+     * 
+     * @param int $idAlbum
+     * @return array
+     */
     public function getGenresOfAlbum(int $idAlbum) {
         $query = <<<EOF
             SELECT GENRE.idGenre, nomGenre
@@ -142,6 +227,11 @@ class Album extends AbstractTable {
         return $stmt->fetchAll();
     }
 
+    /**
+     * Récupère le dernier id des albums
+     * 
+     * @return int
+     */
     public function getLastAlbumId() {
         $query = <<<EOF
             SELECT MAX(idAlbum) as idAlbum
@@ -152,6 +242,12 @@ class Album extends AbstractTable {
         return $stmt->fetchColumn();
     }
 
+    /**
+     * Récupère un album par son nom
+     * 
+     * @param string $nomAlbum
+     * @return array
+     */
     public function getAlbumByName($nomAlbum) {
         $query = <<<EOF
             SELECT * FROM ALBUM

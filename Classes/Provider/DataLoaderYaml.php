@@ -1,18 +1,39 @@
 <?php
 namespace Provider;
 
+/**
+ * Classe pour le chargement de données YAML
+ * 
+ */
 class DataLoaderYaml implements DataLoaderInterface {
     private $data;
 
+    /**
+     * Constructeur de la classe
+     * 
+     * @param string $filePath
+     */
     public function __construct(string $filePath) {
         $this->data = self::parseFile($filePath);
     }
 
+    /**
+     * Parse un fichier YAML
+     * 
+     * @param string $filePath
+     * @return array
+     */
     public static function parseFile(string $filePath): array {
         $yamlData = file_get_contents($filePath);
         return self::parseString($yamlData);
     }
 
+    /**
+     * Parse une chaîne YAML
+     * 
+     * @param string $yamlData
+     * @return array
+     */
     public static function parseString(string $yamlData): array {
         $parsedData = [];
         $currentAlbumId = null;
@@ -61,6 +82,11 @@ class DataLoaderYaml implements DataLoaderInterface {
         return $parsedData;
     }
     
+    /**
+     * Retourne les données
+     * 
+     * @return array
+     */
     public function getData(): array {
         return $this->data;
     }
